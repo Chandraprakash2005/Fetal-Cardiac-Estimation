@@ -367,6 +367,12 @@ export default function PipelineFlow({
                     {/* Completed checkmark badge (smoothly springs into view with Anime.js) */}
                     <NodeCheckmark isVisible={isCompleted && !isHighlighted} />
                   </div>
+
+                  {/* Process Name & Subtitle below the square */}
+                  <div className="linear-node__text">
+                    <span className="linear-node__name">{step.title}</span>
+                    <span className="linear-node__sub">{step.sub}</span>
+                  </div>
                 </div>
 
                 {/* 2. Wave Connecting this Square to the Adjacent Next Square */}
