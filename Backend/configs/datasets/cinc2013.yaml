@@ -1,0 +1,63 @@
+# configs/datasets/cinc2013.yaml
+# Merged on top of configs/default.yaml when --dataset cinc2013 is selected.
+#
+# NOTE ON PROVENANCE: CLAUDE.md §2 recorded CinC 2013 as DROPPED on the supervisor's
+# verbal instruction. It was reinstated on 2026-09-08 at Bhuvanesh's explicit request, as
+# the SECOND zero-shot validation cohort (train ADFECGDB -> validate NInFEA + CinC 2013).
+# The PINN still trains on ADFECGDB only; nothing here is ever trained on.
+
+dataset:
+  name: cinc2013
+  physionet_id: challenge-2013/1.0.0
+  loader: wfdb                       # src/fcac/io/cinc2013.py, via wfdb
+  raw_dir: data/raw/cinc2013
+  interim_dir: data/interim/cinc2013
+
+  native_fs_hz: 1000                 # already at target rate, no resampling needed
+  n_records: 25                      # set-a: a01..a25, the subset with fqrs references
+  record_ids: [a01, a02, a03, a04, a05, a06, a07, a08, a09, a10, a11, a12, a13,
+               a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25]
+
+  abdominal_channel_prefix: AECG     # AECG1..AECG4 -- exactly 4, no kurtosis selection
+  fqrs_extension: fqrs               # fetal R-peak reference annotations
+
+  fetal_reference: fqrs_annotations  # timing only
+  has_scalp_ecg: false               # no amplitude ground truth -- timing metrics only
+
+  ga_days:
+    # CinC 2013 does not publish per-record gestational age. Leave null; the extraction
+    # stages (01/02/04) do not need it, and any downstream ageing work must skip this
+    # cohort rather than invent a GA. TODO(bhuvanesh): confirm none is obtainable.
+    a01: null
+    a02: null
+    a03: null
+    a04: null
+    a05: null
+    a06: null
+    a07: null
+    a08: null
+    a09: null
+    a10: null
+    a11: null
+    a12: null
+    a13: null
+    a14: null
+    a15: null
+    a16: null
+    a17: null
+    a18: null
+    a19: null
+    a20: null
+    a21: null
+    a22: null
+    a23: null
+    a24: null
+    a25: null
+
+  notes: >
+    60 s per record, 4 abdominal channels at 1000 Hz. Heterogeneous collection: 13 of 25
+    records carry strong 50 Hz mains (measured 2026-09-08, prominence 5x-231x over the
+    local noise floor), 0 carry 60 Hz -- hence notch_enabled below.
+
+preprocessing:
+  notch_enabled: true                # 13/25 records show 50 Hz mains (measured)

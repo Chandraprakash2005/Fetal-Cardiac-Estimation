@@ -1,0 +1,25 @@
+{
+  "train_dataset": "adfecgdb",
+  "checkpoint": "data/processed/pinn/pinn.pt",
+  "tolerance_ms": 50.0,
+  "results": [
+    {
+      "dataset": "cinc2013",
+      "role": "zero-shot",
+      "n_records": 25,
+      "n_windows_scored": 275,
+      "mean_f1_raw": 0.3699899829016852,
+      "std_f1_raw": 0.305164427284404,
+      "mean_f1_memd_band": 0.4145609778469334,
+      "std_f1_memd_band": 0.33862826689067776,
+      "mean_f1_pinn": 0.3769307434308058,
+      "std_f1_pinn": 0.35154928465846996,
+      "mean_precision_pinn": 0.4151959454686727,
+      "std_precision_pinn": 0.33850725835160916,
+      "mean_recall_pinn": 0.3532219800401618,
+      "std_recall_pinn": 0.3614508512731127,
+      "status": "ok"
+    }
+  ],
+  "timestamp": "2026-10-02T11:49:26.660519+00:00"
+}

@@ -1,0 +1,16 @@
+numpy==1.26.4
+scipy==1.13.1
+pyyaml==6.0.1
+torch==2.3.1
+wfdb==4.1.2
+# wfdb 4.1.2's annotation-table loader breaks under pandas>=2.1 (StringArray no
+# longer hashable in DataFrame.set_index) -- pin explicitly rather than letting
+# pip pick the newest pandas transitively.
+pandas==2.0.3
+pyedflib==0.1.38
+matplotlib==3.9.0
+pytest==8.2.2
+
+# MEMD is vendored directly at src/fcac/memd/sift.py (Hammersley-sequence multivariate
+# EMD, no third-party MEMD_all dependency) -- no extra package needed.
+scikit-learn==1.9.1

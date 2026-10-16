@@ -1,0 +1,125 @@
+{
+  "summary": {
+    "pinn": {
+      "n_windows": 295,
+      "snr_gain_mean": 0.43209162390612404,
+      "snr_gain_median": 0.043915516151252394,
+      "snr_unit_mean": -1.7869801391799545,
+      "snr_unit_median": -2.5512564199227814,
+      "mse_unit_mean": 1.5681099946216002,
+      "abs_r_mean": 0.21594500189523924,
+      "snr_lag_mean": 0.5794553687956447,
+      "median_best_lag_ms": -2.0,
+      "snr_gain_mean_gate_pass": 0.9915830550195904,
+      "snr_gain_mean_gate_fail": 0.04301999652262152,
+      "per_record_snr_gain_mean": {
+        "r01": 0.9342523934711837,
+        "r04": 0.027515804529190998,
+        "r07": 0.03752164790301061,
+        "r08": 1.1527822210201375,
+        "r10": 0.008386052607097351
+      }
+    },
+    "cancel+pinn": {
+      "n_windows": 295,
+      "snr_gain_mean": 0.43719723124594106,
+      "snr_gain_median": 0.05604193374758193,
+      "snr_unit_mean": -1.7689461509173647,
+      "snr_unit_median": -2.488405670150142,
+      "mse_unit_mean": 1.5612363391003365,
+      "abs_r_mean": 0.2193818295174927,
+      "snr_lag_mean": 0.5831975197371625,
+      "median_best_lag_ms": -2.0,
+      "snr_gain_mean_gate_pass": 0.796746466050448,
+      "snr_gain_mean_gate_fail": 0.04979559092840882,
+      "per_record_snr_gain_mean": {
+        "r01": 0.9298920023296985,
+        "r04": 0.033003940150701266,
+        "r07": 0.056992719488286096,
+        "r08": 1.1586384617611332,
+        "r10": 0.007459032499886227
+      }
+    },
+    "bss_pre": {
+      "n_windows": 295,
+      "snr_gain_mean": 0.40673603708311346,
+      "snr_gain_median": 0.08529801859910674,
+      "snr_unit_mean": -1.7998224620231167,
+      "snr_unit_median": -2.3580127471770322,
+      "mse_unit_mean": 1.5664130004785828,
+      "abs_r_mean": 0.2167934991397411,
+      "snr_lag_mean": 0.5462491706518247,
+      "median_best_lag_ms": -2.0,
+      "snr_gain_mean_gate_pass": 0.440849868350193,
+      "snr_gain_mean_gate_fail": 0.08143628892917591,
+      "per_record_snr_gain_mean": {
+        "r01": 0.6907812040172749,
+        "r04": 0.06499561198169458,
+        "r07": 0.1510645422572704,
+        "r08": 1.0775387027110699,
+        "r10": 0.049300124448257515
+      }
+    },
+    "hybrid": {
+      "n_windows": 295,
+      "snr_gain_mean": 0.45039920539059636,
+      "snr_gain_median": 0.12094262938873707,
+      "snr_unit_mean": -1.6921558885120402,
+      "snr_unit_median": -2.2234064873227006,
+      "mse_unit_mean": 1.5289491431187776,
+      "abs_r_mean": 0.2355254269810212,
+      "snr_lag_mean": 0.6210179052084325,
+      "median_best_lag_ms": -2.0,
+      "snr_gain_mean_gate_pass": 0.482016021474801,
+      "snr_gain_mean_gate_fail": 0.07649598909043666,
+      "per_record_snr_gain_mean": {
+        "r01": 0.9091358252654081,
+        "r04": 0.05122630698832894,
+        "r07": 0.12643961892208433,
+        "r08": 1.1221238260031852,
+        "r10": 0.043070449773974825
+      }
+    },
+    "raw_best_channel (oracle)": {
+      "n_windows": 295,
+      "snr_gain_mean": 0.3266907578311685,
+      "snr_gain_median": 0.16992698566759445,
+      "snr_unit_mean": null,
+      "snr_unit_median": null,
+      "mse_unit_mean": null,
+      "abs_r_mean": 0.22754790160701688,
+      "snr_lag_mean": null,
+      "median_best_lag_ms": null,
+      "snr_gain_mean_gate_pass": 0.3266907578311685,
+      "snr_gain_mean_gate_fail": null,
+      "per_record_snr_gain_mean": {
+        "r01": 0.5542128747596943,
+        "r04": 0.17317598077543758,
+        "r07": 0.13116501882627152,
+        "r08": 0.7248833294706201,
+        "r10": 0.05001658532381918
+      }
+    },
+    "memd_best_channel (oracle)": {
+      "n_windows": 295,
+      "snr_gain_mean": 0.5742317870037609,
+      "snr_gain_median": 0.06609910851358608,
+      "snr_unit_mean": null,
+      "snr_unit_median": null,
+      "mse_unit_mean": null,
+      "abs_r_mean": 0.25085119356435,
+      "snr_lag_mean": null,
+      "median_best_lag_ms": null,
+      "snr_gain_mean_gate_pass": 0.5742317870037609,
+      "snr_gain_mean_gate_fail": null,
+      "per_record_snr_gain_mean": {
+        "r01": 1.1801036152592315,
+        "r04": 0.04229362824538591,
+        "r07": 0.04334481296490662,
+        "r08": 1.5855406584309346,
+        "r10": 0.019876220118345708
+      }
+    }
+  },
+  "timestamp": "2026-10-03T08:48:34.523630+00:00"
+}

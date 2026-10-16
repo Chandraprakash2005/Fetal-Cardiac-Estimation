@@ -1,0 +1,106 @@
+{
+  "dataset": "cinc2013",
+  "records": [
+    {
+      "record_id": "a01",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a02",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a03",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a04",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a05",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a06",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a07",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a08",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a09",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a10",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a11",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a12",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a13",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a14",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a15",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a16",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a17",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a18",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a19",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a20",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a21",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a22",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a23",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a24",
+      "n_windows": 11
+    },
+    {
+      "record_id": "a25",
+      "n_windows": 11
+    }
+  ],
+  "timestamp": "2026-10-02T11:32:20.032844+00:00"
+}

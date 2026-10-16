@@ -1,0 +1,608 @@
+{
+  "dataset": "ninfea",
+  "checkpoint": "data/processed/pinn/pinn.pt",
+  "method": "hybrid",
+  "records": [
+    {
+      "record_id": "1",
+      "n_windows": 5,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 4,
+      "acceptable_fraction": 0.8,
+      "usable": true,
+      "median_heart_rate_bpm": 114.02027027027029,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "10",
+      "n_windows": 7,
+      "share_from_pinn": 0.7142857142857143,
+      "n_acceptable": 7,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 123.62637362637362,
+      "mecg_cancelled_fraction": 0.5714285714285714
+    },
+    {
+      "record_id": "11",
+      "n_windows": 3,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 0.3333333333333333,
+      "usable": false,
+      "median_heart_rate_bpm": 105.56410820321092,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "12",
+      "n_windows": 1,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 131.2623058411726,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "13",
+      "n_windows": 4,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 0.25,
+      "usable": false,
+      "median_heart_rate_bpm": 93.57598922816314,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "14",
+      "n_windows": 8,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 6,
+      "acceptable_fraction": 0.75,
+      "usable": true,
+      "median_heart_rate_bpm": 116.834192288759,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "15",
+      "n_windows": 11,
+      "share_from_pinn": 0.09090909090909091,
+      "n_acceptable": 11,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 133.6964595196831,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "16",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 121.68551470717205,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "17",
+      "n_windows": 5,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 5,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 138.72832369942196,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "18",
+      "n_windows": 4,
+      "share_from_pinn": 0.25,
+      "n_acceptable": 4,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 116.27628807133604,
+      "mecg_cancelled_fraction": 0.75
+    },
+    {
+      "record_id": "19",
+      "n_windows": 5,
+      "share_from_pinn": 0.4,
+      "n_acceptable": 5,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 120.42147516307074,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "2",
+      "n_windows": 5,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 3,
+      "acceptable_fraction": 0.6,
+      "usable": true,
+      "median_heart_rate_bpm": 113.13639220615966,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "20",
+      "n_windows": 8,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 7,
+      "acceptable_fraction": 0.875,
+      "usable": true,
+      "median_heart_rate_bpm": 114.7484577475664,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "21",
+      "n_windows": 8,
+      "share_from_pinn": 0.125,
+      "n_acceptable": 8,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 135.67809398399385,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "22",
+      "n_windows": 2,
+      "share_from_pinn": 1.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 140.74095092530877,
+      "mecg_cancelled_fraction": 0.0
+    },
+    {
+      "record_id": "23",
+      "n_windows": 5,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 3,
+      "acceptable_fraction": 0.6,
+      "usable": true,
+      "median_heart_rate_bpm": 111.4781172584641,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "24",
+      "n_windows": 12,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 12,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 128.53209746248794,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "25",
+      "n_windows": 23,
+      "share_from_pinn": 0.08695652173913043,
+      "n_acceptable": 18,
+      "acceptable_fraction": 0.782608695652174,
+      "usable": true,
+      "median_heart_rate_bpm": 118.57707509881423,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "26",
+      "n_windows": 14,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 14,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 138.8460577041733,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "27",
+      "n_windows": 7,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 5,
+      "acceptable_fraction": 0.7142857142857143,
+      "usable": true,
+      "median_heart_rate_bpm": 117.41682974559687,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "28",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 137.91091227387668,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "29",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 141.15269373191785,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "3",
+      "n_windows": 10,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 9,
+      "acceptable_fraction": 0.9,
+      "usable": true,
+      "median_heart_rate_bpm": 123.89050911190395,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "30",
+      "n_windows": 11,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 7,
+      "acceptable_fraction": 0.6363636363636364,
+      "usable": true,
+      "median_heart_rate_bpm": 119.12640635340833,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "31",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 134.06218542950603,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "32",
+      "n_windows": 3,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 3,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 118.16192560175055,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "33",
+      "n_windows": 5,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 4,
+      "acceptable_fraction": 0.8,
+      "usable": true,
+      "median_heart_rate_bpm": 126.5022137887413,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "34",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 0.5,
+      "usable": true,
+      "median_heart_rate_bpm": 129.41851533381094,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "35",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 0.5,
+      "usable": true,
+      "median_heart_rate_bpm": 106.52590492218269,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "36",
+      "n_windows": 1,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 126.05042016806723,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "37",
+      "n_windows": 4,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 4,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 128.65350228481864,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "38",
+      "n_windows": 1,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 0,
+      "acceptable_fraction": 0.0,
+      "usable": false,
+      "median_heart_rate_bpm": 102.3142509135201,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "39",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 149.19064748201438,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "4",
+      "n_windows": 8,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 8,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 127.23063344587416,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "40",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 134.15403267452106,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "41",
+      "n_windows": 4,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 4,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 134.90469398881,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "42",
+      "n_windows": 1,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 128.53470437017995,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "43",
+      "n_windows": 9,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 7,
+      "acceptable_fraction": 0.7777777777777778,
+      "usable": true,
+      "median_heart_rate_bpm": 123.12743689718859,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "44",
+      "n_windows": 6,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 6,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 137.90825725294104,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "45",
+      "n_windows": 4,
+      "share_from_pinn": 0.75,
+      "n_acceptable": 4,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 133.0826888143847,
+      "mecg_cancelled_fraction": 0.5
+    },
+    {
+      "record_id": "46",
+      "n_windows": 10,
+      "share_from_pinn": 0.2,
+      "n_acceptable": 4,
+      "acceptable_fraction": 0.4,
+      "usable": false,
+      "median_heart_rate_bpm": 108.91640402478639,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "47",
+      "n_windows": 1,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 110.92851273623666,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "48",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 119.05203572608605,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "49",
+      "n_windows": 1,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 129.5336787564767,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "5",
+      "n_windows": 9,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 9,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 126.36899747262005,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "50",
+      "n_windows": 8,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 0.125,
+      "usable": false,
+      "median_heart_rate_bpm": 80.15110050659283,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "51",
+      "n_windows": 4,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 4,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 139.51774554887396,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "52",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 0.5,
+      "usable": true,
+      "median_heart_rate_bpm": 116.42839782558909,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "53",
+      "n_windows": 1,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 1,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 126.36899747262005,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "54",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 135.94788659688146,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "55",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 135.14032009260134,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "56",
+      "n_windows": 8,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 8,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 139.80392560679132,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "57",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 147.00147869381095,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "58",
+      "n_windows": 11,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 11,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 138.2807098409772,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "59",
+      "n_windows": 4,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 4,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 126.53929569487539,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "6",
+      "n_windows": 8,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 6,
+      "acceptable_fraction": 0.75,
+      "usable": true,
+      "median_heart_rate_bpm": 115.02578375336412,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "60",
+      "n_windows": 6,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 6,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 122.97897977143754,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "7",
+      "n_windows": 10,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 7,
+      "acceptable_fraction": 0.7,
+      "usable": true,
+      "median_heart_rate_bpm": 116.32881759398252,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "8",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 119.46023336212825,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "9",
+      "n_windows": 2,
+      "share_from_pinn": 0.0,
+      "n_acceptable": 2,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 128.25869216790124,
+      "mecg_cancelled_fraction": 1.0
+    }
+  ],
+  "timestamp": "2026-10-03T04:05:13.407072+00:00"
+}

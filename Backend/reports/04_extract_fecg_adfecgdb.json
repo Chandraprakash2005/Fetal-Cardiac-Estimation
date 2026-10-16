@@ -1,0 +1,58 @@
+{
+  "dataset": "adfecgdb",
+  "checkpoint": "data/processed/pinn/pinn.pt",
+  "method": "hybrid",
+  "records": [
+    {
+      "record_id": "r01",
+      "n_windows": 59,
+      "share_from_pinn": 0.9661016949152542,
+      "n_acceptable": 59,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 127.36149437486732,
+      "mecg_cancelled_fraction": 0.01694915254237288
+    },
+    {
+      "record_id": "r04",
+      "n_windows": 59,
+      "share_from_pinn": 0.1016949152542373,
+      "n_acceptable": 50,
+      "acceptable_fraction": 0.847457627118644,
+      "usable": true,
+      "median_heart_rate_bpm": 120.91356918943126,
+      "mecg_cancelled_fraction": 1.0
+    },
+    {
+      "record_id": "r07",
+      "n_windows": 59,
+      "share_from_pinn": 0.3050847457627119,
+      "n_acceptable": 48,
+      "acceptable_fraction": 0.8135593220338984,
+      "usable": true,
+      "median_heart_rate_bpm": 116.10406364222747,
+      "mecg_cancelled_fraction": 0.9661016949152542
+    },
+    {
+      "record_id": "r08",
+      "n_windows": 59,
+      "share_from_pinn": 0.9830508474576272,
+      "n_acceptable": 59,
+      "acceptable_fraction": 1.0,
+      "usable": true,
+      "median_heart_rate_bpm": 128.63268222963316,
+      "mecg_cancelled_fraction": 0.01694915254237288
+    },
+    {
+      "record_id": "r10",
+      "n_windows": 59,
+      "share_from_pinn": 0.23728813559322035,
+      "n_acceptable": 56,
+      "acceptable_fraction": 0.9491525423728814,
+      "usable": true,
+      "median_heart_rate_bpm": 125.86532410320956,
+      "mecg_cancelled_fraction": 0.9491525423728814
+    }
+  ],
+  "timestamp": "2026-10-03T04:03:00.122102+00:00"
+}

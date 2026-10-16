@@ -1,0 +1,548 @@
+{
+  "n_ok": 60,
+  "median_rate_bpm": 140.536679930619,
+  "max_abs_duration_mismatch_s": 0.06573228433098599,
+  "records": [
+    {
+      "record_id": "1",
+      "status": "ok",
+      "n_beats": 69,
+      "median_rate_bpm": 148.17391304347842,
+      "duration_s": 28.073943661971832,
+      "ecg_duration_s": 28.0712890625,
+      "duration_mismatch_s": 0.0026545994718318866
+    },
+    {
+      "record_id": "2",
+      "status": "ok",
+      "n_beats": 70,
+      "median_rate_bpm": 146.89655172413796,
+      "duration_s": 28.640845070422536,
+      "ecg_duration_s": 28.6396484375,
+      "duration_mismatch_s": 0.0011966329225359118
+    },
+    {
+      "record_id": "3",
+      "status": "ok",
+      "n_beats": 118,
+      "median_rate_bpm": 145.6410256410255,
+      "duration_s": 53.063380281690144,
+      "ecg_duration_s": 53.0634765625,
+      "duration_mismatch_s": -9.628080985635279e-05
+    },
+    {
+      "record_id": "4",
+      "status": "ok",
+      "n_beats": 96,
+      "median_rate_bpm": 133.12500000000017,
+      "duration_s": 44.33802816901409,
+      "ecg_duration_s": 44.328125,
+      "duration_mismatch_s": 0.00990316901408761
+    },
+    {
+      "record_id": "5",
+      "status": "ok",
+      "n_beats": 103,
+      "median_rate_bpm": 131.07692307692318,
+      "duration_s": 47.313380281690144,
+      "ecg_duration_s": 47.3056640625,
+      "duration_mismatch_s": 0.007716219190143647
+    },
+    {
+      "record_id": "6",
+      "status": "ok",
+      "n_beats": 100,
+      "median_rate_bpm": 143.19327731092446,
+      "duration_s": 43.436619718309856,
+      "ecg_duration_s": 43.4296875,
+      "duration_mismatch_s": 0.006932218309856353
+    },
+    {
+      "record_id": "7",
+      "status": "ok",
+      "n_beats": 123,
+      "median_rate_bpm": 139.6721311475411,
+      "duration_s": 52.602112676056336,
+      "ecg_duration_s": 52.5966796875,
+      "duration_mismatch_s": 0.005432988556336227
+    },
+    {
+      "record_id": "8",
+      "status": "ok",
+      "n_beats": 32,
+      "median_rate_bpm": 156.33027522935797,
+      "duration_s": 13.017605633802816,
+      "ecg_duration_s": 13.0166015625,
+      "duration_mismatch_s": 0.0010040713028161008
+    },
+    {
+      "record_id": "9",
+      "status": "ok",
+      "n_beats": 29,
+      "median_rate_bpm": 127.64044943820231,
+      "duration_s": 12.577464788732394,
+      "ecg_duration_s": 12.58154296875,
+      "duration_mismatch_s": -0.004078180017605959
+    },
+    {
+      "record_id": "10",
+      "status": "ok",
+      "n_beats": 85,
+      "median_rate_bpm": 138.5365853658536,
+      "duration_s": 37.235915492957744,
+      "ecg_duration_s": 37.23974609375,
+      "duration_mismatch_s": -0.003830600792255723
+    },
+    {
+      "record_id": "11",
+      "status": "ok",
+      "n_beats": 40,
+      "median_rate_bpm": 137.41935483871,
+      "duration_s": 17.433098591549296,
+      "ecg_duration_s": 17.43212890625,
+      "duration_mismatch_s": 0.0009696852992959748
+    },
+    {
+      "record_id": "12",
+      "status": "ok",
+      "n_beats": 17,
+      "median_rate_bpm": 135.23809523809527,
+      "duration_s": 7.492957746478873,
+      "ecg_duration_s": 7.49560546875,
+      "duration_mismatch_s": -0.0026477222711269732
+    },
+    {
+      "record_id": "13",
+      "status": "ok",
+      "n_beats": 57,
+      "median_rate_bpm": 154.90909090909085,
+      "duration_s": 23.919014084507044,
+      "ecg_duration_s": 23.92236328125,
+      "duration_mismatch_s": -0.0033491967429561953
+    },
+    {
+      "record_id": "14",
+      "status": "ok",
+      "n_beats": 110,
+      "median_rate_bpm": 145.64102564102674,
+      "duration_s": 45.602112676056336,
+      "ecg_duration_s": 45.60205078125,
+      "duration_mismatch_s": 6.189480633622679e-05
+    },
+    {
+      "record_id": "15",
+      "status": "ok",
+      "n_beats": 131,
+      "median_rate_bpm": 134.17322834645623,
+      "duration_s": 58.721830985915496,
+      "ecg_duration_s": 58.7412109375,
+      "duration_mismatch_s": -0.01937995158450434
+    },
+    {
+      "record_id": "16",
+      "status": "ok",
+      "n_beats": 32,
+      "median_rate_bpm": 135.23809523809527,
+      "duration_s": 14.721830985915492,
+      "ecg_duration_s": 14.72705078125,
+      "duration_mismatch_s": -0.005219795334507893
+    },
+    {
+      "record_id": "17",
+      "status": "ok",
+      "n_beats": 69,
+      "median_rate_bpm": 139.6721311475408,
+      "duration_s": 31.119718309859156,
+      "ecg_duration_s": 31.11376953125,
+      "duration_mismatch_s": 0.00594877860915588
+    },
+    {
+      "record_id": "18",
+      "status": "ok",
+      "n_beats": 64,
+      "median_rate_bpm": 152.14285714285734,
+      "duration_s": 25.862676056338028,
+      "ecg_duration_s": 25.8828125,
+      "duration_mismatch_s": -0.02013644366197198
+    },
+    {
+      "record_id": "19",
+      "status": "ok",
+      "n_beats": 66,
+      "median_rate_bpm": 138.5365853658536,
+      "duration_s": 28.87676056338028,
+      "ecg_duration_s": 28.87451171875,
+      "duration_mismatch_s": 0.002248844630280189
+    },
+    {
+      "record_id": "20",
+      "status": "ok",
+      "n_beats": 111,
+      "median_rate_bpm": 146.2660944206008,
+      "duration_s": 46.91549295774648,
+      "ecg_duration_s": 46.904296875,
+      "duration_mismatch_s": 0.011196082746479874
+    },
+    {
+      "record_id": "21",
+      "status": "ok",
+      "n_beats": 106,
+      "median_rate_bpm": 142.00000000000048,
+      "duration_s": 46.45070422535211,
+      "ecg_duration_s": 46.435546875,
+      "duration_mismatch_s": 0.015157350352112076
+    },
+    {
+      "record_id": "22",
+      "status": "ok",
+      "n_beats": 33,
+      "median_rate_bpm": 135.2380952380952,
+      "duration_s": 14.32394366197183,
+      "ecg_duration_s": 14.32275390625,
+      "duration_mismatch_s": 0.0011897557218301102
+    },
+    {
+      "record_id": "23",
+      "status": "ok",
+      "n_beats": 69,
+      "median_rate_bpm": 142.00000000000048,
+      "duration_s": 29.309859154929576,
+      "ecg_duration_s": 29.31201171875,
+      "duration_mismatch_s": -0.002152563820423836
+    },
+    {
+      "record_id": "24",
+      "status": "ok",
+      "n_beats": 138,
+      "median_rate_bpm": 129.09090909090864,
+      "duration_s": 64.38028169014085,
+      "ecg_duration_s": 64.369140625,
+      "duration_mismatch_s": 0.011141065140847672
+    },
+    {
+      "record_id": "25",
+      "status": "ok",
+      "n_beats": 276,
+      "median_rate_bpm": 139.67213114753994,
+      "duration_s": 119.78873239436619,
+      "ecg_duration_s": 119.7783203125,
+      "duration_mismatch_s": 0.01041208186619258
+    },
+    {
+      "record_id": "26",
+      "status": "ok",
+      "n_beats": 186,
+      "median_rate_bpm": 152.14285714285802,
+      "duration_s": 76.06338028169014,
+      "ecg_duration_s": 76.041015625,
+      "duration_mismatch_s": 0.022364656690143647
+    },
+    {
+      "record_id": "27",
+      "status": "ok",
+      "n_beats": 97,
+      "median_rate_bpm": 140.82644628099175,
+      "duration_s": 41.693661971830984,
+      "ecg_duration_s": 41.6875,
+      "duration_mismatch_s": 0.006161971830984214
+    },
+    {
+      "record_id": "28",
+      "status": "ok",
+      "n_beats": 34,
+      "median_rate_bpm": 136.32000000000002,
+      "duration_s": 15.387323943661972,
+      "ecg_duration_s": 15.39111328125,
+      "duration_mismatch_s": -0.003789337588028019
+    },
+    {
+      "record_id": "29",
+      "status": "ok",
+      "n_beats": 31,
+      "median_rate_bpm": 143.7974683544304,
+      "duration_s": 13.214788732394366,
+      "ecg_duration_s": 13.21630859375,
+      "duration_mismatch_s": -0.001519861355633978
+    },
+    {
+      "record_id": "30",
+      "status": "ok",
+      "n_beats": 146,
+      "median_rate_bpm": 153.5135135135134,
+      "duration_s": 57.21478873239437,
+      "ecg_duration_s": 57.21337890625,
+      "duration_mismatch_s": 0.0014098261443677984
+    },
+    {
+      "record_id": "31",
+      "status": "ok",
+      "n_beats": 30,
+      "median_rate_bpm": 132.09302325581396,
+      "duration_s": 13.887323943661972,
+      "ecg_duration_s": 13.88330078125,
+      "duration_mismatch_s": 0.004023162411971981
+    },
+    {
+      "record_id": "32",
+      "status": "ok",
+      "n_beats": 42,
+      "median_rate_bpm": 134.1732283464565,
+      "duration_s": 20.880281690140844,
+      "ecg_duration_s": 20.87548828125,
+      "duration_mismatch_s": 0.00479340889084412
+    },
+    {
+      "record_id": "33",
+      "status": "ok",
+      "n_beats": 62,
+      "median_rate_bpm": 139.67213114753994,
+      "duration_s": 28.1056338028169,
+      "ecg_duration_s": 28.10107421875,
+      "duration_mismatch_s": 0.0045595840669001575
+    },
+    {
+      "record_id": "34",
+      "status": "ok",
+      "n_beats": 36,
+      "median_rate_bpm": 153.51351351351323,
+      "duration_s": 15.461267605633802,
+      "ecg_duration_s": 15.45751953125,
+      "duration_mismatch_s": 0.0037480743838020913
+    },
+    {
+      "record_id": "35",
+      "status": "ok",
+      "n_beats": 31,
+      "median_rate_bpm": 143.1932773109243,
+      "duration_s": 12.683098591549296,
+      "ecg_duration_s": 12.68115234375,
+      "duration_mismatch_s": 0.0019462477992959748
+    },
+    {
+      "record_id": "36",
+      "status": "ok",
+      "n_beats": 29,
+      "median_rate_bpm": 145.64102564102564,
+      "duration_s": 11.943661971830986,
+      "ecg_duration_s": 11.8779296875,
+      "duration_mismatch_s": 0.06573228433098599
+    },
+    {
+      "record_id": "37",
+      "status": "ok",
+      "n_beats": 61,
+      "median_rate_bpm": 144.4067796610166,
+      "duration_s": 25.429577464788732,
+      "ecg_duration_s": 25.42822265625,
+      "duration_mismatch_s": 0.001354808538732044
+    },
+    {
+      "record_id": "38",
+      "status": "ok",
+      "n_beats": 26,
+      "median_rate_bpm": 154.90909090909085,
+      "duration_s": 10.105633802816902,
+      "ecg_duration_s": 10.10498046875,
+      "duration_mismatch_s": 0.0006533340669019339
+    },
+    {
+      "record_id": "39",
+      "status": "ok",
+      "n_beats": 36,
+      "median_rate_bpm": 146.89655172413796,
+      "duration_s": 15.862676056338028,
+      "ecg_duration_s": 15.857421875,
+      "duration_mismatch_s": 0.005254181338028019
+    },
+    {
+      "record_id": "40",
+      "status": "ok",
+      "n_beats": 28,
+      "median_rate_bpm": 140.82644628099143,
+      "duration_s": 12.514084507042254,
+      "ecg_duration_s": 12.5126953125,
+      "duration_mismatch_s": 0.0013891945422539465
+    },
+    {
+      "record_id": "41",
+      "status": "ok",
+      "n_beats": 55,
+      "median_rate_bpm": 140.24691358024654,
+      "duration_s": 25.095070422535212,
+      "ecg_duration_s": 25.09130859375,
+      "duration_mismatch_s": 0.003761828785211918
+    },
+    {
+      "record_id": "42",
+      "status": "ok",
+      "n_beats": 25,
+      "median_rate_bpm": 131.07692307692315,
+      "duration_s": 10.975352112676056,
+      "ecg_duration_s": 10.97216796875,
+      "duration_mismatch_s": 0.003184143926056038
+    },
+    {
+      "record_id": "43",
+      "status": "ok",
+      "n_beats": 112,
+      "median_rate_bpm": 139.67213114753994,
+      "duration_s": 50.151408450704224,
+      "ecg_duration_s": 50.1484375,
+      "duration_mismatch_s": 0.002970950704224151
+    },
+    {
+      "record_id": "44",
+      "status": "ok",
+      "n_beats": 80,
+      "median_rate_bpm": 138.5365853658536,
+      "duration_s": 34.66197183098591,
+      "ecg_duration_s": 34.6591796875,
+      "duration_mismatch_s": 0.0027921434859123906
+    },
+    {
+      "record_id": "45",
+      "status": "ok",
+      "n_beats": 56,
+      "median_rate_bpm": 154.90909090909085,
+      "duration_s": 22.1443661971831,
+      "ecg_duration_s": 22.14990234375,
+      "duration_mismatch_s": -0.0055361465669001575
+    },
+    {
+      "record_id": "46",
+      "status": "ok",
+      "n_beats": 118,
+      "median_rate_bpm": 130.0763358778633,
+      "duration_s": 54.809859154929576,
+      "ecg_duration_s": 54.80322265625,
+      "duration_mismatch_s": 0.006636498679576164
+    },
+    {
+      "record_id": "47",
+      "status": "ok",
+      "n_beats": 28,
+      "median_rate_bpm": 138.53658536585374,
+      "duration_s": 11.778169014084508,
+      "ecg_duration_s": 11.7783203125,
+      "duration_mismatch_s": -0.0001512984154921071
+    },
+    {
+      "record_id": "48",
+      "status": "ok",
+      "n_beats": 35,
+      "median_rate_bpm": 136.32000000000008,
+      "duration_s": 15.390845070422536,
+      "ecg_duration_s": 15.3916015625,
+      "duration_mismatch_s": -0.0007564920774640882
+    },
+    {
+      "record_id": "49",
+      "status": "ok",
+      "n_beats": 20,
+      "median_rate_bpm": 132.09302325581393,
+      "duration_s": 9.06338028169014,
+      "ecg_duration_s": 9.06787109375,
+      "duration_mismatch_s": -0.0044908120598599055
+    },
+    {
+      "record_id": "50",
+      "status": "ok",
+      "n_beats": 102,
+      "median_rate_bpm": 131.07692307692292,
+      "duration_s": 46.74647887323944,
+      "ecg_duration_s": 46.74169921875,
+      "duration_mismatch_s": 0.004779654489439622
+    },
+    {
+      "record_id": "51",
+      "status": "ok",
+      "n_beats": 60,
+      "median_rate_bpm": 152.14285714285734,
+      "duration_s": 24.323943661971832,
+      "ecg_duration_s": 24.32373046875,
+      "duration_mismatch_s": 0.0002131932218318866
+    },
+    {
+      "record_id": "52",
+      "status": "ok",
+      "n_beats": 31,
+      "median_rate_bpm": 154.90909090909085,
+      "duration_s": 12.915492957746478,
+      "ecg_duration_s": 12.89794921875,
+      "duration_mismatch_s": 0.017543738996478098
+    },
+    {
+      "record_id": "53",
+      "status": "ok",
+      "n_beats": 26,
+      "median_rate_bpm": 145.6410256410258,
+      "duration_s": 11.443661971830986,
+      "ecg_duration_s": 11.4443359375,
+      "duration_mismatch_s": -0.0006739656690140094
+    },
+    {
+      "record_id": "54",
+      "status": "ok",
+      "n_beats": 29,
+      "median_rate_bpm": 141.9999999999999,
+      "duration_s": 12.246478873239436,
+      "ecg_duration_s": 12.24755859375,
+      "duration_mismatch_s": -0.0010797205105639307
+    },
+    {
+      "record_id": "55",
+      "status": "ok",
+      "n_beats": 31,
+      "median_rate_bpm": 135.2380952380952,
+      "duration_s": 13.757042253521126,
+      "ecg_duration_s": 13.7509765625,
+      "duration_mismatch_s": 0.006065691021126085
+    },
+    {
+      "record_id": "56",
+      "status": "ok",
+      "n_beats": 99,
+      "median_rate_bpm": 140.24691358024594,
+      "duration_s": 42.46478873239437,
+      "ecg_duration_s": 42.45703125,
+      "duration_mismatch_s": 0.007757482394367798
+    },
+    {
+      "record_id": "57",
+      "status": "ok",
+      "n_beats": 28,
+      "median_rate_bpm": 150.79646017699113,
+      "duration_s": 12.880281690140846,
+      "ecg_duration_s": 12.88232421875,
+      "duration_mismatch_s": -0.002042528609154104
+    },
+    {
+      "record_id": "58",
+      "status": "ok",
+      "n_beats": 137,
+      "median_rate_bpm": 138.5365853658536,
+      "duration_s": 59.598591549295776,
+      "ecg_duration_s": 59.5732421875,
+      "duration_mismatch_s": 0.02534936179577585
+    },
+    {
+      "record_id": "59",
+      "status": "ok",
+      "n_beats": 55,
+      "median_rate_bpm": 141.9999999999999,
+      "duration_s": 23.992957746478872,
+      "ecg_duration_s": 23.9931640625,
+      "duration_mismatch_s": -0.0002063160211278614
+    },
+    {
+      "record_id": "60",
+      "status": "ok",
+      "n_beats": 76,
+      "median_rate_bpm": 143.19327731092505,
+      "duration_s": 32.92605633802817,
+      "ecg_duration_s": 32.927734375,
+      "duration_mismatch_s": -0.0016780369718318866
+    }
+  ],
+  "timestamp": "2026-10-03T03:00:52.314729+00:00"
+}

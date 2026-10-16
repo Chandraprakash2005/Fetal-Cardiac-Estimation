@@ -1,0 +1,110 @@
+{
+  "dataset": "adfecgdb",
+  "feature_names": [
+    "qtc_sigma",
+    "p_dispersion",
+    "qrs_mean",
+    "qrs_var",
+    "qrs_asymmetry",
+    "prsa",
+    "mse",
+    "apen",
+    "sampen",
+    "dfa_alpha",
+    "lf_hf_ratio",
+    "symbolic_dynamics"
+  ],
+  "records": [
+    {
+      "record_id": "r01",
+      "n_windows": 59,
+      "nan_rate_by_feature": {
+        "qtc_sigma": 0.0,
+        "p_dispersion": 0.0,
+        "qrs_mean": 0.0,
+        "qrs_var": 0.0,
+        "qrs_asymmetry": 0.0,
+        "prsa": 0.3898305084745763,
+        "mse": 0.7627118644067796,
+        "apen": 0.03389830508474576,
+        "sampen": 0.7627118644067796,
+        "dfa_alpha": 0.4745762711864407,
+        "lf_hf_ratio": 1.0,
+        "symbolic_dynamics": 0.0
+      }
+    },
+    {
+      "record_id": "r04",
+      "n_windows": 50,
+      "nan_rate_by_feature": {
+        "qtc_sigma": 0.0,
+        "p_dispersion": 0.0,
+        "qrs_mean": 0.0,
+        "qrs_var": 0.0,
+        "qrs_asymmetry": 0.0,
+        "prsa": 0.96,
+        "mse": 1.0,
+        "apen": 0.12,
+        "sampen": 1.0,
+        "dfa_alpha": 0.96,
+        "lf_hf_ratio": 1.0,
+        "symbolic_dynamics": 0.0
+      }
+    },
+    {
+      "record_id": "r07",
+      "n_windows": 48,
+      "nan_rate_by_feature": {
+        "qtc_sigma": 0.0,
+        "p_dispersion": 0.0,
+        "qrs_mean": 0.0,
+        "qrs_var": 0.0,
+        "qrs_asymmetry": 0.0,
+        "prsa": 0.9791666666666666,
+        "mse": 1.0,
+        "apen": 0.20833333333333334,
+        "sampen": 1.0,
+        "dfa_alpha": 0.9583333333333334,
+        "lf_hf_ratio": 1.0,
+        "symbolic_dynamics": 0.0
+      }
+    },
+    {
+      "record_id": "r08",
+      "n_windows": 59,
+      "nan_rate_by_feature": {
+        "qtc_sigma": 0.0,
+        "p_dispersion": 0.0,
+        "qrs_mean": 0.0,
+        "qrs_var": 0.0,
+        "qrs_asymmetry": 0.0,
+        "prsa": 0.4745762711864407,
+        "mse": 0.8813559322033898,
+        "apen": 0.01694915254237288,
+        "sampen": 0.8813559322033898,
+        "dfa_alpha": 0.3728813559322034,
+        "lf_hf_ratio": 1.0,
+        "symbolic_dynamics": 0.0
+      }
+    },
+    {
+      "record_id": "r10",
+      "n_windows": 56,
+      "nan_rate_by_feature": {
+        "qtc_sigma": 0.0,
+        "p_dispersion": 0.0,
+        "qrs_mean": 0.0,
+        "qrs_var": 0.0,
+        "qrs_asymmetry": 0.0,
+        "prsa": 0.875,
+        "mse": 0.9285714285714286,
+        "apen": 0.07142857142857142,
+        "sampen": 0.9285714285714286,
+        "dfa_alpha": 0.875,
+        "lf_hf_ratio": 1.0,
+        "symbolic_dynamics": 0.017857142857142856
+      }
+    }
+  ],
+  "timestamp": "2026-10-03T04:03:11.325835+00:00"
+}

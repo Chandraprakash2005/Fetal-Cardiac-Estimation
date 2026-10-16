@@ -1,0 +1,1077 @@
+{
+  "ninfea_heldout_gate": {
+    "A": {
+      "window_pass_rate": 0.06031746031746032,
+      "n_windows": 315,
+      "n_acceptable": 19,
+      "n_usable_records": 3,
+      "n_records": 60
+    },
+    "B": {
+      "window_pass_rate": 0.047619047619047616,
+      "n_windows": 315,
+      "n_acceptable": 15,
+      "n_usable_records": 3,
+      "n_records": 60
+    },
+    "records_B_better": 0,
+    "records_B_worse": 3,
+    "per_record": {
+      "1": {
+        "A": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 97.26725335803613
+        },
+        "B": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 96.93053311793214
+        }
+      },
+      "10": {
+        "A": {
+          "n_windows": 7,
+          "n_acceptable": 5,
+          "acceptable_fraction": 0.7142857142857143,
+          "usable": true,
+          "median_hr_bpm": 114.86917677089981
+        },
+        "B": {
+          "n_windows": 7,
+          "n_acceptable": 5,
+          "acceptable_fraction": 0.7142857142857143,
+          "usable": true,
+          "median_hr_bpm": 114.86917677089981
+        }
+      },
+      "11": {
+        "A": {
+          "n_windows": 3,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 86.00095556617296
+        },
+        "B": {
+          "n_windows": 3,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 86.02150537634408
+        }
+      },
+      "12": {
+        "A": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 82.54987388213712
+        },
+        "B": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 82.83479061205706
+        }
+      },
+      "13": {
+        "A": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 58.09086078144374
+        },
+        "B": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 55.01526561985903
+        }
+      },
+      "14": {
+        "A": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 79.6812749003984
+        },
+        "B": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 71.94254822517001
+        }
+      },
+      "15": {
+        "A": {
+          "n_windows": 11,
+          "n_acceptable": 1,
+          "acceptable_fraction": 0.09090909090909091,
+          "usable": false,
+          "median_hr_bpm": 62.66318537859008
+        },
+        "B": {
+          "n_windows": 11,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 61.736998094700446
+        }
+      },
+      "16": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 55.80917362076458
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 55.80917362076458
+        }
+      },
+      "17": {
+        "A": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 61.0170428147763
+        },
+        "B": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 61.02329361500895
+        }
+      },
+      "18": {
+        "A": {
+          "n_windows": 4,
+          "n_acceptable": 1,
+          "acceptable_fraction": 0.25,
+          "usable": false,
+          "median_hr_bpm": 71.88499496847851
+        },
+        "B": {
+          "n_windows": 4,
+          "n_acceptable": 1,
+          "acceptable_fraction": 0.25,
+          "usable": false,
+          "median_hr_bpm": 71.88499496847851
+        }
+      },
+      "19": {
+        "A": {
+          "n_windows": 5,
+          "n_acceptable": 2,
+          "acceptable_fraction": 0.4,
+          "usable": false,
+          "median_hr_bpm": 104.67862054648779
+        },
+        "B": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 98.26826538738362
+        }
+      },
+      "2": {
+        "A": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 48.721071863580995
+        },
+        "B": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 48.721071863580995
+        }
+      },
+      "20": {
+        "A": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 75.65250103420294
+        },
+        "B": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 66.22930368517319
+        }
+      },
+      "21": {
+        "A": {
+          "n_windows": 8,
+          "n_acceptable": 1,
+          "acceptable_fraction": 0.125,
+          "usable": false,
+          "median_hr_bpm": 85.23779987193151
+        },
+        "B": {
+          "n_windows": 8,
+          "n_acceptable": 1,
+          "acceptable_fraction": 0.125,
+          "usable": false,
+          "median_hr_bpm": 82.46254920284315
+        }
+      },
+      "22": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 2,
+          "acceptable_fraction": 1.0,
+          "usable": true,
+          "median_hr_bpm": 140.74095092530877
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 2,
+          "acceptable_fraction": 1.0,
+          "usable": true,
+          "median_hr_bpm": 140.74095092530877
+        }
+      },
+      "23": {
+        "A": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 62.24066390041494
+        },
+        "B": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 62.2568093385214
+        }
+      },
+      "24": {
+        "A": {
+          "n_windows": 12,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 53.00268741577628
+        },
+        "B": {
+          "n_windows": 12,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 40.943578424610294
+        }
+      },
+      "25": {
+        "A": {
+          "n_windows": 23,
+          "n_acceptable": 2,
+          "acceptable_fraction": 0.08695652173913043,
+          "usable": false,
+          "median_hr_bpm": 87.04922681210604
+        },
+        "B": {
+          "n_windows": 23,
+          "n_acceptable": 2,
+          "acceptable_fraction": 0.08695652173913043,
+          "usable": false,
+          "median_hr_bpm": 90.1481004507405
+        }
+      },
+      "26": {
+        "A": {
+          "n_windows": 14,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 44.609671592387
+        },
+        "B": {
+          "n_windows": 14,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 44.60138907231432
+        }
+      },
+      "27": {
+        "A": {
+          "n_windows": 7,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 61.224489795918366
+        },
+        "B": {
+          "n_windows": 7,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 59.98500374906273
+        }
+      },
+      "28": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 66.09199057308314
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 66.09199057308314
+        }
+      },
+      "29": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 51.37350051939008
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 51.36688717275715
+        }
+      },
+      "3": {
+        "A": {
+          "n_windows": 10,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 66.05658211303495
+        },
+        "B": {
+          "n_windows": 10,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 46.46931549960661
+        }
+      },
+      "30": {
+        "A": {
+          "n_windows": 11,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 51.724137931034484
+        },
+        "B": {
+          "n_windows": 11,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 51.701852649719946
+        }
+      },
+      "31": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 51.09370079175208
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 51.10446534794378
+        }
+      },
+      "32": {
+        "A": {
+          "n_windows": 3,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 26.356248627278717
+        },
+        "B": {
+          "n_windows": 3,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 54.71978136418171
+        }
+      },
+      "33": {
+        "A": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 36.74173338549616
+        },
+        "B": {
+          "n_windows": 5,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 36.74908154856561
+        }
+      },
+      "34": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 54.50703239032616
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 54.493612903889904
+        }
+      },
+      "35": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 55.42197436199801
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 55.42572969488365
+        }
+      },
+      "36": {
+        "A": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 98.4759671746776
+        },
+        "B": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 98.45288326300985
+        }
+      },
+      "37": {
+        "A": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 92.09139577277946
+        },
+        "B": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 92.06987760122153
+        }
+      },
+      "38": {
+        "A": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 76.49808754781131
+        },
+        "B": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 76.49808754781131
+        }
+      },
+      "39": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 60.200871920646186
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 48.366468647396246
+        }
+      },
+      "4": {
+        "A": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 58.83470649168407
+        },
+        "B": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 58.82761466278295
+        }
+      },
+      "40": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 57.650732644727356
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 57.66458433445459
+        }
+      },
+      "41": {
+        "A": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 43.9749903924274
+        },
+        "B": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 43.968629740944024
+        }
+      },
+      "42": {
+        "A": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 39.2841553906591
+        },
+        "B": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 39.2841553906591
+        }
+      },
+      "43": {
+        "A": {
+          "n_windows": 9,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 49.82363072493426
+        },
+        "B": {
+          "n_windows": 9,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 38.8852883992223
+        }
+      },
+      "44": {
+        "A": {
+          "n_windows": 6,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 64.34864560952249
+        },
+        "B": {
+          "n_windows": 6,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 52.58594416633109
+        }
+      },
+      "45": {
+        "A": {
+          "n_windows": 4,
+          "n_acceptable": 3,
+          "acceptable_fraction": 0.75,
+          "usable": true,
+          "median_hr_bpm": 129.68592108488843
+        },
+        "B": {
+          "n_windows": 4,
+          "n_acceptable": 3,
+          "acceptable_fraction": 0.75,
+          "usable": true,
+          "median_hr_bpm": 127.54636388364203
+        }
+      },
+      "46": {
+        "A": {
+          "n_windows": 10,
+          "n_acceptable": 2,
+          "acceptable_fraction": 0.2,
+          "usable": false,
+          "median_hr_bpm": 58.23972486663326
+        },
+        "B": {
+          "n_windows": 10,
+          "n_acceptable": 1,
+          "acceptable_fraction": 0.1,
+          "usable": false,
+          "median_hr_bpm": 58.23972486663326
+        }
+      },
+      "47": {
+        "A": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 50.68637803590285
+        },
+        "B": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 50.68637803590285
+        }
+      },
+      "48": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 58.89975218646793
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 58.881597984677924
+        }
+      },
+      "49": {
+        "A": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 49.88567865308668
+        },
+        "B": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 24.94283932654334
+        }
+      },
+      "5": {
+        "A": {
+          "n_windows": 9,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 44.665012406947895
+        },
+        "B": {
+          "n_windows": 9,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 49.18710021321961
+        }
+      },
+      "50": {
+        "A": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 76.78525723061172
+        },
+        "B": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 76.82458386683739
+        }
+      },
+      "51": {
+        "A": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 62.339272168877535
+        },
+        "B": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 62.530470790243804
+        }
+      },
+      "52": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 45.17667702331549
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 45.160252634631235
+        }
+      },
+      "53": {
+        "A": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 60.996272450016946
+        },
+        "B": {
+          "n_windows": 1,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 61.03763987792472
+        }
+      },
+      "54": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 31.498015873015873
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 31.48962189317821
+        }
+      },
+      "55": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 66.66227338468849
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 49.87531172069825
+        }
+      },
+      "56": {
+        "A": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 88.2657444392612
+        },
+        "B": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 86.99629574235618
+        }
+      },
+      "57": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 53.77548734035402
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 53.78753922008068
+        }
+      },
+      "58": {
+        "A": {
+          "n_windows": 11,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 80.51529790660224
+        },
+        "B": {
+          "n_windows": 11,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 66.77053193857111
+        }
+      },
+      "59": {
+        "A": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 61.23803295265941
+        },
+        "B": {
+          "n_windows": 4,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 52.104887763857164
+        }
+      },
+      "6": {
+        "A": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 50.66975340374061
+        },
+        "B": {
+          "n_windows": 8,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 39.6904130482287
+        }
+      },
+      "60": {
+        "A": {
+          "n_windows": 6,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 55.7241902659446
+        },
+        "B": {
+          "n_windows": 6,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 46.26760429544565
+        }
+      },
+      "7": {
+        "A": {
+          "n_windows": 10,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 72.78010530037788
+        },
+        "B": {
+          "n_windows": 10,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 71.32674068789774
+        }
+      },
+      "8": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 71.88004805980965
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 65.29677907476008
+        }
+      },
+      "9": {
+        "A": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 60.433059209003815
+        },
+        "B": {
+          "n_windows": 2,
+          "n_acceptable": 0,
+          "acceptable_fraction": 0.0,
+          "usable": false,
+          "median_hr_bpm": 45.22778804833478
+        }
+      }
+    }
+  },
+  "qrs_f1": {
+    "cinc2013": {
+      "A": {
+        "mean_f1_pinn": 0.3769307434308058,
+        "mean_f1_memd_band": 0.4145609778469334,
+        "n_windows_scored": 275
+      },
+      "B": {
+        "mean_f1_pinn": 0.37978275113042304,
+        "mean_f1_memd_band": 0.4145609778469334,
+        "n_windows_scored": 275
+      }
+    },
+    "adfecgdb": {
+      "A": {
+        "mean_f1_pinn": 0.5100512424143822,
+        "mean_f1_memd_band": 0.5506457675740148,
+        "n_windows_scored": 294
+      },
+      "B": {
+        "mean_f1_pinn": 0.5142918774597132,
+        "mean_f1_memd_band": 0.5506457675740148,
+        "n_windows_scored": 294
+      }
+    }
+  },
+  "folds": {
+    "0": [
+      "12",
+      "15",
+      "16",
+      "17",
+      "23",
+      "24",
+      "27",
+      "31",
+      "32",
+      "33",
+      "34",
+      "37",
+      "38",
+      "4",
+      "43",
+      "44",
+      "45",
+      "46",
+      "47",
+      "48",
+      "5",
+      "55",
+      "56",
+      "57",
+      "59",
+      "6",
+      "60",
+      "7",
+      "8",
+      "9"
+    ],
+    "1": [
+      "1",
+      "10",
+      "11",
+      "13",
+      "14",
+      "18",
+      "19",
+      "2",
+      "20",
+      "21",
+      "22",
+      "25",
+      "26",
+      "28",
+      "29",
+      "3",
+      "30",
+      "35",
+      "36",
+      "39",
+      "40",
+      "41",
+      "42",
+      "49",
+      "50",
+      "51",
+      "52",
+      "53",
+      "54",
+      "58"
+    ]
+  },
+  "epochs_B": 200,
+  "note": "NInFEA metric is a quality-gate proxy (no Doppler timing on disk); CinC 2013 and ADFECGDB are QRS F1. A is ADFECGDB-only; B is the mean of two NInFEA-pooled folds.",
+  "timestamp": "2026-10-02T13:18:14.176998+00:00"
+}

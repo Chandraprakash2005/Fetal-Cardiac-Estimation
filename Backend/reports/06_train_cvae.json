@@ -1,0 +1,73 @@
+{
+  "datasets": [
+    "adfecgdb",
+    "ninfea"
+  ],
+  "synthetic_ga": true,
+  "experiment": "synthetic_ga_smoketest",
+  "n_windows": 537,
+  "n_subjects": 44,
+  "imputation": {
+    "qtc_sigma": {
+      "n_real": 537,
+      "n_imputed": 0,
+      "fill_value": 91.70587921142578
+    },
+    "p_dispersion": {
+      "n_real": 537,
+      "n_imputed": 0,
+      "fill_value": 127.0
+    },
+    "qrs_mean": {
+      "n_real": 537,
+      "n_imputed": 0,
+      "fill_value": 54.727272033691406
+    },
+    "qrs_var": {
+      "n_real": 537,
+      "n_imputed": 0,
+      "fill_value": 374.40972900390625
+    },
+    "qrs_asymmetry": {
+      "n_real": 537,
+      "n_imputed": 0,
+      "fill_value": 1.217024326324463
+    },
+    "prsa": {
+      "n_real": 136,
+      "n_imputed": 401,
+      "fill_value": 1.5
+    },
+    "mse": {
+      "n_real": 43,
+      "n_imputed": 494,
+      "fill_value": 0.8472978472709656
+    },
+    "apen": {
+      "n_real": 481,
+      "n_imputed": 56,
+      "fill_value": -0.133531391620636
+    },
+    "sampen": {
+      "n_real": 43,
+      "n_imputed": 494,
+      "fill_value": 0.6931471824645996
+    },
+    "dfa_alpha": {
+      "n_real": 136,
+      "n_imputed": 401,
+      "fill_value": 0.40141627192497253
+    },
+    "lf_hf_ratio": {
+      "n_real": 0,
+      "n_imputed": 537,
+      "fill_value": 0.0
+    },
+    "symbolic_dynamics": {
+      "n_real": 533,
+      "n_imputed": 4,
+      "fill_value": 0.0
+    }
+  },
+  "timestamp": "2026-10-03T07:36:51.254243+00:00"
+}

@@ -1,0 +1,426 @@
+{
+  "dataset": "ninfea",
+  "records": [
+    {
+      "record_id": "1",
+      "n_windows": 5,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "10",
+      "n_windows": 7,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.1428571428571428
+    },
+    {
+      "record_id": "11",
+      "n_windows": 3,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "12",
+      "n_windows": 1,
+      "k_min": 6,
+      "k_max": 6,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "13",
+      "n_windows": 4,
+      "k_min": 7,
+      "k_max": 8,
+      "mean_n_selected": 1.25
+    },
+    {
+      "record_id": "14",
+      "n_windows": 8,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "15",
+      "n_windows": 11,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "16",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "17",
+      "n_windows": 5,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.2
+    },
+    {
+      "record_id": "18",
+      "n_windows": 4,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "19",
+      "n_windows": 5,
+      "k_min": 6,
+      "k_max": 8,
+      "mean_n_selected": 1.2
+    },
+    {
+      "record_id": "2",
+      "n_windows": 5,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "20",
+      "n_windows": 8,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "21",
+      "n_windows": 8,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "22",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "23",
+      "n_windows": 5,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "24",
+      "n_windows": 12,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "25",
+      "n_windows": 23,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "26",
+      "n_windows": 14,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "27",
+      "n_windows": 7,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "28",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "29",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "3",
+      "n_windows": 10,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "30",
+      "n_windows": 11,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "31",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "32",
+      "n_windows": 3,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "33",
+      "n_windows": 5,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "34",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "35",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "36",
+      "n_windows": 1,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "37",
+      "n_windows": 4,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "38",
+      "n_windows": 1,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "39",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "4",
+      "n_windows": 8,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "40",
+      "n_windows": 2,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "41",
+      "n_windows": 4,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "42",
+      "n_windows": 1,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "43",
+      "n_windows": 9,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "44",
+      "n_windows": 6,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "45",
+      "n_windows": 4,
+      "k_min": 8,
+      "k_max": 8,
+      "mean_n_selected": 1.5
+    },
+    {
+      "record_id": "46",
+      "n_windows": 10,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.8
+    },
+    {
+      "record_id": "47",
+      "n_windows": 1,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "48",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "49",
+      "n_windows": 1,
+      "k_min": 6,
+      "k_max": 6,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "5",
+      "n_windows": 9,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "50",
+      "n_windows": 8,
+      "k_min": 5,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "51",
+      "n_windows": 4,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "52",
+      "n_windows": 2,
+      "k_min": 6,
+      "k_max": 6,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "53",
+      "n_windows": 1,
+      "k_min": 6,
+      "k_max": 6,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "54",
+      "n_windows": 2,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "55",
+      "n_windows": 2,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "56",
+      "n_windows": 8,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "57",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "58",
+      "n_windows": 11,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "59",
+      "n_windows": 4,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "6",
+      "n_windows": 8,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "60",
+      "n_windows": 6,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "7",
+      "n_windows": 10,
+      "k_min": 7,
+      "k_max": 8,
+      "mean_n_selected": 1.1
+    },
+    {
+      "record_id": "8",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "9",
+      "n_windows": 2,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    }
+  ],
+  "timestamp": "2026-09-29T09:00:03.458558+00:00"
+}

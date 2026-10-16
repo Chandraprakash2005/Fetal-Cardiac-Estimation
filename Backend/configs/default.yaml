@@ -1,0 +1,348 @@
+# configs/default.yaml
+#
+# Single source of truth for every hyperparameter. Nothing in src/fcac should hardcode
+# a number that belongs here -- read it through src/fcac/config.py::Config instead.
+# Dataset-specific overrides live in configs/datasets/{adfecgdb,ninfea}.yaml and are merged
+# on top of this file. Ablation overrides live in configs/experiments/.
+
+seed: 42
+
+# ---------------------------------------------------------------------------
+# Preprocessing (CLAUDE.md §2)
+# ---------------------------------------------------------------------------
+preprocessing:
+  # Open question in CLAUDE.md §2: ICC 2026 paper uses 1-100 Hz, spec PDF says 0.5-150 Hz.
+  # Defaulting to the paper's band pending supervisor confirmation -- see README.
+  bandpass_preset: paper_1_100     # one of: paper_1_100, spec_0_150
+  bandpass_presets:
+    paper_1_100:
+      low_hz: 1.0
+      high_hz: 100.0
+    spec_0_150:
+      low_hz: 0.5
+      high_hz: 150.0
+  bandpass_order: 4                # butterworth order, filtfilt (zero-phase)
+
+  notch:
+    freq_hz: 50.0
+    quality_factor: 30.0
+    # Notch applies to NInFEA only (measured spectral prominence); ADFECGDB does not need it.
+    # Actual per-dataset enable/disable lives in configs/datasets/*.yaml (`notch_enabled`).
+
+  edge_trim_seconds: 1.0           # trims filtfilt edge transients from both ends
+
+  target_fs_hz: 1000               # everything downstream consumes 4 channels @ 1000 Hz
+  n_channels: 4
+
+  window:
+    size_samples: 5000             # 5 s @ 1 kHz
+    stride_samples: 5000           # non-overlapping by default; override for augmentation
+
+  normalise: zscore                # per-channel, per-recording
+
+  kurtosis_selection:
+    # NInFEA only: pick top-4 of the 24 abdominal channels by kurtosis, computed AFTER
+    # bandpass filtering. Order matters: filter at native rate -> resample -> normalise -> window.
+    n_select: 4
+    exclude_channels: ["dc1", "dc2", "dc3", "dc4", "saw", "sync"]
+
+# ---------------------------------------------------------------------------
+# MEMD (CLAUDE.md §2)
+# ---------------------------------------------------------------------------
+memd:
+  directions: 64
+  stopping_tolerance: 0.075
+  max_iterations: 300
+  fetal_band_hz: [20.0, 70.0]
+  # A sifting direction abstains from the multivariate mean envelope when its projection
+  # has fewer than 3 extrema; once this fraction of directions abstains, the residue is a
+  # trend rather than an oscillation and IMF extraction stops.
+  abstain_fraction: 0.5
+  # IMF count is data-determined (~10-14). "IMF 3-5" is a heuristic only -- actual
+  # selection is scored per recording: spectral_coherence x in_band_power. See
+  # src/fcac/memd/select.py.
+  score_top_k: null                # null = score-threshold selection, not fixed top-k
+
+# ---------------------------------------------------------------------------
+# PINN (CLAUDE.md §2, spec §7.2)
+# ---------------------------------------------------------------------------
+pinn:
+  # ---------------------------------------------------------------------------
+  # OPEN QUESTION -- AWAITING SUPERVISOR CONFIRMATION.
+  # CLAUDE.md §2 fixes the network width/depth/activations but NOT the input coordinate
+  # scheme or what the scalar output V is read out against. The scheme below is one
+  # concrete instantiation, documented in full in src/fcac/pinn/coords.py (see OPEN-Q 1
+  # and OPEN-Q 2 there). It is what makes the pipeline runnable; it is not confirmed
+  # science. Do not report a number from it until Dr. Muthukumar has signed it off.
+  #
+  #   input  = [x, y, z, t, obs_0..obs_{C-1}]  -> 3 + 1 + 4 = 8
+  #   output = scalar potential V
+  # ---------------------------------------------------------------------------
+  input_dim: 8                      # = 3 spatial + 1 time + preprocessing.n_channels
+  output_dim: 1
+  spatial_dims: [0, 1, 2]           # Laplace residual is taken over these columns only
+  # MEASURED 2026-09-08 on ADFECGDB (QRS F1, +/-50 ms, PC1-projected, all 5 records):
+  #   readout: residual  -> 0.443
+  #   readout: potential -> 0.519     <- and beats the MEMD input's own 0.501
+  # The original `residual` guess (harmonic V absorbs the diffuse maternal field, fetal
+  # is the leftover) is NOT what the trained network does. V itself carries the cleaner
+  # fetal signal -- per-channel it scores up to 0.991 vs the 0.955 input it was fit to,
+  # i.e. the Laplace constraint acts as a SPATIAL DENOISER, not a maternal-absorber.
+  readout: potential                # potential | residual  (see pinn/coords.py)
+
+  # Normalised abdominal electrode positions (x, y, z), one row per input channel.
+  # TODO(bhuvanesh): ADFECGDB's EDF header carries no electrode geometry -- this is an
+  # approximate four-around-the-navel layout on the z=0 surface. Replace with the real
+  # recording montage; the residual readout depends on the inter-electrode baseline.
+  electrodes:
+    - [-1.0,  0.0, 0.0]
+    - [ 0.0,  1.0, 0.0]
+    - [ 1.0,  0.0, 0.0]
+    - [ 0.0, -1.0, 0.0]
+
+  collocation:
+    n_points: 512                   # interior points per step for the physics residual
+    box_margin: 0.5                 # inflates the electrode bounding box so the domain
+                                    # has interior volume (electrodes are coplanar)
+
+  points_per_window: 1024           # data-term points sampled per window per step
+                                    # (a full 4x5000 window is 20k points)
+  hidden_layers: [512, 512, 512, 512, 512]
+  activations: ["tanh", "tanh", "tanh", "relu", "relu"]
+  dropout: 0.2                     # applied on layers 4-5 only
+  loss_weights:
+    data: 0.7
+    physics: 0.3
+  optimizer: adam
+  learning_rate: 1.0e-3
+  epochs: 200
+  batch_size: 32
+  device: auto                      # auto | cpu | cuda | cuda:N -- auto picks cuda if available
+  train_dataset: adfecgdb           # default PINN: ADFECGDB only, frozen after training. The NInFEA-pooled
+                                    # PINN experiment lives in scripts/pinn_ninfea_experiment.py
+                                    # (CLAUDE.md §2 PINN, amended 2026-10-02); CinC 2013 is never trained on.
+  fine_tune_on_ninfea: false        # never fine-tune a trained PINN; joint training is the experiment script's job
+
+# ---------------------------------------------------------------------------
+# Maternal ECG cancellation (src/fcac/mecg.py) -- between MEMD and the PINN
+# ---------------------------------------------------------------------------
+mecg_cancellation:
+  enabled: true
+  # MEASURED 2026-09-08 on ADFECGDB (QRS F1 vs .qrs, PC1-projected):
+  #   record   MEMD    +cancel   delta
+  #   r01      0.934    0.760    -0.174   clean -> cancellation HURTS
+  #   r08      0.959    0.722    -0.237   clean -> cancellation HURTS
+  #   r04      0.202    0.332    +0.130   maternal-locked -> HELPS
+  #   r07      0.190    0.453    +0.263
+  #   r10      0.217    0.388    +0.171
+  # The two representations are complementary, hence `adaptive`: cancel only when the
+  # window's rate is outside the fetal band. "always"/"never" exist for ablations.
+  mode: adaptive              # adaptive | always | never
+  template_half_ms: 120.0     # half-width of the averaged maternal QRST template
+  min_beats: 3                # fewer maternal beats than this -> pass the channel through
+
+# ---------------------------------------------------------------------------
+# Fetal-ECG extraction method (src/fcac/extraction.py, scripts/04_extract_fecg.py)
+# ---------------------------------------------------------------------------
+extraction:
+  method: hybrid              # pinn | hybrid
+                              # pinn   = maternal cancellation -> frozen PINN (original)
+                              # hybrid = per window: that output if it passes the quality gate,
+                              #          else the FastICA BSS output. Best on every cohort measured.
+
+# ---------------------------------------------------------------------------
+# Blind source separation baseline (src/fcac/bss.py) -- an established alternative to the
+# PINN for isolating the fetal ECG (Andreotti et al. 2016 found BSS the most accurate of
+# BSS / template subtraction / adaptive on simulated data). Compared in
+# scripts/bss_experiment.py; not part of the default pipeline.
+# ---------------------------------------------------------------------------
+bss:
+  algorithm: parallel         # sklearn FastICA: parallel (symmetric) | deflation
+  fun: logcosh
+  max_iter: 1000
+  tol: 1.0e-4
+  # The unmixing matrix is fitted on ALL windows of a record concatenated (more samples,
+  # stable mixing) and then applied window by window.
+  # The fetal component of each window is chosen WITHOUT annotations: among components whose
+  # detected rate is inside quality.fetal_hr_{min,max}_bpm, the one with the most regular
+  # rhythm (lowest RR coefficient of variation); if none is in band, the component whose
+  # rate is closest to the band centre. NOTE this selection and the quality gate both look
+  # for a plausible fetal rate, so gate pass-rate on a BSS output is optimistic.
+  min_rr_beats: 4             # fewer detected beats than this -> component is not a candidate
+
+# ---------------------------------------------------------------------------
+# Signal-quality gating (src/fcac/quality.py)
+# ---------------------------------------------------------------------------
+# The extraction chain fails SILENTLY: a maternal-locked window still yields 12
+# confident-looking biomarkers. These thresholds decide what reaches the feature and
+# ageing stages. ICC 2026 plays the same role with its EMD-based quality framework.
+quality:
+  fetal_hr_min_bpm: 110.0     # a window reading 60-100 bpm has locked onto the mother
+  fetal_hr_max_bpm: 160.0
+  max_rr_artifact_rate: 0.25  # fraction of non-physiological RR intervals tolerated
+  min_beats: 5                # too few beats to measure anything
+  min_acceptable_window_fraction: 0.5   # below this, the whole record is unusable
+
+# ---------------------------------------------------------------------------
+# Features (CLAUDE.md §2, spec §8)
+# ---------------------------------------------------------------------------
+features:
+  n_features: 12
+  # Exact FEATURE_NAMES order lives in src/fcac/features/extract.py -- keep in sync.
+  #
+  # OPEN QUESTION -- every parameter below is a documented standard default, NOT a
+  # supervisor-confirmed choice (plan.md item 4). Change here, not in code.
+
+  fiducials:
+    # Fetal-scaled search windows relative to each R peak. A fetal QRS is ~40-60 ms and
+    # the whole RR interval is only ~375-545 ms at 110-160 bpm, so adult-width windows
+    # would overrun the next beat.
+    qs_window_ms: 40.0          # Q searched in [R-40ms, R], S in [R, R+40ms]
+    p_search_start_ms: 50.0     # P searched in [R-150ms, R-50ms]
+    p_search_end_ms: 150.0
+    t_search_start_ms: 80.0     # T searched in [R+80ms, R+250ms]
+    t_search_end_ms: 250.0
+    onset_search_ms: 30.0       # how far to search for a wave boundary
+    # A wave boundary is where the deflection returns to the isoelectric line:
+    # |signal - baseline| <= this fraction of that wave's own amplitude. Replaced a
+    # slope-flattening rule that overran every boundary (a known 50 ms QRS measured
+    # as 75 ms), since the derivative is zero at a peak by definition.
+    # MEASURED 2026-09-08 on a synthetic template with exact 50 ms QRS / 40 ms P:
+    #   frac   QRS clean / noisy    P clean / noisy
+    #   0.05      48.0 / 49.1         38.0 / 27.9   <- best on every count
+    #   0.10      46.0 / 45.9         36.0 / 20.3
+    #   0.15      42.0 / 43.1         34.0 / 17.0
+    # A triangular wave loses `frac` of its span to the threshold, so the bias is
+    # systematic and predictable; 0.05 keeps it to ~4% without becoming noise-sensitive.
+    boundary_amplitude_frac: 0.05
+    # Pan-Tompkins peaks come from a moving-window-INTEGRATED signal and lag the true
+    # R apex by ~half that window. Each peak is snapped to the largest absolute
+    # deviation from baseline within +/- this many ms. Without it, R-referenced
+    # measures are biased: qrs_asymmetry read 0.515 on a perfectly symmetric complex.
+    r_refine_ms: 25.0
+
+  morphological:
+    qtc_correction: bazett      # bazett | fridericia
+                                # Bazett over-corrects at high rates and fetal rates ARE
+                                # high -- fridericia is the obvious alternative to try.
+    qrs_asymmetry_method: ratio # ratio | skewness
+    min_beats: 3                # fewer complete beats than this -> NaN, not a number
+
+  dynamic:
+    entropy_m: 2                # ApEn/SampEn embedding dimension (Pincus; Richman)
+    entropy_r_factor: 0.2       # tolerance r = 0.2 * SD of the RR series
+    mse_max_scale: 5            # Costa coarse-graining scales 1..5
+    dfa_min_box: 4              # short-term alpha1 box range, in beats (Peng)
+    dfa_max_box: 16
+    prsa_window: 4              # PRSA half-window L, in beats (Bauer)
+    symbol_levels: 6            # Porta uniform quantisation levels
+    symbolic_word_length: 3     # word length; summarised as 0V%
+    symbolic_binning: uniform   # uniform (Porta's published method) | equiprobable
+    tachogram_resample_hz: 4.0  # uniform grid for the RR spectral estimate
+
+    # FETAL bands. Adult HF (0.15-0.4 Hz) does NOT apply -- fetal HR is 110-160 bpm and
+    # vagal/respiratory modulation sits higher. plan.md flags this as needing confirmation.
+    lf_band_hz: [0.04, 0.15]
+    hf_band_hz: [0.4, 1.5]
+    # LF/HF is only reported when the tachogram spans at least this many cycles
+    # of the LF lower edge (1 cycle @ 0.04 Hz = 25 s). Below that the LF band is
+    # unresolvable and the ratio would be a fabricated 0.00, so it returns NaN.
+    lf_cycles_required: 1.0
+
+    # Minimum RR-series lengths. A 5 s window holds only ~8-12 RR intervals, far below
+    # what these measures normally need, so each returns NaN rather than a meaningless
+    # number when the series is too short.
+    # RR artefact rejection, applied before ANY dynamic feature. R-peak detection on a
+    # real extracted fECG misses and double-counts beats; on r08 that left intervals of
+    # 97-4320 ms (9.8% of the series) and an RR SD of 180 ms where ~15 ms is physiological.
+    rr_min_ms: 300.0            # 200 bpm -- faster is a false detection
+    rr_max_ms: 700.0            #  86 bpm -- slower is a missed beat
+    rr_max_relative_change: 0.3 # drop intervals >30% from the running median (Malik-style)
+
+    min_rr_entropy: 6
+    min_rr_dfa: 8
+    min_rr_spectral: 8
+
+# ---------------------------------------------------------------------------
+# CVAE -- Contrastive VAE, not Conditional (CLAUDE.md §2, spec §9.2)
+# ---------------------------------------------------------------------------
+cvae:
+  device: auto                      # auto | cpu | cuda | cuda:N -- trained model is returned on CPU
+  input_dim: 12
+  # Standardise the 12 features to zero mean / unit variance (training-set statistics, stored in
+  # the checkpoint) before the encoder. Without it large-scale features (qtc_sigma, qrs_var, ...)
+  # dominate the MSE reconstruction loss -- measured 2026-10-02 on held-out subjects: median
+  # per-feature R^2 -0.01 and qtc_sigma R^2 -11. Set false to reproduce the unscaled model.
+  standardise_inputs: true
+  latent_dim: 64
+  encoder_hidden: [128, 64]
+  decoder_hidden: [64, 128]
+  proj_dim: 64                     # InfoNCE projection head output dim
+  dropout: 0.2
+  beta_kl: 0.1                     # small + warmup to avoid posterior collapse
+  kl_warmup_epochs: 20
+  contrastive:
+    loss: infonce
+    temperature: 0.07
+    positive_rule: same_subject_or_ga_within_window
+    ga_window_days: 7.0            # resolves CLAUDE.md open question: "same-GA" = +/-7 days
+  ga_label_as_input: false          # LOCKED: never true (circular)
+  optimizer: adamw
+  learning_rate: 1.0e-3
+  weight_decay: 1.0e-4
+  grad_clip: 1.0
+  epochs: 200
+  batch_size: 64
+
+# ---------------------------------------------------------------------------
+# Transformer (CLAUDE.md §2, spec §9.2)
+# ---------------------------------------------------------------------------
+transformer:
+  device: auto                      # auto | cpu | cuda | cuda:N -- trained model is returned on CPU
+  n_heads: 4
+  d_model: 256
+  d_k: 64
+  n_layers: 3
+  d_ff: 1024
+  dropout: 0.2
+  max_seq_len: 64
+  head_hidden: 128
+  head_dropout: 0.1
+  loss: mae
+  optimizer: adamw
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-2
+  warmup_epochs: 10
+  grad_clip: 1.0
+  epochs: 200
+  batch_size: 16
+  crop_len: 16          # random window of segment latents per recording each training step
+  repeats_per_epoch: 10 # each recording is seen this many times per epoch (different crops)
+
+# ---------------------------------------------------------------------------
+# Pooled CVAE/transformer training (CLAUDE.md §2 Datasets, amended 2026-10-02)
+# ---------------------------------------------------------------------------
+# The PINN stays ADFECGDB-only (LOCKED). The CVAE and transformer train on, and are
+# evaluated by leave-one-subject-out CV across, every dataset listed here. Only NInFEA
+# recordings that pass quality gating (scripts/05) contribute.
+pooled_training:
+  datasets: [adfecgdb, ninfea]
+
+# ---------------------------------------------------------------------------
+# Evaluation (CLAUDE.md §2, spec §10)
+# ---------------------------------------------------------------------------
+evaluation:
+  losocv:
+    dataset: adfecgdb
+    n_folds: 5                      # leave-one-subject-out over 5 recordings
+  zero_shot:
+    dataset: ninfea
+  mae_unit: days                    # LOCKED: report in days, convert to weeks only for display
+  bootstrap:
+    n_resamples: 1000
+    ci_low_pct: 2.5
+    ci_high_pct: 97.5
+  qrs_f1_tolerance_ms: 50
+
+visualization:
+  morphology_structure: true  # Enable visualization of morphology structure

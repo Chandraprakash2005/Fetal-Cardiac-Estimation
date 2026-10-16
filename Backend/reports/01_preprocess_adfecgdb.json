@@ -1,0 +1,26 @@
+{
+  "dataset": "adfecgdb",
+  "records": [
+    {
+      "record_id": "r01",
+      "n_windows": 59
+    },
+    {
+      "record_id": "r04",
+      "n_windows": 59
+    },
+    {
+      "record_id": "r07",
+      "n_windows": 59
+    },
+    {
+      "record_id": "r08",
+      "n_windows": 59
+    },
+    {
+      "record_id": "r10",
+      "n_windows": 59
+    }
+  ],
+  "timestamp": "2026-09-29T08:19:13.831138+00:00"
+}

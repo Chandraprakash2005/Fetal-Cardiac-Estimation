@@ -1,0 +1,31 @@
+# configs/datasets/adfecgdb.yaml
+# Merged on top of configs/default.yaml when --dataset adfecgdb is selected.
+
+dataset:
+  name: adfecgdb
+  physionet_id: adfecgdb/1.0.0
+  loader: edf                       # src/fcac/io/adfecgdb.py, via pyedflib
+  raw_dir: data/raw/adfecgdb
+  interim_dir: data/interim/adfecgdb
+
+  native_fs_hz: 1000                # already at target rate, no resampling needed
+  record_ids: [r01, r04, r07, r08, r10]
+  scalp_channel: Direct_1            # ground truth ONLY, never a model input
+  abdominal_channel_prefix: Abdomen  # Abdomen_1..4
+  qrs_extension: edf.qrs             # annotations ship as <record>.edf.qrs, not .qrs
+                                      # (wfdb splits the record name on the last dot)
+
+  ga_days:
+    # GA 38-41 weeks per recording; exact per-record LMP-dated GA is supplied
+    # externally (not in the EDF header) -- TODO(bhuvanesh): fill in from spec/PhysioNet
+    # record metadata before training. Do not fabricate values.
+    r01: null
+    r04: null
+    r07: null
+    r08: null
+    r10: null
+
+  emd_quality_note: "ICC 2026: r01/r04/r08 = high quality, r07 = low quality (expect trouble)"
+
+preprocessing:
+  notch_enabled: false              # ADFECGDB does not need the 50 Hz notch

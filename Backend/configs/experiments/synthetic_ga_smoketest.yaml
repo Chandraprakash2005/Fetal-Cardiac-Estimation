@@ -1,0 +1,18 @@
+# configs/experiments/synthetic_ga_smoketest.yaml
+#
+# SYNTHETIC GA LABELS -- PIPELINE CHECK ONLY. NOT REAL DATA. DO NOT REPORT NUMBERS.
+#
+# Real per-record LMP-dated GA for ADFECGDB is not yet available (supervisor/author
+# pending), so these are numpy.random.default_rng(42).integers(266, 288, 5) draws
+# (38-41 weeks = 266-287 days), assigned to r01, r04, r07, r08, r10 in that order.
+# They exist only so scripts/07 and 08 can run end to end. Any MAE / DeltaAge produced
+# under this experiment is meaningless. When real values arrive, put them in
+# configs/datasets/adfecgdb.yaml and stop passing --experiment synthetic_ga_smoketest.
+synthetic_ga: true
+dataset:
+  ga_days:
+    r01: 267
+    r04: 283
+    r07: 280
+    r08: 275
+    r10: 275

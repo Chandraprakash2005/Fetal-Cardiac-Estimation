@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pipeline Overview</title>
+<style>
+:root { --bg:#f7f8f9; --fg:#1c2127; --muted:#5b6672; --rule:#d9dee3; --surface:#fff; --accent:#1d5f7c; --soft:#e3eef3; --warn:#8a4b00; --warnbg:#fbefdc; }
+@media (prefers-color-scheme: dark) { :root { --bg:#14181c; --fg:#e4e8ec; --muted:#9aa5b0; --rule:#2f3841; --surface:#1b2127; --accent:#7fc0dc; --soft:#1d2e37; --warn:#f0b668; --warnbg:#352a18; } }
+* { box-sizing: border-box; }
+body { margin:0; padding:24px 16px 56px; background:var(--bg); color:var(--fg); font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; }
+main { max-width: 860px; margin: 0 auto; }
+h1 { font-size:1.6rem; margin:0 0 4px; } h2 { font-size:1.2rem; margin:0 0 8px; display:flex; gap:10px; align-items:baseline; }
+h3 { font-size:.95rem; margin:18px 0 6px; } h4 { font-size:.85rem; margin:14px 0 2px; color:var(--muted); font-weight:600; }
+.sub { color:var(--muted); margin:0 0 18px; }
+.num { background:var(--accent); color:var(--bg); border-radius:50%; min-width:26px; height:26px; display:inline-flex; align-items:center; justify-content:center; font-size:.85rem; flex:none; }
+.flow { display:flex; flex-wrap:wrap; gap:6px; align-items:stretch; margin:0 0 8px; }
+.chip { display:flex; flex-direction:column; background:var(--soft); border-left:3px solid var(--accent); padding:6px 10px; color:var(--fg); text-decoration:none; font-size:.85rem; }
+.chip span { color:var(--muted); font-size:.75rem; font-family:ui-monospace,monospace; }
+.chev { align-self:center; color:var(--muted); }
+.stage { background:var(--surface); border:1px solid var(--rule); padding:16px; margin:18px 0; }
+.what { margin:0 0 12px; }
+.iorow { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+.io { flex:1 1 220px; border:1px solid var(--rule); padding:8px 12px; background:var(--bg); }
+.io-t { font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+.io-s { font:600 1rem ui-monospace,monospace; } .io-n { font-size:.8rem; color:var(--muted); }
+.arrow { font-size:1.4rem; color:var(--accent); }
+.scroll { overflow-x:auto; margin:6px 0 10px; }
+table { border-collapse:collapse; width:100%; min-width:460px; font-size:.86rem; }
+th,td { text-align:left; padding:6px 10px; border-bottom:1px solid var(--rule); vertical-align:top; }
+th { font-size:.75rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+.chart { width:100%; max-width:560px; height:auto; display:block; }
+.chart .lbl { font-size:12px; fill:var(--fg); } .chart .val { font-size:12px; fill:var(--muted); font-family:ui-monospace,monospace; }
+figure { margin:14px 0 0; } img { max-width:100%; height:auto; border:1px solid var(--rule); background:#fff; }
+figcaption { font-size:.8rem; color:var(--muted); margin-top:4px; }
+.warn { background:var(--warnbg); border-left:3px solid var(--warn); padding:8px 12px; font-size:.88rem; }
+.small { color:var(--muted); font-size:.8rem; } code { font-family:ui-monospace,monospace; font-size:.85em; }
+.banner { background:var(--warnbg); border-left:3px solid var(--warn); padding:10px 14px; margin:0 0 18px; font-size:.9rem; }
+</style></head><body><main>
+<h1>Fetal Cardiac Ageing Clock: pipeline overview</h1>
+<p class="sub">Input, output and metrics for each stage.</p>
+<div class="flow"><a class="chip" href="#s1"><b>1</b> Preprocess<span>(W, 4, 5000)</span></a><span class="chev">&rsaquo;</span><a class="chip" href="#s2"><b>2</b> MEMD<span>(4, 5000)</span></a><span class="chev">&rsaquo;</span><a class="chip" href="#s3"><b>3</b> PINN<span>(5000,)</span></a><span class="chev">&rsaquo;</span><a class="chip" href="#s4"><b>4</b> Features<span>(12,)</span></a><span class="chev">&rsaquo;</span><a class="chip" href="#s5"><b>5</b> CVAE<span>z (64,)</span></a><span class="chev">&rsaquo;</span><a class="chip" href="#s6"><b>6</b> Transformer<span>CA, days</span></a><span class="chev">&rsaquo;</span><a class="chip" href="#s7"><b>7</b> Evaluate<span>MAE, &Delta;Age</span></a></div>
+
+<section class="stage" id="s1">
+  <h2><span class="num">1</span>Preprocessing</h2>
+  <p class="what">Band-pass 1&ndash;100 Hz (zero-phase Butterworth), 50 Hz notch on NInFEA and CinC only, NInFEA: top-4 channels by kurtosis then resample 2048&rarr;1000 Hz, per-channel z-score, cut into 5 s windows.</p>
+  <div class="iorow"><div class="io"><div class="io-t">Input</div><div class="io-s">(C_raw, N_raw)</div><div class="io-n">raw abdominal channels, 1000 Hz (NInFEA 2048 Hz, 24 channels)</div></div><div class="arrow">&rarr;</div><div class="io"><div class="io-t">Output</div><div class="io-s">(W, 4, 5000)</div><div class="io-n">W windows &times; 4 channels &times; 5000 samples</div></div></div>
+  <h3>Metrics</h3>
+  <div class="scroll"><table><thead><tr><th>Cohort</th><th>Records</th><th>Windows</th><th>Notch</th><th>Note</th></tr></thead><tbody><tr><td>ADFECGDB</td><td>5</td><td>295 (59 each)</td><td>off</td><td>1 s trimmed at each end</td></tr><tr><td>NInFEA</td><td>60</td><td>315</td><td>on</td><td>kurtosis top-4 of 24</td></tr><tr><td>CinC 2013</td><td>25</td><td>275 (11 each)</td><td>on</td><td>13 of 25 records have strong 50 Hz mains</td></tr></tbody></table></div><p class='small'>No accuracy metric at this stage: it is checked visually (time-domain + Welch spectrum).</p>
+  
+  <figure><img src="figures/pipeline/01_preprocessing_adfecgdb_r08.png" alt="ADFECGDB r08: raw vs preprocessed, time-domain and spectrum" loading="lazy"><figcaption>ADFECGDB r08: raw vs preprocessed, time-domain and spectrum</figcaption></figure>
+</section>
+<section class="stage" id="s2">
+  <h2><span class="num">2</span>MEMD (multivariate EMD)</h2>
+  <p class="what">Splits the 4 channels jointly into IMF layers (64 directions). Each IMF is scored by in-band power (20&ndash;70 Hz); high scorers are summed. Removes drift, motion and muscle noise only &mdash; the mother is still in the output.</p>
+  <div class="iorow"><div class="io"><div class="io-t">Input</div><div class="io-s">(4, 5000)</div><div class="io-n">one preprocessed window</div></div><div class="arrow">&rarr;</div><div class="io"><div class="io-t">Output</div><div class="io-s">IMFs (K, 4, 5000) &rarr; (4, 5000)</div><div class="io-n">K = 6&ndash;8 layers; selected layers summed</div></div></div>
+  <h3>Metrics</h3>
+  <div class="scroll"><table><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>IMFs per window (ADFECGDB)</td><td>6&ndash;8</td></tr><tr><td>IMFs kept per window (mean)</td><td>about 1.0</td></tr><tr><td>Selection rule</td><td>score &ge; mean + 1 SD (no fixed top-k)</td></tr><tr><td>QRS F1 of MEMD output, ADFECGDB</td><td>0.501</td></tr></tbody></table></div>
+  
+  <figure><img src="figures/pipeline/02_memd_adfecgdb_r08_w0.png" alt="IMF layers, per-IMF score and the selected fetal-band sum" loading="lazy"><figcaption>IMF layers, per-IMF score and the selected fetal-band sum</figcaption></figure>
+</section>
+<section class="stage" id="s3">
+  <h2><span class="num">3</span>PINN extraction</h2>
+  <p class="what">The frozen PINN takes the 4-channel window (potential V, &nabla;&sup2;V = 0, loss 0.7&middot;L_data + 0.3&middot;L_physics) and V is read out as one signal by PCA. Windows that fail a quality check (110&ndash;160 bpm, &ge;5 beats) are replaced by a blind-source-separation output.</p>
+  <div class="iorow"><div class="io"><div class="io-t">Input</div><div class="io-s">(4, 5000)</div><div class="io-n">fetal-band window from MEMD</div></div><div class="arrow">&rarr;</div><div class="io"><div class="io-t">Output</div><div class="io-s">(5000,)</div><div class="io-n">one fetal ECG per window; PINNOutput.fecg is (W, 5000)</div></div></div>
+  <h3>Metrics</h3>
+  <h4>QRS F1 (&plusmn;50 ms) &mdash; ADFECGDB</h4><svg viewBox="0 0 520 38" role="img" class="chart" xmlns="http://www.w3.org/2000/svg"><text x="182" y="22" text-anchor="end" class="lbl">PINN extraction</text><rect x="190" y="10" width="165.6" height="16" rx="2" fill="#c2691b"/><text x="361.6" y="22" class="val">0.64</text></svg><h4>QRS F1 (&plusmn;50 ms) &mdash; CinC 2013 (zero-shot)</h4><svg viewBox="0 0 520 38" role="img" class="chart" xmlns="http://www.w3.org/2000/svg"><text x="182" y="22" text-anchor="end" class="lbl">PINN extraction</text><rect x="190" y="10" width="140.9" height="16" rx="2" fill="#c2691b"/><text x="336.9" y="22" class="val">0.54</text></svg><div class="scroll"><table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>NInFEA windows within 10 bpm of the Doppler rate</td><td>54%</td></tr><tr><td>NInFEA median rate error</td><td>9 bpm</td></tr><tr><td>R-R Bland&ndash;Altman, ADFECGDB (PINN output)</td><td>bias 0.3 ms, limits of agreement &minus;26 to +27 ms (1080 pairs)</td></tr></tbody></table></div>
+  
+  <figure><img src="figures/pipeline/03_pinn_adfecgdb_r08_w0.png" alt="r08 window 0: maternal part removed, PINN beats vs the scalp reference" loading="lazy"><figcaption>r08 window 0: maternal part removed, PINN beats vs the scalp reference</figcaption></figure><figure><img src="figures/separation_adfecgdb_r04_w0.png" alt="r04: a maternal-dominated record" loading="lazy"><figcaption>r04: a maternal-dominated record</figcaption></figure><figure><img src="figures/bland_altman_adfecgdb.png" alt="Bland&amp;ndash;Altman R-R agreement, ADFECGDB" loading="lazy"><figcaption>Bland&amp;ndash;Altman R-R agreement, ADFECGDB</figcaption></figure>
+</section>
+<section class="stage" id="s4">
+  <h2><span class="num">4</span>Feature extraction (12 biomarkers)</h2>
+  <p class="what">Not a trained model. Pan-Tompkins finds R peaks, RR intervals are cleaned, Q/S/P/T are located around each R peak, then 5 shape features and 7 rhythm features are computed. A feature is NaN when the window has too few beats.</p>
+  <div class="iorow"><div class="io"><div class="io-t">Input</div><div class="io-s">(5000,)</div><div class="io-n">one extracted fetal ECG window</div></div><div class="arrow">&rarr;</div><div class="io"><div class="io-t">Output</div><div class="io-s">(12,)</div><div class="io-n">FeatureVector.f, fixed order; (W, 12) for a recording</div></div></div>
+  <h3>Metrics</h3>
+  <h4>Share of windows with a real (non-NaN) value &mdash; pooled ADFECGDB + NInFEA, 537 windows</h4><svg viewBox="0 0 520 324" role="img" class="chart" xmlns="http://www.w3.org/2000/svg"><text x="182" y="22" text-anchor="end" class="lbl">qtc_sigma</text><rect x="190" y="10" width="260.0" height="16" rx="2" fill="#2d7a4f"/><text x="456.0" y="22" class="val">100%</text><text x="182" y="48" text-anchor="end" class="lbl">p_dispersion</text><rect x="190" y="36" width="260.0" height="16" rx="2" fill="#2d7a4f"/><text x="456.0" y="48" class="val">100%</text><text x="182" y="74" text-anchor="end" class="lbl">qrs_mean</text><rect x="190" y="62" width="260.0" height="16" rx="2" fill="#2d7a4f"/><text x="456.0" y="74" class="val">100%</text><text x="182" y="100" text-anchor="end" class="lbl">qrs_var</text><rect x="190" y="88" width="260.0" height="16" rx="2" fill="#2d7a4f"/><text x="456.0" y="100" class="val">100%</text><text x="182" y="126" text-anchor="end" class="lbl">qrs_asymmetry</text><rect x="190" y="114" width="260.0" height="16" rx="2" fill="#2d7a4f"/><text x="456.0" y="126" class="val">100%</text><text x="182" y="152" text-anchor="end" class="lbl">symbolic_dynamics</text><rect x="190" y="140" width="258.2" height="16" rx="2" fill="#2d7a4f"/><text x="454.2" y="152" class="val">99%</text><text x="182" y="178" text-anchor="end" class="lbl">apen</text><rect x="190" y="166" width="233.0" height="16" rx="2" fill="#2d7a4f"/><text x="429.0" y="178" class="val">90%</text><text x="182" y="204" text-anchor="end" class="lbl">prsa</text><rect x="190" y="192" width="65.8" height="16" rx="2" fill="#2d7a4f"/><text x="261.8" y="204" class="val">25%</text><text x="182" y="230" text-anchor="end" class="lbl">dfa_alpha</text><rect x="190" y="218" width="65.8" height="16" rx="2" fill="#2d7a4f"/><text x="261.8" y="230" class="val">25%</text><text x="182" y="256" text-anchor="end" class="lbl">mse</text><rect x="190" y="244" width="20.8" height="16" rx="2" fill="#2d7a4f"/><text x="216.8" y="256" class="val">8%</text><text x="182" y="282" text-anchor="end" class="lbl">sampen</text><rect x="190" y="270" width="20.8" height="16" rx="2" fill="#2d7a4f"/><text x="216.8" y="282" class="val">8%</text><text x="182" y="308" text-anchor="end" class="lbl">lf_hf_ratio</text><rect x="190" y="296" width="1.5" height="16" rx="2" fill="#2d7a4f"/><text x="197.5" y="308" class="val">0%</text></svg><p class='small'>Morphological features are always defined; the slow rhythm features (MSE, SampEn, DFA, PRSA, LF/HF) need hundreds of beats and a 5 s window holds only 8&ndash;12 RR intervals. LF/HF was never defined on any window.</p>
+  
+  <figure><img src="figures/pipeline/04_features_adfecgdb_r08_w0.png" alt="The 12 values for one window (bars = z-scores, grey = NaN)" loading="lazy"><figcaption>The 12 values for one window (bars = z-scores, grey = NaN)</figcaption></figure><figure><img src="figures/feature_distributions.png" alt="Feature distributions across windows" loading="lazy"><figcaption>Feature distributions across windows</figcaption></figure>
+</section>
+<section class="stage" id="s5">
+  <h2><span class="num">5</span>CVAE (contrastive VAE)</h2>
+  <p class="what">Standardise the 12 features (NaN filled with the median), encode 12 &rarr; 128 &rarr; 64 &rarr; latent z (64), decode back to 12. Trained with reconstruction + KL + InfoNCE (&tau; = 0.07; positives = same subject or GA within &plusmn;7 d). GA is never an input. It expands the data; it is not compression.</p>
+  <div class="iorow"><div class="io"><div class="io-t">Input</div><div class="io-s">(12,)</div><div class="io-n">feature vector per window</div></div><div class="arrow">&rarr;</div><div class="io"><div class="io-t">Output</div><div class="io-s">z (64,)</div><div class="io-n">latent per window</div></div></div>
+  <h3>Metrics</h3>
+  <div class="scroll"><table><thead><tr><th>Check (held-out, 537 windows, 44 subjects)</th><th>Unscaled inputs</th><th>Standardised inputs</th></tr></thead><tbody><tr><td>Reconstruction R&sup2;, median over features</td><td>&minus;0.01</td><td>0.86</td></tr><tr><td>Features reconstructed better than the training mean</td><td>3 of 11</td><td>11 of 11</td></tr></tbody></table></div>
+  
+  <figure><img src="figures/pipeline/05_cvae_adfecgdb_r08_w0.png" alt="Input vs reconstruction and the latent for one window" loading="lazy"><figcaption>Input vs reconstruction and the latent for one window</figcaption></figure>
+</section>
+<section class="stage" id="s6">
+  <h2><span class="num">6</span>Transformer (Cardiac Age)</h2>
+  <p class="what">Takes one recording's sequence of latents (up to 64 windows). Linear 64 &rarr; 256, a CLS token and learned positions are added, 3 encoder layers (4 heads, d_k 64, feed-forward 1024), the CLS output goes through 256 &rarr; 128 &rarr; 1. MAE loss, AdamW.</p>
+  <div class="iorow"><div class="io"><div class="io-t">Input</div><div class="io-s">(L, 64)</div><div class="io-n">latents of one recording, L &le; 64 windows</div></div><div class="arrow">&rarr;</div><div class="io"><div class="io-t">Output</div><div class="io-s">CA (days)</div><div class="io-n">one Cardiac Age per recording</div></div></div>
+  <h3>Metrics</h3>
+  <p>No separate held-out metric here: the saved model was fitted on all records, so its predictions on them are a train-set fit, not an evaluation (r08: 279.2 d vs 275.0 d label). The held-out result is stage 7.</p>
+  
+  <figure><img src="figures/pipeline/06_transformer_adfecgdb_r08.png" alt="Latent sequence in, one Cardiac Age out" loading="lazy"><figcaption>Latent sequence in, one Cardiac Age out</figcaption></figure>
+</section>
+<section class="stage" id="s7">
+  <h2><span class="num">7</span>Evaluation: pooled leave-one-subject-out CV</h2>
+  <p class="what">Each mother's recordings are held out together; CVAE and transformer are refitted inside every fold. MAE in days with a 95% bootstrap CI (1000 resamples) after the mandatory unit check. &Delta;Age = CA &minus; GA.</p>
+  <div class="iorow"><div class="io"><div class="io-t">Input</div><div class="io-s">CA, GA per record</div><div class="io-n">64 held-out records (5 ADFECGDB + 59 gated NInFEA)</div></div><div class="arrow">&rarr;</div><div class="io"><div class="io-t">Output</div><div class="io-s">MAE, CI, r, &Delta;Age</div><div class="io-n">per record and overall</div></div></div>
+  <h3>Metrics</h3>
+  <h4>MAE in days, 64 records (lower is better)</h4><svg viewBox="0 0 520 64" role="img" class="chart" xmlns="http://www.w3.org/2000/svg"><text x="182" y="22" text-anchor="end" class="lbl">Predict the mean</text><rect x="190" y="10" width="178.5" height="16" rx="2" fill="#1d5f7c"/><text x="374.5" y="22" class="val">20.6 d</text><text x="182" y="48" text-anchor="end" class="lbl">Our pipeline</text><rect x="190" y="36" width="195.9" height="16" rx="2" fill="#c2691b"/><text x="391.9" y="48" class="val">22.6 d</text></svg><div class="scroll"><table><thead><tr><th>Subset</th><th>n</th><th>MAE (95% CI), days</th><th>RMSE</th><th>Pearson r</th></tr></thead><tbody><tr><td>Overall</td><td>64</td><td>22.6 (17.6&ndash;28.3)</td><td>30.6</td><td>0.56</td></tr><tr><td>NInFEA only</td><td>59</td><td>22.6 (17.6&ndash;28.3)</td><td>31.0</td><td>&minus;0.02</td></tr><tr><td>ADFECGDB only</td><td>5</td><td>22.5 (11.5&ndash;33.4)</td><td>25.6</td><td>&minus;0.90 (labels are synthetic)</td></tr></tbody></table></div><p>Mean &Delta;Age overall: +7.8 days. Within NInFEA the model is worse than predicting the NInFEA mean (12.5 d); the overall r of 0.56 mostly reflects the two cohorts (21&ndash;27 wk vs 38&ndash;41 wk) being far apart. None of the 12 features correlates with GA within NInFEA after multiple-test correction.</p>
+  <p class="warn">ADFECGDB gestational ages are placeholders pending the real labels.</p>
+  <figure><img src="figures/pipeline/07_evaluation_pooled_losocv.png" alt="Pooled leave-one-subject-out: CA vs GA and &amp;Delta;Age per record" loading="lazy"><figcaption>Pooled leave-one-subject-out: CA vs GA and &amp;Delta;Age per record</figcaption></figure>
+</section>
+</main></body></html>

@@ -1,0 +1,41 @@
+{
+  "dataset": "adfecgdb",
+  "records": [
+    {
+      "record_id": "r01",
+      "n_windows": 59,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "r04",
+      "n_windows": 59,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0
+    },
+    {
+      "record_id": "r07",
+      "n_windows": 59,
+      "k_min": 6,
+      "k_max": 7,
+      "mean_n_selected": 1.0169491525423728
+    },
+    {
+      "record_id": "r08",
+      "n_windows": 59,
+      "k_min": 7,
+      "k_max": 7,
+      "mean_n_selected": 1.0169491525423728
+    },
+    {
+      "record_id": "r10",
+      "n_windows": 59,
+      "k_min": 7,
+      "k_max": 8,
+      "mean_n_selected": 1.0169491525423728
+    }
+  ],
+  "timestamp": "2026-09-29T08:47:46.316953+00:00"
+}

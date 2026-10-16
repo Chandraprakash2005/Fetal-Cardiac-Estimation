@@ -1,0 +1,251 @@
+{
+  "results": {
+    "adfecgdb": {
+      "pinn": {
+        "n_windows": 295,
+        "n_records": 5,
+        "gate_pass_rate": 0.4101694915254237,
+        "usable_records": 2,
+        "median_record_hr_bpm": 94.7617794156357,
+        "share_from_pinn": 0.5186440677966102,
+        "mean_f1": 0.5100512424143822,
+        "mean_precision": 0.5442694304939203,
+        "mean_recall": 0.4885844314415743,
+        "n_scored": 294,
+        "f1_gate_passing": {
+          "mean": 0.9202174604419436,
+          "n": 121
+        },
+        "f1_gate_failing": {
+          "mean": 0.223171980094527,
+          "n": 173
+        }
+      },
+      "cancel+pinn": {
+        "n_windows": 295,
+        "n_records": 5,
+        "gate_pass_rate": 0.5186440677966102,
+        "usable_records": 2,
+        "median_record_hr_bpm": 99.54375777685607,
+        "share_from_pinn": 0.5186440677966102,
+        "mean_f1": 0.6300136727657049,
+        "mean_precision": 0.6715103773777243,
+        "mean_recall": 0.6032685002072756,
+        "n_scored": 294,
+        "f1_gate_passing": {
+          "mean": 0.8768474709740919,
+          "n": 153
+        },
+        "f1_gate_failing": {
+          "mean": 0.3621727427949021,
+          "n": 141
+        }
+      },
+      "bss_pre": {
+        "n_windows": 295,
+        "n_records": 5,
+        "gate_pass_rate": 0.9050847457627119,
+        "usable_records": 5,
+        "median_record_hr_bpm": 126.58227848101266,
+        "share_from_pinn": 0.5186440677966102,
+        "mean_f1": 0.5572390220656391,
+        "mean_precision": 0.563646113901216,
+        "mean_recall": 0.5537347006734761,
+        "n_scored": 294,
+        "f1_gate_passing": {
+          "mean": 0.5808014464962395,
+          "n": 266
+        },
+        "f1_gate_failing": {
+          "mean": 0.3333959899749373,
+          "n": 28
+        }
+      },
+      "bss_memd": {
+        "n_windows": 295,
+        "n_records": 5,
+        "gate_pass_rate": 0.6440677966101694,
+        "usable_records": 2,
+        "median_record_hr_bpm": 109.1129521115377,
+        "share_from_pinn": 0.5186440677966102,
+        "mean_f1": 0.5593035903937954,
+        "mean_precision": 0.5763999322672791,
+        "mean_recall": 0.5474548316385051,
+        "n_scored": 294,
+        "f1_gate_passing": {
+          "mean": 0.7236240992844204,
+          "n": 190
+        },
+        "f1_gate_failing": {
+          "mean": 0.25910266068976867,
+          "n": 104
+        }
+      },
+      "hybrid": {
+        "n_windows": 295,
+        "n_records": 5,
+        "gate_pass_rate": 0.9220338983050848,
+        "usable_records": 5,
+        "median_record_hr_bpm": 125.86532410320956,
+        "share_from_pinn": 0.5186440677966102,
+        "mean_f1": 0.6369371130053892,
+        "mean_precision": 0.6440711404997119,
+        "mean_recall": 0.6320637790025545,
+        "n_scored": 294,
+        "f1_gate_passing": {
+          "mean": 0.6650347730785469,
+          "n": 271
+        },
+        "f1_gate_failing": {
+          "mean": 0.30587337909992374,
+          "n": 23
+        }
+      }
+    },
+    "cinc2013": {
+      "pinn": {
+        "n_windows": 275,
+        "n_records": 25,
+        "gate_pass_rate": 0.33454545454545453,
+        "usable_records": 8,
+        "median_record_hr_bpm": 92.64978381717108,
+        "share_from_pinn": 0.3890909090909091,
+        "mean_f1": 0.3769307434308058,
+        "mean_precision": 0.4151959454686727,
+        "mean_recall": 0.3532219800401618,
+        "n_scored": 275,
+        "f1_gate_passing": {
+          "mean": 0.75982894290401,
+          "n": 92
+        },
+        "f1_gate_failing": {
+          "mean": 0.18443547375028785,
+          "n": 183
+        }
+      },
+      "cancel+pinn": {
+        "n_windows": 275,
+        "n_records": 25,
+        "gate_pass_rate": 0.3890909090909091,
+        "usable_records": 8,
+        "median_record_hr_bpm": 96.3302752293578,
+        "share_from_pinn": 0.3890909090909091,
+        "mean_f1": 0.43967965978989615,
+        "mean_precision": 0.5022270355906719,
+        "mean_recall": 0.40698711894166445,
+        "n_scored": 275,
+        "f1_gate_passing": {
+          "mean": 0.732156582693252,
+          "n": 107
+        },
+        "f1_gate_failing": {
+          "mean": 0.25339971484549684,
+          "n": 168
+        }
+      },
+      "bss_pre": {
+        "n_windows": 275,
+        "n_records": 25,
+        "gate_pass_rate": 0.7927272727272727,
+        "usable_records": 22,
+        "median_record_hr_bpm": 124.53300124533001,
+        "share_from_pinn": 0.3890909090909091,
+        "mean_f1": 0.5193811133557215,
+        "mean_precision": 0.537643598825417,
+        "mean_recall": 0.5068547260819988,
+        "n_scored": 275,
+        "f1_gate_passing": {
+          "mean": 0.590897147265199,
+          "n": 218
+        },
+        "f1_gate_failing": {
+          "mean": 0.24586365033350885,
+          "n": 57
+        }
+      },
+      "bss_memd": {
+        "n_windows": 275,
+        "n_records": 25,
+        "gate_pass_rate": 0.5309090909090909,
+        "usable_records": 12,
+        "median_record_hr_bpm": 109.91527364323333,
+        "share_from_pinn": 0.3890909090909091,
+        "mean_f1": 0.46993825633325625,
+        "mean_precision": 0.5074328600692237,
+        "mean_recall": 0.4444714073804983,
+        "n_scored": 275,
+        "f1_gate_passing": {
+          "mean": 0.6475224895145347,
+          "n": 146
+        },
+        "f1_gate_failing": {
+          "mean": 0.2689514497870031,
+          "n": 129
+        }
+      },
+      "hybrid": {
+        "n_windows": 275,
+        "n_records": 25,
+        "gate_pass_rate": 0.8181818181818182,
+        "usable_records": 22,
+        "median_record_hr_bpm": 122.95081967213115,
+        "share_from_pinn": 0.3890909090909091,
+        "mean_f1": 0.5415440092151359,
+        "mean_precision": 0.5604654133745043,
+        "mean_recall": 0.5280414635869181,
+        "n_scored": 275,
+        "f1_gate_passing": {
+          "mean": 0.6051916577918403,
+          "n": 225
+        },
+        "f1_gate_failing": {
+          "mean": 0.2551295906199662,
+          "n": 50
+        }
+      }
+    },
+    "ninfea": {
+      "pinn": {
+        "n_windows": 315,
+        "n_records": 60,
+        "gate_pass_rate": 0.025396825396825397,
+        "usable_records": 2,
+        "median_record_hr_bpm": 86.3447446363142,
+        "share_from_pinn": 0.06031746031746032
+      },
+      "cancel+pinn": {
+        "n_windows": 315,
+        "n_records": 60,
+        "gate_pass_rate": 0.06031746031746032,
+        "usable_records": 3,
+        "median_record_hr_bpm": 61.006657632396625,
+        "share_from_pinn": 0.06031746031746032
+      },
+      "bss_pre": {
+        "n_windows": 315,
+        "n_records": 60,
+        "gate_pass_rate": 0.8317460317460318,
+        "usable_records": 55,
+        "median_record_hr_bpm": 126.36899747262005,
+        "share_from_pinn": 0.06031746031746032
+      },
+      "bss_memd": {
+        "n_windows": 315,
+        "n_records": 60,
+        "gate_pass_rate": 0.18412698412698414,
+        "usable_records": 10,
+        "median_record_hr_bpm": 96.21686581926372,
+        "share_from_pinn": 0.06031746031746032
+      },
+      "hybrid": {
+        "n_windows": 315,
+        "n_records": 60,
+        "gate_pass_rate": 0.8412698412698413,
+        "usable_records": 55,
+        "median_record_hr_bpm": 126.36899747262005,
+        "share_from_pinn": 0.06031746031746032
+      }
+    }
+  },
+  "timestamp": "2026-10-02T14:11:35.412988+00:00"
+}

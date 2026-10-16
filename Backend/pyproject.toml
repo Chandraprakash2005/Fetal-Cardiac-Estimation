@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fcac"
+version = "0.1.0"
+description = "Fetal Cardiac Ageing Clock -- multi-cohort deep learning framework for non-invasive fetal gestational age and cardiac maturity estimation"
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fcac*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

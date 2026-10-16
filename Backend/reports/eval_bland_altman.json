@@ -1,0 +1,1051 @@
+{
+  "min_reference_beats": 3,
+  "datasets": {
+    "adfecgdb": {
+      "tolerance_ms": 50.0,
+      "lag_ms": 0.0,
+      "n_records": 5,
+      "role": "train (PINN in-sample)",
+      "arms": {
+        "pinn": {
+          "all_windows": {
+            "n_pairs": 1080,
+            "bias_ms": 0.30555555555524755,
+            "loa_low_ms": -26.092073495291874,
+            "loa_high_ms": 26.70318460640237,
+            "sd_diff_ms": 13.4681780871669,
+            "mean_abs_diff_ms": 9.292592592592525,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 2841,
+            "coverage": 0.3801478352692714,
+            "bias_ci95_ms": [
+              -0.23476587556160747,
+              13.409638554215816
+            ],
+            "loa_low_ci95_ms": [
+              -59.83315174565,
+              -22.068684012511795
+            ],
+            "loa_high_ci95_ms": [
+              21.852098447930995,
+              85.93125717612519
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": 7.4859429840636835,
+              "loa_low_ms": -12.628264103956141,
+              "loa_high_ms": 27.60015007208351,
+              "sd_diff_ms": 10.262350555112155,
+              "mean_abs_diff_ms": 7.670332319577335,
+              "n_records": 5
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 1027,
+            "bias_ms": -0.13242453748807145,
+            "loa_low_ms": -21.94503079659762,
+            "loa_high_ms": 21.68018172162148,
+            "sd_diff_ms": 11.128880744443649,
+            "mean_abs_diff_ms": 8.428432327166524,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 4,
+            "n_reference_intervals": 1183,
+            "coverage": 0.8681318681318682,
+            "bias_ci95_ms": [
+              -0.17827868852492015,
+              6.999999999997897
+            ],
+            "loa_low_ci95_ms": [
+              -38.0586906156785,
+              -20.88843816216159
+            ],
+            "loa_high_ci95_ms": [
+              20.624987327281787,
+              52.058690615674294
+            ],
+            "n_records_resampled": 4
+          }
+        },
+        "cancel+pinn": {
+          "all_windows": {
+            "n_pairs": 1317,
+            "bias_ms": -0.3872437357631169,
+            "loa_low_ms": -32.453388740853114,
+            "loa_high_ms": 31.678901269326882,
+            "sd_diff_ms": 16.36027806382143,
+            "mean_abs_diff_ms": 11.034168564920295,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 2841,
+            "coverage": 0.4635691657866948,
+            "bias_ci95_ms": [
+              -1.2150313152393994,
+              -0.16186880604085435
+            ],
+            "loa_low_ci95_ms": [
+              -59.156957945625614,
+              -23.118889915255558
+            ],
+            "loa_high_ci95_ms": [
+              22.81311624319966,
+              56.97957435360912
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -0.7031246409806272,
+              "loa_low_ms": -1.8920963959741672,
+              "loa_high_ms": 0.4858471140129127,
+              "sd_diff_ms": 0.6066182423436428,
+              "mean_abs_diff_ms": 0.7031246409806272,
+              "n_records": 5
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 1176,
+            "bias_ms": -0.4022108843539494,
+            "loa_low_ms": -28.436883414791666,
+            "loa_high_ms": 27.63246164608377,
+            "sd_diff_ms": 14.303404352264142,
+            "mean_abs_diff_ms": 9.912414965986384,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 1491,
+            "coverage": 0.7887323943661971,
+            "bias_ci95_ms": [
+              -2.105485232067632,
+              -0.1714285714288249
+            ],
+            "loa_low_ci95_ms": [
+              -59.65250594766885,
+              -22.129490541387945
+            ],
+            "loa_high_ci95_ms": [
+              21.731521935662727,
+              55.44153548353359
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -1.1878246898263456,
+              "loa_low_ms": -2.986655010242778,
+              "loa_high_ms": 0.6110056305900871,
+              "sd_diff_ms": 0.917770571641037,
+              "mean_abs_diff_ms": 1.1878246898263456,
+              "n_records": 5
+            }
+          }
+        },
+        "bss_pre": {
+          "all_windows": {
+            "n_pairs": 1163,
+            "bias_ms": -0.6603611349959262,
+            "loa_low_ms": -31.63878702755205,
+            "loa_high_ms": 30.318064757560194,
+            "sd_diff_ms": 15.805319332936797,
+            "mean_abs_diff_ms": 9.267411865866542,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 2841,
+            "coverage": 0.4093629003871876,
+            "bias_ci95_ms": [
+              -2.025462962963685,
+              -0.18148487626063028
+            ],
+            "loa_low_ci95_ms": [
+              -53.933327367389865,
+              -22.059853579780405
+            ],
+            "loa_high_ci95_ms": [
+              21.12217100918635,
+              49.88240144146249
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -1.3189549577845696,
+              "loa_low_ms": -3.986176844375899,
+              "loa_high_ms": 1.3482669288067597,
+              "sd_diff_ms": 1.3608274931588416,
+              "mean_abs_diff_ms": 1.3212472213947535,
+              "n_records": 5
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 1135,
+            "bias_ms": -0.5894273127755362,
+            "loa_low_ms": -30.817692107502065,
+            "loa_high_ms": 29.63883748195099,
+            "sd_diff_ms": 15.422584078942107,
+            "mean_abs_diff_ms": 8.925991189429844,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 2573,
+            "coverage": 0.4411193159735717,
+            "bias_ci95_ms": [
+              -1.4722222222227361,
+              -0.2802249297098307
+            ],
+            "loa_low_ci95_ms": [
+              -53.481627019024124,
+              -21.418105575217112
+            ],
+            "loa_high_ci95_ms": [
+              20.658691764087052,
+              50.53718257457866
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -1.1921054652625116,
+              "loa_low_ms": -3.2472825506374967,
+              "loa_high_ms": 0.8630716201124733,
+              "sd_diff_ms": 1.0485597374362168,
+              "mean_abs_diff_ms": 1.1921054652625116,
+              "n_records": 5
+            }
+          }
+        },
+        "bss_memd": {
+          "all_windows": {
+            "n_pairs": 1241,
+            "bias_ms": -0.5084609186142076,
+            "loa_low_ms": -27.269861458094606,
+            "loa_high_ms": 26.25293962086619,
+            "sd_diff_ms": 13.653775785449183,
+            "mean_abs_diff_ms": 8.656728444803033,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 2841,
+            "coverage": 0.43681802182330165,
+            "bias_ci95_ms": [
+              -4.585365853658454,
+              -0.16724336793557945
+            ],
+            "loa_low_ci95_ms": [
+              -70.78870093731933,
+              -18.925883840211586
+            ],
+            "loa_high_ci95_ms": [
+              18.46432369256903,
+              62.891188443511254
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -3.7987014124627763,
+              "loa_low_ms": -13.576665511381488,
+              "loa_high_ms": 5.979262686455936,
+              "sd_diff_ms": 4.988757193325874,
+              "mean_abs_diff_ms": 3.7987014124627763,
+              "n_records": 5
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 1192,
+            "bias_ms": -0.3850671140941797,
+            "loa_low_ms": -23.513357943139816,
+            "loa_high_ms": 22.743223714951455,
+            "sd_diff_ms": 11.80014838216614,
+            "mean_abs_diff_ms": 7.730704697987047,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 1845,
+            "coverage": 0.646070460704607,
+            "bias_ci95_ms": [
+              -6.175257731959424,
+              -0.11268403171020863
+            ],
+            "loa_low_ci95_ms": [
+              -68.59920503559445,
+              -18.169429497895514
+            ],
+            "loa_high_ci95_ms": [
+              17.584211674672137,
+              61.149205035594655
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -5.876163625507695,
+              "loa_low_ms": -22.377927986216747,
+              "loa_high_ms": 10.625600735201354,
+              "sd_diff_ms": 8.419267530974006,
+              "mean_abs_diff_ms": 5.904070602252557,
+              "n_records": 5
+            }
+          }
+        },
+        "hybrid": {
+          "all_windows": {
+            "n_pairs": 1424,
+            "bias_ms": -0.6179775280901958,
+            "loa_low_ms": -33.041712170097355,
+            "loa_high_ms": 31.805757113916965,
+            "sd_diff_ms": 16.542721756126102,
+            "mean_abs_diff_ms": 11.34971910112348,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 2841,
+            "coverage": 0.5012319605772615,
+            "bias_ci95_ms": [
+              -2.2141623488780575,
+              -0.18381541154545725
+            ],
+            "loa_low_ci95_ms": [
+              -53.09020950985044,
+              -23.41636602252823
+            ],
+            "loa_high_ci95_ms": [
+              22.93851493864444,
+              50.11220321594337
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -1.3010728568450531,
+              "loa_low_ms": -3.919539682665292,
+              "loa_high_ms": 1.317393968975186,
+              "sd_diff_ms": 1.3359524621531833,
+              "mean_abs_diff_ms": 1.3010728568450531,
+              "n_records": 5
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 1405,
+            "bias_ms": -0.5181494661924444,
+            "loa_low_ms": -32.63653503545188,
+            "loa_high_ms": 31.600236103066987,
+            "sd_diff_ms": 16.386931412887463,
+            "mean_abs_diff_ms": 11.20996441281136,
+            "n_records_scored": 5,
+            "n_records_with_pairs": 5,
+            "n_reference_intervals": 2622,
+            "coverage": 0.5358504958047292,
+            "bias_ci95_ms": [
+              -1.8232044198900315,
+              -0.18217099271545983
+            ],
+            "loa_low_ci95_ms": [
+              -52.875597811994524,
+              -23.424666280894378
+            ],
+            "loa_high_ci95_ms": [
+              22.928439865799383,
+              50.49310186385725
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 5,
+              "bias_ms": -1.2104912993635821,
+              "loa_low_ms": -3.517846517212595,
+              "loa_high_ms": 1.0968639184854307,
+              "sd_diff_ms": 1.1772220499229658,
+              "mean_abs_diff_ms": 1.2104912993635821,
+              "n_records": 5
+            }
+          }
+        }
+      }
+    },
+    "cinc2013": {
+      "tolerance_ms": 50.0,
+      "lag_ms": 0.0,
+      "n_records": 25,
+      "role": "zero-shot",
+      "arms": {
+        "pinn": {
+          "all_windows": {
+            "n_pairs": 646,
+            "bias_ms": 0.6965944272446213,
+            "loa_low_ms": -26.358692097186726,
+            "loa_high_ms": 27.75188095167597,
+            "sd_diff_ms": 13.803717614505791,
+            "mean_abs_diff_ms": 9.42414860681117,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 14,
+            "n_reference_intervals": 2834,
+            "coverage": 0.22794636556104447,
+            "bias_ci95_ms": [
+              -0.340291986546813,
+              3.654966884857195
+            ],
+            "loa_low_ci95_ms": [
+              -34.91160339410057,
+              -21.890056478590598
+            ],
+            "loa_high_ci95_ms": [
+              22.051963107704182,
+              41.96173941908561
+            ],
+            "n_records_resampled": 13,
+            "per_record_mean_rr": {
+              "n_pairs": 12,
+              "bias_ms": 8.14067394217715,
+              "loa_low_ms": -38.795539124210435,
+              "loa_high_ms": 55.07688700856474,
+              "sd_diff_ms": 23.94704748285081,
+              "mean_abs_diff_ms": 13.579419816764423,
+              "n_records": 12
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 627,
+            "bias_ms": 0.8277511961722729,
+            "loa_low_ms": -24.11325251991698,
+            "loa_high_ms": 25.768754912261524,
+            "sd_diff_ms": 12.725001895963905,
+            "mean_abs_diff_ms": 8.907496012759177,
+            "n_records_scored": 12,
+            "n_records_with_pairs": 10,
+            "n_reference_intervals": 965,
+            "coverage": 0.649740932642487,
+            "bias_ci95_ms": [
+              -0.14927634477851903,
+              3.4009799965928824
+            ],
+            "loa_low_ci95_ms": [
+              -31.089770791536665,
+              -20.184761875789324
+            ],
+            "loa_high_ci95_ms": [
+              19.901296393728146,
+              38.23232233771254
+            ],
+            "n_records_resampled": 9,
+            "per_record_mean_rr": {
+              "n_pairs": 9,
+              "bias_ms": 12.52275044142149,
+              "loa_low_ms": -35.68326198324263,
+              "loa_high_ms": 60.7287628660856,
+              "sd_diff_ms": 24.59490429829802,
+              "mean_abs_diff_ms": 12.900337533463679,
+              "n_records": 9
+            }
+          }
+        },
+        "cancel+pinn": {
+          "all_windows": {
+            "n_pairs": 760,
+            "bias_ms": 0.5842105263157779,
+            "loa_low_ms": -31.45875378473579,
+            "loa_high_ms": 32.62717483736735,
+            "sd_diff_ms": 16.348451179107943,
+            "mean_abs_diff_ms": 11.055263157894782,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 25,
+            "n_reference_intervals": 2834,
+            "coverage": 0.2681721947776994,
+            "bias_ci95_ms": [
+              -0.5577940466673564,
+              2.130057763804614
+            ],
+            "loa_low_ci95_ms": [
+              -42.47964371802765,
+              -24.92956295304269
+            ],
+            "loa_high_ci95_ms": [
+              25.513713208724838,
+              45.23955987441172
+            ],
+            "n_records_resampled": 22,
+            "per_record_mean_rr": {
+              "n_pairs": 19,
+              "bias_ms": 4.579616237331983,
+              "loa_low_ms": -33.62568732317572,
+              "loa_high_ms": 42.784919797839684,
+              "sd_diff_ms": 19.492501816585563,
+              "mean_abs_diff_ms": 9.919172378097379,
+              "n_records": 19
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 676,
+            "bias_ms": 0.5458579881656598,
+            "loa_low_ms": -28.088547176907646,
+            "loa_high_ms": 29.18026315323897,
+            "sd_diff_ms": 14.609390390343524,
+            "mean_abs_diff_ms": 9.957100591716014,
+            "n_records_scored": 17,
+            "n_records_with_pairs": 15,
+            "n_reference_intervals": 1115,
+            "coverage": 0.6062780269058295,
+            "bias_ci95_ms": [
+              -0.3516299522503265,
+              2.929934519396821
+            ],
+            "loa_low_ci95_ms": [
+              -38.428013815640846,
+              -22.81216153018993
+            ],
+            "loa_high_ci95_ms": [
+              22.808630110266876,
+              43.307152282582145
+            ],
+            "n_records_resampled": 13,
+            "per_record_mean_rr": {
+              "n_pairs": 13,
+              "bias_ms": 7.961363124235972,
+              "loa_low_ms": -34.37597047637862,
+              "loa_high_ms": 50.298696724850565,
+              "sd_diff_ms": 21.600680408476833,
+              "mean_abs_diff_ms": 9.768790898862566,
+              "n_records": 13
+            }
+          }
+        },
+        "bss_pre": {
+          "all_windows": {
+            "n_pairs": 1026,
+            "bias_ms": -0.0750487329434515,
+            "loa_low_ms": -31.311542664919994,
+            "loa_high_ms": 31.161445199033093,
+            "sd_diff_ms": 15.936986699988033,
+            "mean_abs_diff_ms": 9.449317738791706,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 25,
+            "n_reference_intervals": 2834,
+            "coverage": 0.36203246294989416,
+            "bias_ci95_ms": [
+              -1.0268920868773197,
+              1.0029824050982448
+            ],
+            "loa_low_ci95_ms": [
+              -40.11072190205987,
+              -25.193758261327893
+            ],
+            "loa_high_ci95_ms": [
+              24.8954261871229,
+              40.12353600530582
+            ],
+            "n_records_resampled": 25,
+            "per_record_mean_rr": {
+              "n_pairs": 25,
+              "bias_ms": 2.3982674624568836,
+              "loa_low_ms": -31.5927818430654,
+              "loa_high_ms": 36.38931676797917,
+              "sd_diff_ms": 17.342372094654227,
+              "mean_abs_diff_ms": 7.54949931320185,
+              "n_records": 25
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 989,
+            "bias_ms": -0.013144590495450352,
+            "loa_low_ms": -29.990768728967236,
+            "loa_high_ms": 29.964479547976335,
+            "sd_diff_ms": 15.29470619309785,
+            "mean_abs_diff_ms": 9.0869565217394,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 25,
+            "n_reference_intervals": 2249,
+            "coverage": 0.43975100044464205,
+            "bias_ci95_ms": [
+              -1.0226651097332595,
+              1.0050821635472655
+            ],
+            "loa_low_ci95_ms": [
+              -37.7685744476161,
+              -23.6700061244049
+            ],
+            "loa_high_ci95_ms": [
+              23.571686195141943,
+              38.41061042322556
+            ],
+            "n_records_resampled": 24,
+            "per_record_mean_rr": {
+              "n_pairs": 24,
+              "bias_ms": 2.722577242363504,
+              "loa_low_ms": -32.19541850024069,
+              "loa_high_ms": 37.640572984967704,
+              "sd_diff_ms": 17.815303950308266,
+              "mean_abs_diff_ms": 7.812033467219891,
+              "n_records": 24
+            }
+          }
+        },
+        "bss_memd": {
+          "all_windows": {
+            "n_pairs": 879,
+            "bias_ms": -0.3947667804323036,
+            "loa_low_ms": -30.30227685019966,
+            "loa_high_ms": 29.512743289335056,
+            "sd_diff_ms": 15.258933709064978,
+            "mean_abs_diff_ms": 10.203640500568799,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 24,
+            "n_reference_intervals": 2834,
+            "coverage": 0.3101623147494707,
+            "bias_ci95_ms": [
+              -1.4636443331724986,
+              0.5507125026157476
+            ],
+            "loa_low_ci95_ms": [
+              -40.465656946495606,
+              -24.38121304606114
+            ],
+            "loa_high_ci95_ms": [
+              23.514089048762436,
+              39.03013085292899
+            ],
+            "n_records_resampled": 24,
+            "per_record_mean_rr": {
+              "n_pairs": 23,
+              "bias_ms": -0.47015459067677307,
+              "loa_low_ms": -24.309133166646472,
+              "loa_high_ms": 23.368823985292924,
+              "sd_diff_ms": 12.162744171413111,
+              "mean_abs_diff_ms": 7.302252361072016,
+              "n_records": 23
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 782,
+            "bias_ms": -0.1010230179028138,
+            "loa_low_ms": -25.259430176383088,
+            "loa_high_ms": 25.057384140577458,
+            "sd_diff_ms": 12.835922019632793,
+            "mean_abs_diff_ms": 8.829923273657243,
+            "n_records_scored": 24,
+            "n_records_with_pairs": 22,
+            "n_reference_intervals": 1535,
+            "coverage": 0.5094462540716612,
+            "bias_ci95_ms": [
+              -0.7815353488901687,
+              1.0138403822298871
+            ],
+            "loa_low_ci95_ms": [
+              -33.43012766618783,
+              -20.20959249372344
+            ],
+            "loa_high_ci95_ms": [
+              19.652192665313706,
+              33.855072033322585
+            ],
+            "n_records_resampled": 18,
+            "per_record_mean_rr": {
+              "n_pairs": 15,
+              "bias_ms": 1.4770827182029544,
+              "loa_low_ms": -23.474992573711095,
+              "loa_high_ms": 26.429158010117003,
+              "sd_diff_ms": 12.73065065913982,
+              "mean_abs_diff_ms": 5.982080953016661,
+              "n_records": 15
+            }
+          }
+        },
+        "hybrid": {
+          "all_windows": {
+            "n_pairs": 1098,
+            "bias_ms": -0.04644808743167494,
+            "loa_low_ms": -32.450113880756874,
+            "loa_high_ms": 32.35721770589352,
+            "sd_diff_ms": 16.532482547614897,
+            "mean_abs_diff_ms": 11.173952641165835,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 25,
+            "n_reference_intervals": 2834,
+            "coverage": 0.38743824982357095,
+            "bias_ci95_ms": [
+              -0.9180022630123177,
+              1.0527267817830253
+            ],
+            "loa_low_ci95_ms": [
+              -40.055193013384695,
+              -27.3217287129042
+            ],
+            "loa_high_ci95_ms": [
+              26.8593300710045,
+              40.79157523657634
+            ],
+            "n_records_resampled": 25,
+            "per_record_mean_rr": {
+              "n_pairs": 25,
+              "bias_ms": 2.402433474273648,
+              "loa_low_ms": -30.994026245624937,
+              "loa_high_ms": 35.79889319417224,
+              "sd_diff_ms": 17.03901006117275,
+              "mean_abs_diff_ms": 7.3878639135039155,
+              "n_records": 25
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 1062,
+            "bias_ms": -0.010357815442560403,
+            "loa_low_ms": -31.345714678572364,
+            "loa_high_ms": 31.324999047687243,
+            "sd_diff_ms": 15.987426970984593,
+            "mean_abs_diff_ms": 10.908662900188386,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 25,
+            "n_reference_intervals": 2319,
+            "coverage": 0.4579560155239327,
+            "bias_ci95_ms": [
+              -1.0338699870955084,
+              1.0127110229535998
+            ],
+            "loa_low_ci95_ms": [
+              -38.27833443909162,
+              -26.122989401842876
+            ],
+            "loa_high_ci95_ms": [
+              26.005321460328563,
+              38.46570109680939
+            ],
+            "n_records_resampled": 24,
+            "per_record_mean_rr": {
+              "n_pairs": 24,
+              "bias_ms": 2.6332902100043234,
+              "loa_low_ms": -31.650590110357744,
+              "loa_high_ms": 36.91717053036639,
+              "sd_diff_ms": 17.491775673654114,
+              "mean_abs_diff_ms": 7.518539887202844,
+              "n_records": 24
+            }
+          }
+        }
+      }
+    },
+    "ninfea": {
+      "tolerance_ms": 100.0,
+      "lag_ms": -62.49999999999984,
+      "n_records": 60,
+      "role": "zero-shot for the PINN; timing reference only",
+      "lag_arm": "bss_pre",
+      "lag_concentration": 0.15200764818355642,
+      "arms": {
+        "pinn": {
+          "all_windows": {
+            "n_pairs": 73,
+            "bias_ms": 45.07775419641108,
+            "loa_low_ms": -129.42489055382526,
+            "loa_high_ms": 219.58039894664745,
+            "sd_diff_ms": 89.03196160726345,
+            "mean_abs_diff_ms": 80.33455527686647,
+            "n_records_scored": 60,
+            "n_records_with_pairs": 22,
+            "n_reference_intervals": 3310,
+            "coverage": 0.022054380664652568,
+            "bias_ci95_ms": [
+              14.695612998778001,
+              90.44723040766273
+            ],
+            "loa_low_ci95_ms": [
+              -145.0741082054437,
+              -72.42995303757043
+            ],
+            "loa_high_ci95_ms": [
+              154.60076629889323,
+              262.7014892371306
+            ],
+            "n_records_resampled": 14,
+            "per_record_mean_rr": {
+              "n_pairs": 9,
+              "bias_ms": 60.52942050125135,
+              "loa_low_ms": -43.98205629945899,
+              "loa_high_ms": 165.0408973019617,
+              "sd_diff_ms": 53.32218204117875,
+              "mean_abs_diff_ms": 67.62170849494792,
+              "n_records": 9
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 22,
+            "bias_ms": -8.579385403329235,
+            "loa_low_ms": -101.97326009480048,
+            "loa_high_ms": 84.814489288142,
+            "sd_diff_ms": 47.649936067077164,
+            "mean_abs_diff_ms": 36.54097311139581,
+            "n_records_scored": 4,
+            "n_records_with_pairs": 3,
+            "n_reference_intervals": 88,
+            "coverage": 0.25
+          }
+        },
+        "cancel+pinn": {
+          "all_windows": {
+            "n_pairs": 89,
+            "bias_ms": 12.442475075169739,
+            "loa_low_ms": -119.0172337641855,
+            "loa_high_ms": 143.90218391452498,
+            "sd_diff_ms": 67.07128002007921,
+            "mean_abs_diff_ms": 51.02737774964403,
+            "n_records_scored": 60,
+            "n_records_with_pairs": 18,
+            "n_reference_intervals": 3310,
+            "coverage": 0.02688821752265861,
+            "bias_ci95_ms": [
+              -2.639895130574159,
+              35.129296935458726
+            ],
+            "loa_low_ci95_ms": [
+              -125.5499448267328,
+              -95.65081300571005
+            ],
+            "loa_high_ci95_ms": [
+              97.39718498439552,
+              183.41124889381524
+            ],
+            "n_records_resampled": 11,
+            "per_record_mean_rr": {
+              "n_pairs": 8,
+              "bias_ms": 15.517433876764734,
+              "loa_low_ms": -45.36253288371779,
+              "loa_high_ms": 76.39740063724726,
+              "sd_diff_ms": 31.061207530858432,
+              "mean_abs_diff_ms": 25.282004419680355,
+              "n_records": 8
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 48,
+            "bias_ms": -7.0316901408449555,
+            "loa_low_ms": -91.38482612852218,
+            "loa_high_ms": 77.32144584683226,
+            "sd_diff_ms": 43.03731427942716,
+            "mean_abs_diff_ms": 31.73532863849793,
+            "n_records_scored": 9,
+            "n_records_with_pairs": 6,
+            "n_reference_intervals": 203,
+            "coverage": 0.23645320197044334,
+            "bias_ci95_ms": [
+              -15.704865556978188,
+              -2.221663313212581
+            ],
+            "loa_low_ci95_ms": [
+              -99.937322400752,
+              -64.05027963482573
+            ],
+            "loa_high_ci95_ms": [
+              54.59239382234246,
+              73.06743823683422
+            ],
+            "n_records_resampled": 5,
+            "per_record_mean_rr": {
+              "n_pairs": 4,
+              "bias_ms": -8.221825675015126,
+              "loa_low_ms": -21.069416690056322,
+              "loa_high_ms": 4.625765340026071,
+              "sd_diff_ms": 6.5548933750210185,
+              "mean_abs_diff_ms": 8.914313937925769,
+              "n_records": 4
+            }
+          }
+        },
+        "bss_pre": {
+          "all_windows": {
+            "n_pairs": 730,
+            "bias_ms": -1.745803588655222,
+            "loa_low_ms": -122.5631383034597,
+            "loa_high_ms": 119.07153112614925,
+            "sd_diff_ms": 61.641497303471674,
+            "mean_abs_diff_ms": 43.778564537912445,
+            "n_records_scored": 60,
+            "n_records_with_pairs": 53,
+            "n_reference_intervals": 3310,
+            "coverage": 0.22054380664652568,
+            "bias_ci95_ms": [
+              -5.889251047483298,
+              2.4410626520140886
+            ],
+            "loa_low_ci95_ms": [
+              -142.41573516081408,
+              -103.43332082830676
+            ],
+            "loa_high_ci95_ms": [
+              99.81017746481459,
+              140.08321446253643
+            ],
+            "n_records_resampled": 52,
+            "per_record_mean_rr": {
+              "n_pairs": 47,
+              "bias_ms": -1.3285895666598786,
+              "loa_low_ms": -43.73182083605162,
+              "loa_high_ms": 41.07464170273186,
+              "sd_diff_ms": 21.63430166805701,
+              "mean_abs_diff_ms": 15.710097949703227,
+              "n_records": 47
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 680,
+            "bias_ms": -2.1285418392709556,
+            "loa_low_ms": -120.42006447913899,
+            "loa_high_ms": 116.16298080059708,
+            "sd_diff_ms": 60.35281767340206,
+            "mean_abs_diff_ms": 42.260811930406014,
+            "n_records_scored": 59,
+            "n_records_with_pairs": 53,
+            "n_reference_intervals": 2751,
+            "coverage": 0.24718284260268994,
+            "bias_ci95_ms": [
+              -5.4860094046904155,
+              2.7064456226283142
+            ],
+            "loa_low_ci95_ms": [
+              -138.66637394855908,
+              -100.39023570404682
+            ],
+            "loa_high_ci95_ms": [
+              96.71138987831793,
+              138.1123130562573
+            ],
+            "n_records_resampled": 50,
+            "per_record_mean_rr": {
+              "n_pairs": 44,
+              "bias_ms": -1.752093219015345,
+              "loa_low_ms": -40.41048521732769,
+              "loa_high_ms": 36.906298779297,
+              "sd_diff_ms": 19.723669386894056,
+              "mean_abs_diff_ms": 14.074006991188888,
+              "n_records": 44
+            }
+          }
+        },
+        "bss_memd": {
+          "all_windows": {
+            "n_pairs": 336,
+            "bias_ms": 6.286720321931419,
+            "loa_low_ms": -122.51270737438699,
+            "loa_high_ms": 135.08614801824984,
+            "sd_diff_ms": 65.71399372261143,
+            "mean_abs_diff_ms": 46.58853118712275,
+            "n_records_scored": 60,
+            "n_records_with_pairs": 40,
+            "n_reference_intervals": 3310,
+            "coverage": 0.1015105740181269,
+            "bias_ci95_ms": [
+              -0.7749778526180338,
+              18.816707758647976
+            ],
+            "loa_low_ci95_ms": [
+              -143.44689270906045,
+              -101.04760451616885
+            ],
+            "loa_high_ci95_ms": [
+              106.2133659106992,
+              177.2066227654175
+            ],
+            "n_records_resampled": 37,
+            "per_record_mean_rr": {
+              "n_pairs": 27,
+              "bias_ms": 15.48268270363217,
+              "loa_low_ms": -78.29677132600749,
+              "loa_high_ms": 109.26213673327182,
+              "sd_diff_ms": 47.846660219203905,
+              "mean_abs_diff_ms": 34.123370919323165,
+              "n_records": 27
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 192,
+            "bias_ms": -4.248973004695068,
+            "loa_low_ms": -90.68451609410702,
+            "loa_high_ms": 82.18657008471688,
+            "sd_diff_ms": 44.09976688235304,
+            "mean_abs_diff_ms": 30.07335680751196,
+            "n_records_scored": 25,
+            "n_records_with_pairs": 19,
+            "n_reference_intervals": 613,
+            "coverage": 0.3132137030995106,
+            "bias_ci95_ms": [
+              -12.651130120764824,
+              0.007175737529552107
+            ],
+            "loa_low_ci95_ms": [
+              -127.6276547556201,
+              -65.54770913593104
+            ],
+            "loa_high_ci95_ms": [
+              61.14904692950795,
+              104.86340513432881
+            ],
+            "n_records_resampled": 13,
+            "per_record_mean_rr": {
+              "n_pairs": 12,
+              "bias_ms": -10.088436026024135,
+              "loa_low_ms": -40.3798032108291,
+              "loa_high_ms": 20.202931158780835,
+              "sd_diff_ms": 15.454779175920903,
+              "mean_abs_diff_ms": 12.553339119800592,
+              "n_records": 12
+            }
+          }
+        },
+        "hybrid": {
+          "all_windows": {
+            "n_pairs": 711,
+            "bias_ms": -2.922980923515774,
+            "loa_low_ms": -123.96090942655952,
+            "loa_high_ms": 118.11494757952796,
+            "sd_diff_ms": 61.754045154614154,
+            "mean_abs_diff_ms": 44.03781620807834,
+            "n_records_scored": 60,
+            "n_records_with_pairs": 52,
+            "n_reference_intervals": 3310,
+            "coverage": 0.2148036253776435,
+            "bias_ci95_ms": [
+              -7.311085153337648,
+              1.5250744417484703
+            ],
+            "loa_low_ci95_ms": [
+              -144.18949152229658,
+              -104.08761290694044
+            ],
+            "loa_high_ci95_ms": [
+              98.84674973595847,
+              138.06526711702202
+            ],
+            "n_records_resampled": 51,
+            "per_record_mean_rr": {
+              "n_pairs": 46,
+              "bias_ms": -3.0820409703585283,
+              "loa_low_ms": -43.99155197368594,
+              "loa_high_ms": 37.82747003296888,
+              "sd_diff_ms": 20.87219949149358,
+              "mean_abs_diff_ms": 15.356743875978406,
+              "n_records": 46
+            }
+          },
+          "gate_pass_windows": {
+            "n_pairs": 663,
+            "bias_ms": -3.322074225139706,
+            "loa_low_ms": -121.66748188995811,
+            "loa_high_ms": 115.02333343967871,
+            "sd_diff_ms": 60.38031003307062,
+            "mean_abs_diff_ms": 42.45835192148373,
+            "n_records_scored": 59,
+            "n_records_with_pairs": 52,
+            "n_reference_intervals": 2782,
+            "coverage": 0.2383177570093458,
+            "bias_ci95_ms": [
+              -7.085113689673884,
+              1.619326764797207
+            ],
+            "loa_low_ci95_ms": [
+              -142.04143318243754,
+              -101.51014076511699
+            ],
+            "loa_high_ci95_ms": [
+              95.40190806679963,
+              137.49098339320238
+            ],
+            "n_records_resampled": 49,
+            "per_record_mean_rr": {
+              "n_pairs": 43,
+              "bias_ms": -3.3947472516839894,
+              "loa_low_ms": -40.297314295151445,
+              "loa_high_ms": 33.50781979178347,
+              "sd_diff_ms": 18.82784032829972,
+              "mean_abs_diff_ms": 13.71319117432427,
+              "n_records": 43
+            }
+          }
+        }
+      }
+    }
+  },
+  "timestamp": "2026-10-06T13:35:56.207980+00:00"
+}

@@ -1,0 +1,14 @@
+{
+  "dataset": "adfecgdb",
+  "records": [
+    "r01",
+    "r04",
+    "r07",
+    "r08",
+    "r10"
+  ],
+  "n_windows": 295,
+  "epochs": 200,
+  "readout": "potential",
+  "timestamp": "2026-09-29T09:55:47.024381+00:00"
+}

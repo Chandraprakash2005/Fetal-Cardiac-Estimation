@@ -1,0 +1,160 @@
+<title>Ageing Clock Progress</title>
+<style>
+/* Layout: a plain progress memo. One narrow column, tables inside scroll boxes, one restrained accent. */
+:root {
+  --bg: #f7f8f9;
+  --surface: #ffffff;
+  --fg: #1c2127;
+  --muted: #5b6672;
+  --rule: #d9dee3;
+  --accent: #1d5f7c;
+  --accent-soft: #e3eef3;
+  --warn: #8a4b00;
+  --warn-soft: #fbefdc;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14181c; --surface: #1b2127; --fg: #e4e8ec; --muted: #9aa5b0; --rule: #2f3841;
+    --accent: #7fc0dc; --accent-soft: #1d2e37; --warn: #f0b668; --warn-soft: #352a18; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14181c; --surface: #1b2127; --fg: #e4e8ec; --muted: #9aa5b0; --rule: #2f3841;
+  --accent: #7fc0dc; --accent-soft: #1d2e37; --warn: #f0b668; --warn-soft: #352a18; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.6; padding-inline: 16px; padding-block: 28px 56px; }
+main { max-width: 760px; margin-inline: auto; }
+h1 { font-size: 1.7rem; line-height: 1.2; margin: 0 0 4px; text-wrap: balance; }
+h2 { font-size: 1.15rem; margin: 40px 0 10px; padding-top: 14px; border-top: 1px solid var(--rule); text-wrap: balance; }
+h3 { font-size: 0.95rem; margin: 22px 0 6px; }
+p { margin: 0 0 12px; max-width: 68ch; }
+.meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 22px; }
+.box { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 14px 16px; margin: 0 0 8px; }
+.box p:last-child { margin-bottom: 0; }
+.note { background: var(--warn-soft); border-left: 3px solid var(--warn); padding: 10px 14px; margin: 12px 0; font-size: 0.92rem; }
+.scroll { overflow-x: auto; margin: 8px 0 16px; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 0.88rem; background: var(--surface); }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+td.n, th.n { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.best td { background: var(--accent-soft); }
+code { font-family: var(--font-mono); font-size: 0.85em; }
+ol, ul { padding-left: 1.3rem; margin: 0 0 12px; max-width: 68ch; }
+li { margin-bottom: 6px; }
+.small { color: var(--muted); font-size: 0.82rem; }
+</style>
+<main>
+<h1>Fetal Cardiac Ageing Clock: progress</h1>
+<p class="meta">Prepared for Dr. Muthukumar K A &middot; 3 October 2026 &middot; code state: git <code>6715f68</code></p>
+
+<div class="box">
+<p><strong>Bottom line.</strong> Fetal ECG extraction improved substantially: a hybrid of the PINN and a blind-source-separation (BSS) extractor now recovers a usable fetal rhythm in 55 of 60 NInFEA recordings, up from 3. The age model does not yet work. Within NInFEA neither the fetal heart rate nor any of the 12 biomarkers varies with gestational age (GA), so the models can only predict the average. Five decisions from you would unblock the next steps (section 5).</p>
+</div>
+
+<h2>1. Pipeline, approach and metrics</h2>
+<div class="scroll"><table>
+<thead><tr><th>Stage</th><th>Approach</th><th>Metrics used</th></tr></thead>
+<tbody>
+<tr><td>Data</td><td>ADFECGDB: 5 recordings, 1 kHz, 4 abdominal channels plus a scalp lead (ground truth), 38&ndash;41 wk. NInFEA: 60 recordings from 39 mothers, 24 abdominal channels, 2048 Hz, 21&ndash;27 wk, with pulsed-wave Doppler. CinC 2013: 25 &times; 60 s, 4 channels, GA not published.</td><td>Record and window counts</td></tr>
+<tr><td>Preprocessing</td><td>Zero-phase Butterworth band-pass 1&ndash;100 Hz (confirmed); 50 Hz notch for NInFEA and CinC; NInFEA keeps the 4 highest-kurtosis channels, resampled to 1 kHz; per-channel z-score; 5 s windows.</td><td>Time-domain and Welch-spectrum checks</td></tr>
+<tr><td>MEMD</td><td>Multivariate EMD (64 directions); fetal-band IMFs chosen by spectral coherence &times; in-band power (20&ndash;70 Hz). Removes drift, motion and muscle noise only.</td><td>QRS F1 of the MEMD output (baseline)</td></tr>
+<tr><td>Maternal cancellation</td><td>Averaged maternal QRS-T template subtracted, only when a window's rate is outside the fetal band.</td><td>QRS F1 before and after</td></tr>
+<tr><td>PINN</td><td>5 &times; 512 fully connected network, potential V with a Laplace constraint (double autograd), loss 0.7 data + 0.3 physics; trained on ADFECGDB only. Coordinate scheme awaiting your sign-off.</td><td>QRS F1 (&plusmn;50 ms), SNR / MSE vs scalp lead</td></tr>
+<tr><td>BSS (new)</td><td>FastICA on the 4 channels; fetal component chosen without annotations (rate 110&ndash;160 bpm, most regular rhythm).</td><td>Same as PINN, plus heart-rate agreement with Doppler</td></tr>
+<tr><td>Hybrid (new, default)</td><td>Per window: cancellation + PINN if it passes the quality gate, otherwise BSS.</td><td>Same</td></tr>
+<tr><td>Quality gate</td><td>Rate 110&ndash;160 bpm, at least 5 beats, RR-artefact rate at most 25%; a record is usable if at least half its windows pass.</td><td>Pass rate, usable records, agreement with Doppler</td></tr>
+<tr><td>Features (12)</td><td>Fiducial detection, then QTc &sigma;, P dispersion, QRS mean / variance / asymmetry, PRSA, multiscale entropy, ApEn, SampEn, DFA &alpha;, LF/HF, symbolic dynamics.</td><td>NaN rate per feature</td></tr>
+<tr><td>CVAE</td><td>Contrastive VAE, 12 &rarr; 64, InfoNCE (&tau; = 0.07), KL warm-up; inputs now standardised.</td><td>Held-out reconstruction R&sup2;, active latent dimensions, same-subject retrieval, kNN age prediction</td></tr>
+<tr><td>Transformer</td><td>Encoder (4 heads, d<sub>model</sub> 256, 3 layers) over each recording's window latents, regressing Cardiac Age.</td><td>MAE in days with 95% bootstrap CI (1000 resamples), RMSE, Pearson r, &Delta;Age; unit check; predict-the-mean baseline</td></tr>
+<tr><td>Evaluation</td><td>Strict leave-one-mother-out CV over ADFECGDB and NInFEA; CVAE and transformer refitted inside every fold.</td><td>As above</td></tr>
+</tbody></table></div>
+
+<h2>2. Extraction results</h2>
+<p>QRS F1 (beats within &plusmn;50 ms of the reference). ADFECGDB is in-sample for the PINN; CinC 2013 was never trained on.</p>
+<div class="scroll"><table>
+<thead><tr><th>Method</th><th class="n">ADFECGDB</th><th class="n">CinC 2013</th></tr></thead>
+<tbody>
+<tr><td>PINN</td><td class="n">0.510</td><td class="n">0.377</td></tr>
+<tr><td>Cancellation + PINN (previous default)</td><td class="n">0.630</td><td class="n">0.440</td></tr>
+<tr><td>BSS (FastICA)</td><td class="n">0.557</td><td class="n">0.519</td></tr>
+<tr class="best"><td>Hybrid (new default)</td><td class="n">0.637</td><td class="n">0.542</td></tr>
+</tbody></table></div>
+
+<h3>NInFEA, checked against the Doppler</h3>
+<p>NInFEA ships its fetal reference only as Doppler bitmaps, so I ported the dataset's envelope extractor and added beat detection; image and ECG durations agree to within a few milliseconds. Doppler fetal rates are 128&ndash;156 bpm. Scoring covers 315 windows from 60 recordings.</p>
+<div class="scroll"><table>
+<thead><tr><th>Method</th><th class="n">Windows within 10 bpm of Doppler rate</th><th class="n">Median rate error (bpm)</th></tr></thead>
+<tbody>
+<tr><td>PINN</td><td class="n">2%</td><td class="n">53</td></tr>
+<tr><td>Cancellation + PINN</td><td class="n">5%</td><td class="n">59</td></tr>
+<tr><td>BSS</td><td class="n">52%</td><td class="n">10</td></tr>
+<tr class="best"><td>Hybrid</td><td class="n">54%</td><td class="n">9</td></tr>
+</tbody></table></div>
+<p>The PINN pipeline locks onto the maternal rhythm on NInFEA. The quality gate keeps 98% of the right-rate windows, but only 63% of the windows it keeps are right, so a high gate pass rate overstates correctness.</p>
+
+<h3>Effect on usable data</h3>
+<div class="scroll"><table>
+<thead><tr><th></th><th class="n">Before</th><th class="n">With hybrid</th></tr></thead>
+<tbody>
+<tr><td>ADFECGDB usable records / windows</td><td class="n">2 of 5 / 153</td><td class="n">5 of 5 / 272</td></tr>
+<tr><td>NInFEA usable records / windows</td><td class="n">3 of 60 / 19</td><td class="n">55 of 60 / 265</td></tr>
+</tbody></table></div>
+
+<h3>SNR against the scalp lead (ADFECGDB only)</h3>
+<p>Mean over all windows, after the best scalar gain per window (sign and scale are arbitrary for these extractors): PINN 0.43 dB, cancellation + PINN 0.44 dB, BSS 0.41 dB, hybrid 0.45 dB. In the paper's unit-gain form (both signals z-scored, sign aligned) it is about &minus;1.7 dB, with MSE of about 1.55. Clean records r01 and r08 reach roughly 0.9&ndash;1.2 dB; r04, r07 and r10 stay near 0. Allowing a &plusmn;40 ms shift only lifts the mean to about 0.6 dB, so timing offset does not explain it. The abdominal fetal waveform differs in shape from the scalp lead, so sample-wise SNR is low even when beat detection is excellent (F1 above 0.9 on r01 and r08), and it does not separate the methods. It is also not comparable with the 14.4 dB in the ICC 2026 paper, whose network was trained to reproduce the scalp signal. Beat-timing metrics are the informative ones here.</p>
+
+<h2>3. CVAE validation</h2>
+<p>Held-out data, 537 windows from 44 subjects. Standardising the 12 input features fixed the model mechanically.</p>
+<div class="scroll"><table>
+<thead><tr><th>Check</th><th class="n">Unscaled</th><th class="n">Standardised</th></tr></thead>
+<tbody>
+<tr><td>Held-out reconstruction R&sup2;, median over features</td><td class="n">&minus;0.01</td><td class="n">0.86</td></tr>
+<tr><td>Features reconstructed better than the training mean</td><td class="n">3 of 11</td><td class="n">11 of 11</td></tr>
+<tr><td>Active latent dimensions (of 64)</td><td class="n">19&ndash;39</td><td class="n">64</td></tr>
+<tr><td>Same-subject retrieval (chance 0.06; raw features 0.15)</td><td class="n">0.10</td><td class="n">0.14</td></tr>
+<tr><td>kNN age prediction, 39 mothers: MAE in days (predict-the-mean 11.4)</td><td class="n">11.8</td><td class="n">12.3</td></tr>
+</tbody></table></div>
+<p>The latent has 64 dimensions and the input only 12, so good reconstruction shows the autoencoder works, not that the latent is informative.</p>
+
+<h2>4. Age prediction</h2>
+<div class="note"><strong>Not reportable yet.</strong> The five ADFECGDB gestational ages are random placeholders, because the real per-record values are not available. NInFEA ages are real (from the dataset paper).</div>
+<div class="scroll"><table>
+<thead><tr><th>64 recordings, strict leave-one-mother-out</th><th class="n">MAE (days)</th><th class="n">r</th></tr></thead>
+<tbody>
+<tr><td>Overall, standardised CVAE</td><td class="n">22.6 (CI 17.6&ndash;28.3)</td><td class="n">0.56</td></tr>
+<tr><td>Overall, unscaled CVAE</td><td class="n">17.7 (CI 14.2&ndash;22.1)</td><td class="n">0.68</td></tr>
+<tr><td>Predict the mean (overall)</td><td class="n">20.6</td><td class="n">&ndash;</td></tr>
+<tr><td>NInFEA only, standardised</td><td class="n">22.6</td><td class="n">&minus;0.02</td></tr>
+<tr><td>NInFEA only: predict the NInFEA mean</td><td class="n">12.5</td><td class="n">&ndash;</td></tr>
+</tbody></table></div>
+<p>The overall correlation comes from separating the two cohorts (21&ndash;27 against 38&ndash;41 weeks). Within NInFEA the model is worse than predicting the mean.</p>
+
+<h3>Why: the inputs do not change with age</h3>
+<ul>
+<li>Doppler fetal heart rate against GA over the 60 recordings: Spearman &rho; = &minus;0.07. NInFEA spans only 147&ndash;194 days (6.7 weeks).</li>
+<li>None of the 12 features correlates significantly with GA. I also kept only windows whose extracted rate matches the Doppler rate (166 windows, 51 recordings) to remove noise from wrong-rate windows: still nothing after correcting for 11 tests (strongest: symbolic dynamics &rho; = &minus;0.25, p = 0.08).</li>
+<li>With about 50 recordings only correlations of roughly 0.4 or more would be detectable, so weak effects are not excluded, but they would be too weak to build a predictor on.</li>
+<li>MSE, SampEn, DFA and PRSA are mostly undefined on 5 s windows, so they could not be tested properly.</li>
+</ul>
+
+<h2>5. Decisions I need from you</h2>
+<ol>
+<li><strong>Real ADFECGDB gestational ages</strong> for r01, r04, r07, r08 and r10. PhysioNet gives only the range 38&ndash;41 weeks. Do you know the source from your ICC 2026 work, or whom to ask?</li>
+<li><strong>What the age model can claim.</strong> No dataset we have covers 28&ndash;37 weeks, and within 21&ndash;27 weeks the features show no age signal. Options: report this as a feasibility result, reframe the target, or find data spanning more of pregnancy.</li>
+<li><strong>Feature design.</strong> The slow-changing dynamic features need long beat series. Computing them per recording instead of per 5 s window would change what a feature vector is.</li>
+<li><strong>PINN coordinate scheme sign-off.</strong> Until then no PINN-specific numbers should be quoted outside this team.</li>
+<li><strong>Dataset policy change, for your awareness.</strong> Originally NInFEA was to be zero-shot only. At Bhuvanesh's request it is now used to train the CVAE and transformer (CinC 2013 stays untrained but has no GA). Please confirm this is acceptable.</li>
+</ol>
+<p class="small">Already confirmed by Bhuvanesh: band-pass 1&ndash;100 Hz; hybrid extractor as default.</p>
+
+<h2>6. Caveats</h2>
+<ul>
+<li>NInFEA gestational ages and the recording-to-mother table were read from the dataset paper via a summarising tool and have not been checked against the published tables.</li>
+<li>Doppler peaks trail the ECG R wave by an unknown lag (estimated at about &minus;60 ms with weak concentration), so beat F1 against the Doppler is only approximate; heart-rate agreement does not depend on it.</li>
+<li>Several mothers have more than one recording; the cross-validation holds all of a mother's recordings out together.</li>
+<li>No fine-tuning or training touched CinC 2013; the PINN was trained on ADFECGDB only.</li>
+</ol>
+<p class="small">Reproduce: <code>EXPERIMENT=synthetic_ga_smoketest bash scripts/reproduce_all.sh</code> runs the full chain with placeholder ADFECGDB ages; extraction, SNR and Doppler checks are in <code>scripts/bss_experiment.py</code>, <code>eval_snr_adfecgdb.py</code>, <code>eval_ninfea_doppler.py</code> and <code>analyse_feature_ga_signal.py</code>. Every decision is logged in <code>reports/engineering_log.md</code>.</p>
+</main>
