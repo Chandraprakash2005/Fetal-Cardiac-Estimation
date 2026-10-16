@@ -769,6 +769,13 @@ body {
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.main-panel--initial {
+  min-height: max(500px, calc(100vh - 180px));
+  justify-content: center;
+  align-items: center;
 }
 
 .main-panel--centered {
@@ -1695,17 +1702,27 @@ body {
 
 /* ── HORIZONTAL LINEAR PIPELINE FLOW (CENTERED) ─────────── */
 .linear-pipeline-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 28px 32px;
-  box-shadow: var(--shadow);
+  background: #edf3f8;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow:
+    -6px -6px 18px #ffffff,
+    6px 6px 18px rgba(175, 198, 218, 0.65);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 16px;
   width: 100%;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.linear-pipeline-card--initial {
+  padding: 36px 32px;
+  box-shadow:
+    -8px -8px 24px #ffffff,
+    8px 8px 24px rgba(175, 198, 218, 0.7);
 }
 
 .linear-pipeline-logo-bar {
