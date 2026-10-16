@@ -460,6 +460,7 @@ export default function App() {
   };
 
   const hasFiles = files.length > 0;
+  const isInitial = !loading && !result && activeStep === 0;
 
   return (
     <div className={`app ${result ? 'app--results' : ''}`}>
@@ -672,7 +673,7 @@ export default function App() {
           </aside>
 
           {/* ── Right 75%: Pipeline Flow at Top + Diagnostic Report with 3 Outputs Below ── */}
-          <section className={`main-panel ${result ? 'main-panel--results' : ''}`}>
+          <section className={`main-panel ${isInitial ? 'main-panel--initial' : ''} ${result ? 'main-panel--results' : ''}`}>
             {/* Live Pipeline Flow visible at the top itself as like before */}
             <PipelineFlow
               currentStep={activeStep}
