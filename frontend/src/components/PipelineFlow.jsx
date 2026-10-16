@@ -262,6 +262,7 @@ export default function PipelineFlow({
   const [selectedId, setSelectedId] = useState(1);
   const total = LINEAR_STEPS.length;
   const isFinished = currentStep >= total && !isAnalyzing;
+  const isInitial = currentStep === 0 && !isAnalyzing && !isFinished;
 
   // Smooth numerical count-up interpolation with Anime.js
   const pctObjRef = useRef({ val: 0 });
@@ -288,7 +289,7 @@ export default function PipelineFlow({
   }, [isAnalyzing, currentStep]);
 
   return (
-    <div className={`linear-pipeline-card animate-in ${isAnalyzing ? 'linear-pipeline-card--analyzing' : ''}`}>
+    <div className={`linear-pipeline-card animate-in ${isAnalyzing ? 'linear-pipeline-card--analyzing' : ''} ${isInitial ? 'linear-pipeline-card--initial' : ''}`}>
       {/* ── Real-Time Backend Streaming Progress Ribbon ── */}
       {isAnalyzing && (
         <div className="pipeline-live-stream-header animate-in">
@@ -319,7 +320,7 @@ export default function PipelineFlow({
               (step.id === 6 && completionPercentage >= 100);
 
             const isProcessing = isAnalyzing && currentStep === step.id;
-            const isSelected = selectedId === step.id;
+            const isSelected = !isInitial && selectedId === step.id;
             const isHighlighted = isProcessing || isSelected;
             const isPending = currentStep < step.id && !isFinished && !isCompleted;
             const isLastStep = step.id === 6;
@@ -389,13 +390,15 @@ export default function PipelineFlow({
         </div>
       </div>
 
-      {/* ── Active Stage Output Visualizer (driven by clicking pipeline logos) ──── */}
-      <StageVisualizer
-        activeStep={selectedId}
-        isAnalyzing={isAnalyzing && currentStep === selectedId}
-        completionPercentage={completionPercentage}
-        telemetry={telemetry}
-      />
+      {/* ── Active Stage Output Visualizer (only when analysis has started, none initially) ──── */}
+      {!isInitial && (
+        <StageVisualizer
+          activeStep={selectedId}
+          isAnalyzing={isAnalyzing && currentStep === selectedId}
+          completionPercentage={completionPercentage}
+          telemetry={telemetry}
+        />
+      )}
     </div>
   );
 }
