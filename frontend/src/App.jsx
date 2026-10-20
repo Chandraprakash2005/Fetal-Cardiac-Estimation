@@ -383,6 +383,7 @@ function DiagnosticReportView({ result, onReset, files, gaDaysApprox, gaWeeksApp
 export default function App() {
   const [files, setFiles] = useState([]);
   const [previewSignal, setPreviewSignal] = useState(null);
+  const [loadingPreview, setLoadingPreview] = useState(false);
   const [ga, setGa] = useState('30.0');
   const [gaUnit, setGaUnit] = useState('weeks'); // 'weeks' | 'days'
   const [dragging, setDragging] = useState(false);
@@ -407,16 +408,21 @@ export default function App() {
   useEffect(() => {
     if (!files || !files.length) {
       setPreviewSignal(null);
+      setLoadingPreview(false);
       return;
     }
     let isCancelled = false;
+    setLoadingPreview(true);
     previewECGSignal(files[0])
       .then((prev) => {
         if (!isCancelled && prev) {
           setPreviewSignal(prev);
         }
       })
-      .catch((e) => console.warn('Preview signal load failed:', e));
+      .catch((e) => console.warn('Preview signal load failed:', e))
+      .finally(() => {
+        if (!isCancelled) setLoadingPreview(false);
+      });
     return () => {
       isCancelled = true;
     };
@@ -425,7 +431,13 @@ export default function App() {
   useEffect(() => {
     getDatCatalog()
       .then((records) => {
-        if (records && records.length) setDatCatalog(records);
+        if (records && records.length) {
+          setDatCatalog(records);
+          // Auto-select reference record a01.dat if no file loaded yet
+          if (!files.length && !selectedDatName) {
+            handleSelectDat('a01.dat');
+          }
+        }
       })
       .catch((e) => console.warn(e));
   }, []);
@@ -502,6 +514,9 @@ export default function App() {
           detail: meta?.detail || '',
           telemetry: meta?.telemetry || null,
         });
+        if (meta?.result) {
+          setResult(meta.result);
+        }
         if (step) setActiveStep(step);
       });
       setActiveStep(6);
@@ -635,41 +650,57 @@ export default function App() {
               </label>
 
               {/* Real Raw ECG Signal Waveform Preview Card */}
-              {previewSignal && previewSignal.signal && (
+              {(previewSignal || loadingPreview) && (
                 <div className="sidebar-raw-ecg-card animate-in">
                   <div className="sidebar-raw-ecg-header">
                     <div className="sidebar-raw-ecg-title">
-                      <span className="live-pulse-dot" />
+                      <span className={`live-pulse-dot ${loadingPreview ? 'live-pulse-dot--loading' : ''}`} />
                       <span>Raw Abdominal ECG (Ch 1)</span>
+                      {(previewSignal?.filename || selectedDatName) && (
+                        <span className="sidebar-raw-ecg-badge" title={previewSignal?.filename || selectedDatName}>
+                          {previewSignal?.filename || selectedDatName}
+                        </span>
+                      )}
                     </div>
-                    <span className="sidebar-raw-ecg-rate">{previewSignal.fs || 1000} Hz</span>
+                    <span className="sidebar-raw-ecg-rate">{previewSignal?.fs || 1000} Hz</span>
                   </div>
 
                   <div className="sidebar-raw-ecg-canvas-wrap">
-                    <svg className="sidebar-raw-ecg-svg" viewBox="0 0 280 60" preserveAspectRatio="none">
-                      <defs>
-                        <linearGradient id="sidebarRawGrad" x1="0" y1="0" x2="1" y2="0">
-                          <stop offset="0%" stopColor="#0284c7" />
-                          <stop offset="100%" stopColor="#0ea5e9" />
-                        </linearGradient>
-                      </defs>
-                      <path
-                        d={signalToSvgPath(previewSignal.signal, 280, 60, 4)}
-                        fill="none"
-                        stroke="url(#sidebarRawGrad)"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <div className="sidebar-raw-ecg-grid" />
+                    {loadingPreview ? (
+                      <div className="sidebar-raw-ecg-loader">
+                        <span className="sidebar-raw-spinner" />
+                        <span>Loading ECG waveform...</span>
+                      </div>
+                    ) : (
+                      <>
+                        <svg className="sidebar-raw-ecg-svg" viewBox="0 0 280 60" preserveAspectRatio="none">
+                          <defs>
+                            <linearGradient id="sidebarRawGrad" x1="0" y1="0" x2="1" y2="0">
+                              <stop offset="0%" stopColor="#0284c7" />
+                              <stop offset="100%" stopColor="#0ea5e9" />
+                            </linearGradient>
+                          </defs>
+                          <path
+                            d={signalToSvgPath(previewSignal?.signal, 280, 60, 4)}
+                            fill="none"
+                            stroke="url(#sidebarRawGrad)"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <div className="sidebar-raw-ecg-grid" />
+                      </>
+                    )}
                   </div>
 
-                  <div className="sidebar-raw-ecg-meta">
-                    <span>Duration: <strong>{previewSignal.duration_seconds}s</strong></span>
-                    <span>Channels: <strong>{previewSignal.channels || 4}</strong></span>
-                    <span>Span: <strong>{previewSignal.min_val} to {previewSignal.max_val} mV</strong></span>
-                  </div>
+                  {previewSignal && !loadingPreview && (
+                    <div className="sidebar-raw-ecg-meta">
+                      <span>Window: <strong>{previewSignal.preview_seconds || 2.5}s</strong> ({previewSignal.duration_seconds}s total)</span>
+                      <span>Channels: <strong>{previewSignal.channels || 4}</strong></span>
+                      <span>Span: <strong>{previewSignal.min_val} to {previewSignal.max_val} mV</strong></span>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -951,6 +982,7 @@ export default function App() {
               detailText={progress.detail}
               telemetry={progress.telemetry}
               result={result}
+              previewSignal={previewSignal}
               onReset={handleReset}
             />
           </section>

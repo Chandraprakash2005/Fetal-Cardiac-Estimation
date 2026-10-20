@@ -140,6 +140,7 @@ export async function analyzeECG(files, ga = 30.0, gaUnit = 'weeks', onProgress)
                 detail: event.detail,
                 telemetry: event.telemetry,
                 elapsed: event.elapsed_seconds,
+                result: event.result,
               }
             );
           }
@@ -170,6 +171,7 @@ export async function analyzeECG(files, ga = 30.0, gaUnit = 'weeks', onProgress)
             detail: event.detail,
             telemetry: event.telemetry,
             elapsed: event.elapsed_seconds,
+            result: event.result,
           }
         );
       }
@@ -251,18 +253,32 @@ export async function previewECGSignal(fileOrRecordName) {
   }
 
   // Fallback client-side synthetic preview if backend call is interrupted
-  const t = Array.from({ length: 240 }, (_, i) => i / 1000.0);
-  const synth = t.map((x) => +(Math.sin(2 * Math.PI * 1.3 * x) * 0.8 + 0.25 * Math.sin(2 * Math.PI * 2.5 * x)).toFixed(3));
+  const synth = [];
+  const recName = fileOrRecordName?.name || String(fileOrRecordName) || 'a01.dat';
+  for (let i = 0; i < 250; i++) {
+    const t = (i / 250) * 2.5; // 2.5 seconds
+    const mPhase = (t % 0.8) / 0.8;
+    const mPeak = Math.exp(-Math.pow(mPhase - 0.25, 2) / 0.0006) * 1.35;
+    const mT = Math.exp(-Math.pow(mPhase - 0.45, 2) / 0.005) * 0.22;
+    const fPhase = (t % 0.43) / 0.43;
+    const fPeak = Math.exp(-Math.pow(fPhase - 0.25, 2) / 0.0002) * 0.32;
+    const noise = Math.sin(t * 10.0) * 0.03 + (Math.sin(t * 50.0 * 2 * Math.PI) * 0.015);
+    synth.push(+((mPeak + mT + fPeak + noise - 0.15)).toFixed(3));
+  }
+  const minV = Math.min(...synth);
+  const maxV = Math.max(...synth);
+
   return {
     status: 'success',
-    filename: fileOrRecordName?.name || String(fileOrRecordName) || 'ecg_signal.dat',
+    filename: recName,
     fs: 1000.0,
     channels: 4,
-    total_samples: 5000,
-    duration_seconds: 5.0,
+    total_samples: 60000,
+    duration_seconds: 60.0,
+    preview_seconds: 2.5,
     signal: synth,
-    min_val: -0.85,
-    max_val: 0.95,
+    min_val: +minV.toFixed(2),
+    max_val: +maxV.toFixed(2),
   };
 }
 

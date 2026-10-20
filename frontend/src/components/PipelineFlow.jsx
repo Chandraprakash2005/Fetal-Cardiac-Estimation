@@ -291,6 +291,7 @@ export default function PipelineFlow({
   detailText = '',
   telemetry = null,
   result = null,
+  previewSignal = null,
   onReset = null,
 }) {
   const [selectedId, setSelectedId] = useState(1);
@@ -559,6 +560,7 @@ export default function PipelineFlow({
           completionPercentage={completionPercentage}
           telemetry={telemetry}
           result={result}
+          previewSignal={previewSignal}
           onReset={onReset}
         />
       )}

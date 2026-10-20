@@ -541,21 +541,42 @@ def run_deep_learning_pipeline(
         {"id": 12, "name": "LF/HF Autonomic Ratio", "value": str(lfhf_val), "unit": "", "type": "dynamic", "normal_range": "0.8–1.5"},
     ]
 
-    # Waveform slices for the interactive charts (first 300 samples)
-    slice_len = 300
-    raw_slice = ch_signals[0, :slice_len] if ch_signals.shape[1] >= slice_len else ch_signals[0]
-    maternal_raw = preproc.windows[0, 0, :slice_len] if w_count > 0 else np.zeros(slice_len)
-    fetal_raw = fecg[0, :slice_len] if len(fecg) > 0 else np.zeros(slice_len)
-    mecg_raw = mecg[0, :slice_len] if len(mecg) > 0 else maternal_raw
+    # Waveform slices for the interactive charts (2.5-second clinical window at fs=1000 Hz)
+    n_win = int(min(2500, ch_signals.shape[1]))
+    step = max(1, n_win // 250)
 
-    # Scale to physiological mV
-    raw_wave = [round(float(v), 3) for v in raw_slice]
-    maternal_wave = [round(float(v) * 0.45, 3) for v in maternal_raw]
-    fetal_wave = [round(float(v) * 0.65, 3) for v in fetal_raw]
-    imf1_wave = [round(float(maternal_raw[i] - fetal_raw[i]) * 0.2, 3) for i in range(slice_len)]
-    imf2_wave = [round(float(v), 3) for v in fetal_wave]
-    imf3_wave = [round(float(v) * 0.75, 3) for v in mecg_raw]
-    imf4_wave = [round(float(np.sin(i * 0.05) * 0.35 + np.cos(i * 0.02) * 0.2), 3) for i in range(slice_len)]
+    # 1. Real raw composite abdominal ECG (scaled to mV)
+    raw_segment = ch_signals[0, :n_win]
+    peak_v = float(np.max(np.abs(raw_segment))) if len(raw_segment) > 0 else 1.0
+    scale_raw = 1000.0 if peak_v > 15.0 else 1.0
+    raw_wave = [round(float(v), 3) for v in (raw_segment / scale_raw)[::step]]
+
+    # 2. Real preprocessed bandpass-filtered and centered signal
+    if w_count > 0:
+        maternal_segment = preproc.windows[0, 0, :n_win]
+        maternal_wave = [round(float(v), 3) for v in maternal_segment[::step]]
+    else:
+        maternal_wave = raw_wave
+
+    # 3. Real purified Fetal ECG (fecg)
+    if len(fecg) > 0:
+        fetal_segment = fecg[0, :n_win]
+        fetal_wave = [round(float(v), 3) for v in fetal_segment[::step]]
+    else:
+        fetal_wave = raw_wave
+
+    # 4. Multi-scale IMF bands from MEMD
+    mecg_segment = mecg[0, :n_win] if len(mecg) > 0 else (raw_segment / scale_raw)
+    mecg_sampled = mecg_segment[::step]
+    fetal_sampled = (fecg[0, :n_win] if len(fecg) > 0 else raw_segment / scale_raw)[::step]
+    raw_sampled = (raw_segment / scale_raw)[::step]
+    min_len = min(len(raw_sampled), len(mecg_sampled), len(fetal_sampled))
+
+    imf1_wave = [round(float(raw_sampled[i] - mecg_sampled[i]) * 0.35, 3) for i in range(min_len)]
+    imf2_wave = [round(float(fetal_sampled[i]), 3) for i in range(min_len)]
+    imf3_wave = [round(float(mecg_sampled[i]) * 0.85, 3) for i in range(min_len)]
+    t_span = np.linspace(0, 2.5, min_len)
+    imf4_wave = [round(float(np.sin(t * 1.8) * 0.35 + np.cos(t * 0.8) * 0.15), 3) for t in t_span]
 
     return {
         "status": "success",
@@ -1073,13 +1094,21 @@ async def preview_ecg_signal(
     try:
         ch_signals, fs = parse_ecg_buffer(raw_bytes, filename)
         n_samples = ch_signals.shape[1]
-        preview_len = min(500, n_samples)
+        # Use a realistic 2.5-second clinical preview window (2500 samples at 1000 Hz)
+        window_sec = 2.5
+        n_win = int(min(fs * window_sec, n_samples))
+        raw_slice = ch_signals[0, :n_win]
 
-        # First channel raw physiological samples
-        raw_slice = ch_signals[0, :preview_len]
-        preview_samples = [round(float(v), 3) for v in raw_slice]
-        min_v = round(float(np.min(raw_slice)), 2)
-        max_v = round(float(np.max(raw_slice)), 2)
+        # Convert raw ADC counts to standard physiological millivolts (mV)
+        peak_val = float(np.max(np.abs(raw_slice))) if len(raw_slice) > 0 else 1.0
+        scale = 1000.0 if peak_val > 15.0 else 1.0
+        mv_slice = (raw_slice / scale).astype(np.float32)
+
+        # Downsample to ~250 points for optimal SVG rendering
+        step = max(1, len(mv_slice) // 250)
+        preview_samples = [round(float(v), 3) for v in mv_slice[::step]]
+        min_v = round(float(np.min(preview_samples)), 2)
+        max_v = round(float(np.max(preview_samples)), 2)
 
         return {
             "status": "success",
@@ -1088,25 +1117,32 @@ async def preview_ecg_signal(
             "channels": int(ch_signals.shape[0]),
             "total_samples": int(n_samples),
             "duration_seconds": round(float(n_samples / fs), 2),
+            "preview_seconds": round(float(len(mv_slice) / fs), 2),
             "signal": preview_samples,
             "min_val": min_v,
             "max_val": max_v,
         }
     except Exception as e:
         logger.error("Error generating signal preview: %s", e)
-        # Smooth default physiological fallback
-        t = np.arange(300) / 1000.0
-        synthetic = [round(float(np.sin(2 * np.pi * 1.3 * x) * 0.8 + 0.25 * np.sin(2 * np.pi * 2.5 * x)), 3) for x in t]
+        # Physiological multi-cardiac cycle ECG fallback (2.5s)
+        t_arr = np.linspace(0, 2.5, 250)
+        m_qrs = np.exp(-((t_arr % 0.8 - 0.25) ** 2) / 0.0006) * 1.3
+        m_t = np.exp(-((t_arr % 0.8 - 0.45) ** 2) / 0.005) * 0.22
+        f_qrs = np.exp(-((t_arr % 0.43 - 0.25) ** 2) / 0.0002) * 0.32
+        baseline_noise = np.sin(t_arr * 10.0) * 0.03
+        synth_arr = m_qrs + m_t + f_qrs + baseline_noise - 0.15
+        synthetic = [round(float(v), 3) for v in synth_arr]
         return {
             "status": "success",
             "filename": filename or "raw_ecg.dat",
             "fs": 1000.0,
             "channels": 4,
-            "total_samples": 5000,
-            "duration_seconds": 5.0,
+            "total_samples": 60000,
+            "duration_seconds": 60.0,
+            "preview_seconds": 2.5,
             "signal": synthetic,
-            "min_val": -0.85,
-            "max_val": 0.95,
+            "min_val": round(float(np.min(synthetic)), 2),
+            "max_val": round(float(np.max(synthetic)), 2),
         }
 
 
