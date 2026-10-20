@@ -16,3 +16,9 @@ dataset:
     r07: 280
     r08: 275
     r10: 275
+
+transformer:
+  epochs: 60
+  repeats_per_epoch: 4
+  learning_rate: 3.0e-4
+

@@ -11,52 +11,52 @@
     "qtc_sigma": {
       "n_real": 537,
       "n_imputed": 0,
-      "fill_value": 91.70587921142578
+      "fill_value": 94.8950424194336
     },
     "p_dispersion": {
       "n_real": 537,
       "n_imputed": 0,
-      "fill_value": 127.0
+      "fill_value": 129.7468719482422
     },
     "qrs_mean": {
       "n_real": 537,
       "n_imputed": 0,
-      "fill_value": 54.727272033691406
+      "fill_value": 55.66209030151367
     },
     "qrs_var": {
       "n_real": 537,
       "n_imputed": 0,
-      "fill_value": 374.40972900390625
+      "fill_value": 381.8116149902344
     },
     "qrs_asymmetry": {
       "n_real": 537,
       "n_imputed": 0,
-      "fill_value": 1.217024326324463
+      "fill_value": 1.265192985534668
     },
     "prsa": {
-      "n_real": 136,
-      "n_imputed": 401,
-      "fill_value": 1.5
+      "n_real": 119,
+      "n_imputed": 418,
+      "fill_value": 1.4397822618484497
     },
     "mse": {
-      "n_real": 43,
-      "n_imputed": 494,
-      "fill_value": 0.8472978472709656
+      "n_real": 42,
+      "n_imputed": 495,
+      "fill_value": 0.8499264717102051
     },
     "apen": {
-      "n_real": 481,
-      "n_imputed": 56,
-      "fill_value": -0.133531391620636
+      "n_real": 479,
+      "n_imputed": 58,
+      "fill_value": -0.11778303235769272
     },
     "sampen": {
-      "n_real": 43,
-      "n_imputed": 494,
+      "n_real": 42,
+      "n_imputed": 495,
       "fill_value": 0.6931471824645996
     },
     "dfa_alpha": {
-      "n_real": 136,
-      "n_imputed": 401,
-      "fill_value": 0.40141627192497253
+      "n_real": 123,
+      "n_imputed": 414,
+      "fill_value": 0.43436911702156067
     },
     "lf_hf_ratio": {
       "n_real": 0,
@@ -66,8 +66,8 @@
     "symbolic_dynamics": {
       "n_real": 533,
       "n_imputed": 4,
-      "fill_value": 0.0
+      "fill_value": 0.01583334058523178
     }
   },
-  "timestamp": "2026-10-03T07:36:51.254243+00:00"
+  "timestamp": "2026-10-20T04:53:10.091819+00:00"
 }

@@ -105,25 +105,42 @@ def train_transformer_on_recordings(
     model.target_std.fill_(target_std)
     scaled_target = (ca_days_target - target_mean) / target_std
 
+    # Balanced cohort sampling weights so term and preterm cohorts contribute equally
+    is_term = ca_days_target > 240.0
+    n_term = is_term.sum().item()
+    n_preterm = len(ca_days_target) - n_term
+    repeats = getattr(cfg.transformer, "repeats_per_epoch", 4)
+    if 0 < n_term < len(ca_days_target):
+        sample_weights = torch.where(
+            is_term,
+            float(len(ca_days_target)) / (2.0 * max(1, n_term)),
+            float(len(ca_days_target)) / (2.0 * max(1, n_preterm)),
+        )
+        sampler = torch.utils.data.WeightedRandomSampler(
+            sample_weights, num_samples=len(ca_days_target) * repeats, replacement=True
+        )
+        shuffle = False
+    else:
+        sampler = None
+        shuffle = True
+
     optimizer = torch.optim.AdamW(
         model.parameters(),
         lr=cfg.transformer.learning_rate,
         weight_decay=cfg.transformer.weight_decay,
     )
-    scheduler = torch.optim.lr_scheduler.LambdaLR(
-        optimizer,
-        lambda epoch: _warmup_cosine_lr(
-            epoch, cfg.transformer.warmup_epochs, cfg.transformer.epochs
-        ),
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+        optimizer, T_max=cfg.transformer.epochs, eta_min=1e-5
     )
-    loss_fn = nn.L1Loss()
+    loss_fn = nn.SmoothL1Loss(beta=0.1)
     dataset = RecordingDataset(
-        z_by_recording, scaled_target, cfg.transformer.crop_len, cfg.transformer.repeats_per_epoch
+        z_by_recording, scaled_target, cfg.transformer.crop_len, repeats_per_epoch=1 if sampler is not None else repeats
     )
     loader = DataLoader(
         dataset,
         batch_size=min(cfg.transformer.batch_size, len(dataset)),
-        shuffle=True,
+        shuffle=shuffle,
+        sampler=sampler,
         collate_fn=collate,
     )
 
@@ -142,3 +159,4 @@ def train_transformer_on_recordings(
             logger.info("epoch %d: MAE(last batch)=%.4f days", epoch, last_loss.item())
 
     return model.cpu()
+

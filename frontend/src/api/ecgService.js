@@ -194,3 +194,28 @@ export async function analyzeECG(files, ga = 30.0, gaUnit = 'weeks', onProgress)
 
   return finalResult;
 }
+
+/**
+ * Fetches catalog of all available .dat files in Backend/.dat
+ */
+export async function getDatCatalog() {
+  try {
+    const res = await fetch(`${BASE_URL}/datasets/dat-files`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.records || [];
+  } catch (e) {
+    console.warn('Could not fetch dat catalog:', e);
+    return [];
+  }
+}
+
+/**
+ * Loads a .dat file from Backend/.dat as a standard File object
+ */
+export async function fetchDatRecordFile(filename) {
+  const res = await fetch(`${BASE_URL}/datasets/dat-files/${filename}`);
+  if (!res.ok) throw new Error(`Could not load record ${filename}`);
+  const blob = await res.blob();
+  return new File([blob], filename, { type: 'application/octet-stream' });
+}

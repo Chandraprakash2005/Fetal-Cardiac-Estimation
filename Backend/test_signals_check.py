@@ -1,10 +1,14 @@
 import json
-import urllib.request
 import os
+import urllib.request
+from pathlib import Path
 
 url = "http://127.0.0.1:8000/analyze?stream=true"
 boundary = "----WebKitFormBoundaryCheck"
-file_path = r"c:\Users\pavee\Downloads\Chandru\sample_ecg\a01.dat"
+sample_dir = Path(__file__).resolve().parent.parent / "sample_ecg"
+if not sample_dir.exists():
+    sample_dir = Path(__file__).resolve().parent / "sample_ecg"
+file_path = sample_dir / "a01.dat"
 
 with open(file_path, "rb") as f:
     file_bytes = f.read()

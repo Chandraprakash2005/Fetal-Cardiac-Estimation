@@ -16,11 +16,47 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
-import pyedflib
+try:
+    import pyedflib
+except ImportError:
+    pyedflib = None
 import wfdb
 
 from fcac.config import Config
 from fcac.io.types import Recording
+
+
+def _read_edf_fallback(edf_path: Path):
+    with open(edf_path, 'rb') as f:
+        hdr = f.read(256)
+        n_rec = int(hdr[236:244].strip())
+        dur = float(hdr[244:252].strip())
+        ns = int(hdr[252:256].strip())
+        labels = [f.read(16).strip().decode('ascii', 'ignore') for _ in range(ns)]
+        f.read(ns * 80)
+        f.read(ns * 8)
+        pmin = np.array([float(f.read(8).strip()) for _ in range(ns)])
+        pmax = np.array([float(f.read(8).strip()) for _ in range(ns)])
+        dmin = np.array([float(f.read(8).strip()) for _ in range(ns)])
+        dmax = np.array([float(f.read(8).strip()) for _ in range(ns)])
+        f.read(ns * 80)
+        nsamp = [int(f.read(8).strip()) for _ in range(ns)]
+        f.read(ns * 32)
+        
+        scale = (pmax - pmin) / np.maximum(dmax - dmin, 1e-6)
+        signals = {l: [] for l in labels}
+        
+        for _ in range(n_rec):
+            for i, l in enumerate(labels):
+                data = np.fromfile(f, dtype='<i2', count=nsamp[i])
+                phys = (data - dmin[i]) * scale[i] + pmin[i]
+                signals[l].append(phys)
+                
+        sig_list = []
+        for i, l in enumerate(labels):
+            sig_list.append(np.concatenate(signals[l]))
+        fs_raw = nsamp[0] / dur
+        return labels, sig_list, fs_raw
 
 
 def load_adfecgdb_record(record_id: str, cfg: Config) -> Recording:
@@ -30,17 +66,20 @@ def load_adfecgdb_record(record_id: str, cfg: Config) -> Recording:
     """
     edf_path = Path(cfg.dataset.raw_dir) / f"{record_id}.edf"
 
-    reader = pyedflib.EdfReader(str(edf_path))
-    try:
-        channel_names = reader.getSignalLabels()
-        fs_raw = reader.getSampleFrequency(0)
-        n_samples = reader.getNSamples()[0]
+    if pyedflib is not None:
+        reader = pyedflib.EdfReader(str(edf_path))
+        try:
+            channel_names = reader.getSignalLabels()
+            fs_raw = reader.getSampleFrequency(0)
+            n_samples = reader.getNSamples()[0]
 
-        all_signals = np.zeros((reader.signals_in_file, n_samples), dtype=np.float32)
-        for i in range(reader.signals_in_file):
-            all_signals[i, :] = reader.readSignal(i)
-    finally:
-        reader.close()
+            all_signals = np.zeros((reader.signals_in_file, n_samples), dtype=np.float32)
+            for i in range(reader.signals_in_file):
+                all_signals[i, :] = reader.readSignal(i)
+        finally:
+            reader.close()
+    else:
+        channel_names, all_signals, fs_raw = _read_edf_fallback(edf_path)
 
     scalp_index = channel_names.index(cfg.dataset.scalp_channel)
     abdo_indices = [
@@ -53,8 +92,12 @@ def load_adfecgdb_record(record_id: str, cfg: Config) -> Recording:
             f"with prefix '{cfg.dataset.abdominal_channel_prefix}', found {len(abdo_indices)}"
         )
 
-    signal = all_signals[abdo_indices, :]
-    fetal_ref = all_signals[scalp_index, :]
+    if isinstance(all_signals, list):
+        signal = np.array([all_signals[i] for i in abdo_indices], dtype=np.float32)
+        fetal_ref = np.asarray(all_signals[scalp_index], dtype=np.float32)
+    else:
+        signal = all_signals[abdo_indices, :]
+        fetal_ref = all_signals[scalp_index, :]
     ga_days = cfg.dataset.ga_days[record_id] if record_id in cfg.dataset.ga_days else None
 
     return Recording(

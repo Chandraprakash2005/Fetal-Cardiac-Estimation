@@ -41,9 +41,11 @@ wheels/
 *.pt
 *.npz
 
-# Logs
+# Logs & Reports
 logs/
 *.log
+*.pdf
+reports/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

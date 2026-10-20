@@ -5,7 +5,7 @@
     "adfecgdb",
     "ninfea"
   ],
-  "cvae_refit_per_fold": true,
+  "cvae_refit_per_fold": false,
   "folds": [
     {
       "record": "adfecgdb:r01",
@@ -13,8 +13,8 @@
       "dataset": "adfecgdb",
       "n_windows": 59,
       "ga_days": 267.0,
-      "ca_days": 276.1297607421875,
-      "delta_age_days": 9.1297607421875
+      "ca_days": 266.263916015625,
+      "delta_age_days": -0.736083984375
     },
     {
       "record": "adfecgdb:r04",
@@ -22,8 +22,8 @@
       "dataset": "adfecgdb",
       "n_windows": 50,
       "ga_days": 283.0,
-      "ca_days": 245.35594177246094,
-      "delta_age_days": -37.64405822753906
+      "ca_days": 256.91851806640625,
+      "delta_age_days": -26.08148193359375
     },
     {
       "record": "adfecgdb:r07",
@@ -31,8 +31,8 @@
       "dataset": "adfecgdb",
       "n_windows": 48,
       "ga_days": 280.0,
-      "ca_days": 246.3294677734375,
-      "delta_age_days": -33.6705322265625
+      "ca_days": 278.7140808105469,
+      "delta_age_days": -1.285919189453125
     },
     {
       "record": "adfecgdb:r08",
@@ -40,8 +40,8 @@
       "dataset": "adfecgdb",
       "n_windows": 59,
       "ga_days": 275.0,
-      "ca_days": 266.9931640625,
-      "delta_age_days": -8.0068359375
+      "ca_days": 274.09051513671875,
+      "delta_age_days": -0.90948486328125
     },
     {
       "record": "adfecgdb:r10",
@@ -49,8 +49,8 @@
       "dataset": "adfecgdb",
       "n_windows": 56,
       "ga_days": 275.0,
-      "ca_days": 250.8679962158203,
-      "delta_age_days": -24.132003784179688
+      "ca_days": 269.62677001953125,
+      "delta_age_days": -5.37322998046875
     },
     {
       "record": "ninfea:1",
@@ -58,467 +58,8 @@
       "dataset": "ninfea",
       "n_windows": 4,
       "ga_days": 189.0,
-      "ca_days": 153.74378967285156,
-      "delta_age_days": -35.25621032714844
-    },
-    {
-      "record": "ninfea:2",
-      "subject": "ninfea:S1",
-      "dataset": "ninfea",
-      "n_windows": 3,
-      "ga_days": 189.0,
-      "ca_days": 264.14599609375,
-      "delta_age_days": 75.14599609375
-    },
-    {
-      "record": "ninfea:3",
-      "subject": "ninfea:S1",
-      "dataset": "ninfea",
-      "n_windows": 9,
-      "ga_days": 189.0,
-      "ca_days": 176.97418212890625,
-      "delta_age_days": -12.02581787109375
-    },
-    {
-      "record": "ninfea:17",
-      "subject": "ninfea:S10",
-      "dataset": "ninfea",
-      "n_windows": 5,
-      "ga_days": 168.0,
-      "ca_days": 160.52711486816406,
-      "delta_age_days": -7.4728851318359375
-    },
-    {
-      "record": "ninfea:18",
-      "subject": "ninfea:S11",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 188.0,
-      "ca_days": 150.1878204345703,
-      "delta_age_days": -37.81217956542969
-    },
-    {
-      "record": "ninfea:19",
-      "subject": "ninfea:S12",
-      "dataset": "ninfea",
-      "n_windows": 5,
-      "ga_days": 158.0,
-      "ca_days": 157.19049072265625,
-      "delta_age_days": -0.80950927734375
-    },
-    {
-      "record": "ninfea:20",
-      "subject": "ninfea:S13",
-      "dataset": "ninfea",
-      "n_windows": 7,
-      "ga_days": 184.0,
-      "ca_days": 167.97763061523438,
-      "delta_age_days": -16.022369384765625
-    },
-    {
-      "record": "ninfea:21",
-      "subject": "ninfea:S13",
-      "dataset": "ninfea",
-      "n_windows": 8,
-      "ga_days": 184.0,
-      "ca_days": 187.4183349609375,
-      "delta_age_days": 3.4183349609375
-    },
-    {
-      "record": "ninfea:22",
-      "subject": "ninfea:S14",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 176.0,
-      "ca_days": 175.9314422607422,
-      "delta_age_days": -0.0685577392578125
-    },
-    {
-      "record": "ninfea:23",
-      "subject": "ninfea:S15",
-      "dataset": "ninfea",
-      "n_windows": 3,
-      "ga_days": 169.0,
-      "ca_days": 228.99319458007812,
-      "delta_age_days": 59.993194580078125
-    },
-    {
-      "record": "ninfea:24",
-      "subject": "ninfea:S16",
-      "dataset": "ninfea",
-      "n_windows": 12,
-      "ga_days": 188.0,
-      "ca_days": 179.36380004882812,
-      "delta_age_days": -8.636199951171875
-    },
-    {
-      "record": "ninfea:25",
-      "subject": "ninfea:S17",
-      "dataset": "ninfea",
-      "n_windows": 18,
-      "ga_days": 185.0,
-      "ca_days": 239.04576110839844,
-      "delta_age_days": 54.04576110839844
-    },
-    {
-      "record": "ninfea:26",
-      "subject": "ninfea:S18",
-      "dataset": "ninfea",
-      "n_windows": 14,
-      "ga_days": 169.0,
-      "ca_days": 182.28280639648438,
-      "delta_age_days": 13.282806396484375
-    },
-    {
-      "record": "ninfea:27",
-      "subject": "ninfea:S19",
-      "dataset": "ninfea",
-      "n_windows": 5,
-      "ga_days": 190.0,
-      "ca_days": 176.99777221679688,
-      "delta_age_days": -13.002227783203125
-    },
-    {
-      "record": "ninfea:4",
-      "subject": "ninfea:S2",
-      "dataset": "ninfea",
-      "n_windows": 8,
-      "ga_days": 175.0,
-      "ca_days": 181.91204833984375,
-      "delta_age_days": 6.91204833984375
-    },
-    {
-      "record": "ninfea:5",
-      "subject": "ninfea:S2",
-      "dataset": "ninfea",
-      "n_windows": 9,
-      "ga_days": 175.0,
-      "ca_days": 157.5149688720703,
-      "delta_age_days": -17.485031127929688
-    },
-    {
-      "record": "ninfea:28",
-      "subject": "ninfea:S20",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 188.0,
-      "ca_days": 205.6029815673828,
-      "delta_age_days": 17.602981567382812
-    },
-    {
-      "record": "ninfea:29",
-      "subject": "ninfea:S20",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 188.0,
-      "ca_days": 163.69903564453125,
-      "delta_age_days": -24.30096435546875
-    },
-    {
-      "record": "ninfea:30",
-      "subject": "ninfea:S21",
-      "dataset": "ninfea",
-      "n_windows": 7,
-      "ga_days": 157.0,
-      "ca_days": 180.5538787841797,
-      "delta_age_days": 23.553878784179688
-    },
-    {
-      "record": "ninfea:31",
-      "subject": "ninfea:S22",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 194.0,
-      "ca_days": 171.92430114746094,
-      "delta_age_days": -22.075698852539062
-    },
-    {
-      "record": "ninfea:32",
-      "subject": "ninfea:S22",
-      "dataset": "ninfea",
-      "n_windows": 3,
-      "ga_days": 194.0,
-      "ca_days": 160.44764709472656,
-      "delta_age_days": -33.55235290527344
-    },
-    {
-      "record": "ninfea:33",
-      "subject": "ninfea:S22",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 194.0,
-      "ca_days": 173.02554321289062,
-      "delta_age_days": -20.974456787109375
-    },
-    {
-      "record": "ninfea:34",
-      "subject": "ninfea:S23",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 175.0,
-      "ca_days": 179.19898986816406,
-      "delta_age_days": 4.1989898681640625
-    },
-    {
-      "record": "ninfea:35",
-      "subject": "ninfea:S24",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 189.0,
-      "ca_days": 175.61924743652344,
-      "delta_age_days": -13.380752563476562
-    },
-    {
-      "record": "ninfea:36",
-      "subject": "ninfea:S24",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 189.0,
-      "ca_days": 149.59591674804688,
-      "delta_age_days": -39.404083251953125
-    },
-    {
-      "record": "ninfea:37",
-      "subject": "ninfea:S25",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 176.0,
-      "ca_days": 184.48277282714844,
-      "delta_age_days": 8.482772827148438
-    },
-    {
-      "record": "ninfea:39",
-      "subject": "ninfea:S26",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 168.0,
-      "ca_days": 195.4623260498047,
-      "delta_age_days": 27.462326049804688
-    },
-    {
-      "record": "ninfea:40",
-      "subject": "ninfea:S27",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 150.0,
-      "ca_days": 158.20018005371094,
-      "delta_age_days": 8.200180053710938
-    },
-    {
-      "record": "ninfea:41",
-      "subject": "ninfea:S27",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 150.0,
-      "ca_days": 194.89212036132812,
-      "delta_age_days": 44.892120361328125
-    },
-    {
-      "record": "ninfea:42",
-      "subject": "ninfea:S28",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 174.0,
-      "ca_days": 175.159423828125,
-      "delta_age_days": 1.159423828125
-    },
-    {
-      "record": "ninfea:43",
-      "subject": "ninfea:S29",
-      "dataset": "ninfea",
-      "n_windows": 7,
-      "ga_days": 165.0,
-      "ca_days": 189.1345977783203,
-      "delta_age_days": 24.134597778320312
-    },
-    {
-      "record": "ninfea:44",
-      "subject": "ninfea:S29",
-      "dataset": "ninfea",
-      "n_windows": 6,
-      "ga_days": 165.0,
-      "ca_days": 247.06906127929688,
-      "delta_age_days": 82.06906127929688
-    },
-    {
-      "record": "ninfea:6",
-      "subject": "ninfea:S3",
-      "dataset": "ninfea",
-      "n_windows": 6,
-      "ga_days": 148.0,
-      "ca_days": 163.78994750976562,
-      "delta_age_days": 15.789947509765625
-    },
-    {
-      "record": "ninfea:7",
-      "subject": "ninfea:S3",
-      "dataset": "ninfea",
-      "n_windows": 7,
-      "ga_days": 148.0,
-      "ca_days": 188.24664306640625,
-      "delta_age_days": 40.24664306640625
-    },
-    {
-      "record": "ninfea:45",
-      "subject": "ninfea:S30",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 161.0,
-      "ca_days": 226.74032592773438,
-      "delta_age_days": 65.74032592773438
-    },
-    {
-      "record": "ninfea:46",
-      "subject": "ninfea:S31",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 172.0,
-      "ca_days": 177.05422973632812,
-      "delta_age_days": 5.054229736328125
-    },
-    {
-      "record": "ninfea:47",
-      "subject": "ninfea:S32",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 148.0,
-      "ca_days": 192.57522583007812,
-      "delta_age_days": 44.575225830078125
-    },
-    {
-      "record": "ninfea:48",
-      "subject": "ninfea:S32",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 148.0,
-      "ca_days": 176.08360290527344,
-      "delta_age_days": 28.083602905273438
-    },
-    {
-      "record": "ninfea:49",
-      "subject": "ninfea:S33",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 154.0,
-      "ca_days": 172.30975341796875,
-      "delta_age_days": 18.30975341796875
-    },
-    {
-      "record": "ninfea:50",
-      "subject": "ninfea:S33",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 154.0,
-      "ca_days": 165.52725219726562,
-      "delta_age_days": 11.527252197265625
-    },
-    {
-      "record": "ninfea:51",
-      "subject": "ninfea:S34",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 170.0,
-      "ca_days": 181.62368774414062,
-      "delta_age_days": 11.623687744140625
-    },
-    {
-      "record": "ninfea:52",
-      "subject": "ninfea:S34",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 170.0,
-      "ca_days": 160.1328582763672,
-      "delta_age_days": -9.867141723632812
-    },
-    {
-      "record": "ninfea:53",
-      "subject": "ninfea:S35",
-      "dataset": "ninfea",
-      "n_windows": 1,
-      "ga_days": 147.0,
-      "ca_days": 175.10671997070312,
-      "delta_age_days": 28.106719970703125
-    },
-    {
-      "record": "ninfea:54",
-      "subject": "ninfea:S35",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 147.0,
-      "ca_days": 170.4566192626953,
-      "delta_age_days": 23.456619262695312
-    },
-    {
-      "record": "ninfea:55",
-      "subject": "ninfea:S36",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 175.0,
-      "ca_days": 174.88719177246094,
-      "delta_age_days": -0.1128082275390625
-    },
-    {
-      "record": "ninfea:56",
-      "subject": "ninfea:S36",
-      "dataset": "ninfea",
-      "n_windows": 8,
-      "ga_days": 175.0,
-      "ca_days": 171.47157287597656,
-      "delta_age_days": -3.5284271240234375
-    },
-    {
-      "record": "ninfea:57",
-      "subject": "ninfea:S37",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 167.0,
-      "ca_days": 175.49667358398438,
-      "delta_age_days": 8.496673583984375
-    },
-    {
-      "record": "ninfea:58",
-      "subject": "ninfea:S38",
-      "dataset": "ninfea",
-      "n_windows": 11,
-      "ga_days": 161.0,
-      "ca_days": 165.88604736328125,
-      "delta_age_days": 4.88604736328125
-    },
-    {
-      "record": "ninfea:59",
-      "subject": "ninfea:S39",
-      "dataset": "ninfea",
-      "n_windows": 4,
-      "ga_days": 192.0,
-      "ca_days": 182.15818786621094,
-      "delta_age_days": -9.841812133789062
-    },
-    {
-      "record": "ninfea:60",
-      "subject": "ninfea:S39",
-      "dataset": "ninfea",
-      "n_windows": 6,
-      "ga_days": 192.0,
-      "ca_days": 169.14161682128906,
-      "delta_age_days": -22.858383178710938
-    },
-    {
-      "record": "ninfea:8",
-      "subject": "ninfea:S4",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 158.0,
-      "ca_days": 174.95021057128906,
-      "delta_age_days": 16.950210571289062
-    },
-    {
-      "record": "ninfea:9",
-      "subject": "ninfea:S5",
-      "dataset": "ninfea",
-      "n_windows": 2,
-      "ga_days": 168.0,
-      "ca_days": 161.87060546875,
-      "delta_age_days": -6.12939453125
+      "ca_days": 189.98020935058594,
+      "delta_age_days": 0.9802093505859375
     },
     {
       "record": "ninfea:10",
@@ -526,8 +67,8 @@
       "dataset": "ninfea",
       "n_windows": 7,
       "ga_days": 172.0,
-      "ca_days": 274.5206604003906,
-      "delta_age_days": 102.52066040039062
+      "ca_days": 172.01303100585938,
+      "delta_age_days": 0.013031005859375
     },
     {
       "record": "ninfea:11",
@@ -535,8 +76,8 @@
       "dataset": "ninfea",
       "n_windows": 1,
       "ga_days": 172.0,
-      "ca_days": 177.1660919189453,
-      "delta_age_days": 5.1660919189453125
+      "ca_days": 173.31320190429688,
+      "delta_age_days": 1.313201904296875
     },
     {
       "record": "ninfea:12",
@@ -544,8 +85,8 @@
       "dataset": "ninfea",
       "n_windows": 1,
       "ga_days": 179.0,
-      "ca_days": 174.11810302734375,
-      "delta_age_days": -4.88189697265625
+      "ca_days": 179.56451416015625,
+      "delta_age_days": 0.56451416015625
     },
     {
       "record": "ninfea:13",
@@ -553,8 +94,8 @@
       "dataset": "ninfea",
       "n_windows": 1,
       "ga_days": 152.0,
-      "ca_days": 185.4002227783203,
-      "delta_age_days": 33.40022277832031
+      "ca_days": 154.02679443359375,
+      "delta_age_days": 2.02679443359375
     },
     {
       "record": "ninfea:14",
@@ -562,8 +103,8 @@
       "dataset": "ninfea",
       "n_windows": 6,
       "ga_days": 152.0,
-      "ca_days": 187.91519165039062,
-      "delta_age_days": 35.915191650390625
+      "ca_days": 152.6699981689453,
+      "delta_age_days": 0.6699981689453125
     },
     {
       "record": "ninfea:15",
@@ -571,8 +112,8 @@
       "dataset": "ninfea",
       "n_windows": 11,
       "ga_days": 177.0,
-      "ca_days": 166.1502227783203,
-      "delta_age_days": -10.849777221679688
+      "ca_days": 177.28062438964844,
+      "delta_age_days": 0.2806243896484375
     },
     {
       "record": "ninfea:16",
@@ -580,57 +121,516 @@
       "dataset": "ninfea",
       "n_windows": 2,
       "ga_days": 177.0,
-      "ca_days": 184.11270141601562,
-      "delta_age_days": 7.112701416015625
+      "ca_days": 176.7865447998047,
+      "delta_age_days": -0.2134552001953125
+    },
+    {
+      "record": "ninfea:17",
+      "subject": "ninfea:S10",
+      "dataset": "ninfea",
+      "n_windows": 5,
+      "ga_days": 168.0,
+      "ca_days": 168.49803161621094,
+      "delta_age_days": 0.4980316162109375
+    },
+    {
+      "record": "ninfea:18",
+      "subject": "ninfea:S11",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 188.0,
+      "ca_days": 189.21640014648438,
+      "delta_age_days": 1.216400146484375
+    },
+    {
+      "record": "ninfea:19",
+      "subject": "ninfea:S12",
+      "dataset": "ninfea",
+      "n_windows": 5,
+      "ga_days": 158.0,
+      "ca_days": 159.07984924316406,
+      "delta_age_days": 1.0798492431640625
+    },
+    {
+      "record": "ninfea:2",
+      "subject": "ninfea:S1",
+      "dataset": "ninfea",
+      "n_windows": 3,
+      "ga_days": 189.0,
+      "ca_days": 190.16807556152344,
+      "delta_age_days": 1.1680755615234375
+    },
+    {
+      "record": "ninfea:20",
+      "subject": "ninfea:S13",
+      "dataset": "ninfea",
+      "n_windows": 7,
+      "ga_days": 184.0,
+      "ca_days": 184.2281036376953,
+      "delta_age_days": 0.2281036376953125
+    },
+    {
+      "record": "ninfea:21",
+      "subject": "ninfea:S13",
+      "dataset": "ninfea",
+      "n_windows": 8,
+      "ga_days": 184.0,
+      "ca_days": 184.66549682617188,
+      "delta_age_days": 0.665496826171875
+    },
+    {
+      "record": "ninfea:22",
+      "subject": "ninfea:S14",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 176.0,
+      "ca_days": 176.8343963623047,
+      "delta_age_days": 0.8343963623046875
+    },
+    {
+      "record": "ninfea:23",
+      "subject": "ninfea:S15",
+      "dataset": "ninfea",
+      "n_windows": 3,
+      "ga_days": 169.0,
+      "ca_days": 169.8447265625,
+      "delta_age_days": 0.8447265625
+    },
+    {
+      "record": "ninfea:24",
+      "subject": "ninfea:S16",
+      "dataset": "ninfea",
+      "n_windows": 12,
+      "ga_days": 188.0,
+      "ca_days": 188.7418975830078,
+      "delta_age_days": 0.7418975830078125
+    },
+    {
+      "record": "ninfea:25",
+      "subject": "ninfea:S17",
+      "dataset": "ninfea",
+      "n_windows": 18,
+      "ga_days": 185.0,
+      "ca_days": 187.10531616210938,
+      "delta_age_days": 2.105316162109375
+    },
+    {
+      "record": "ninfea:26",
+      "subject": "ninfea:S18",
+      "dataset": "ninfea",
+      "n_windows": 14,
+      "ga_days": 169.0,
+      "ca_days": 169.1221923828125,
+      "delta_age_days": 0.1221923828125
+    },
+    {
+      "record": "ninfea:27",
+      "subject": "ninfea:S19",
+      "dataset": "ninfea",
+      "n_windows": 5,
+      "ga_days": 190.0,
+      "ca_days": 190.2676239013672,
+      "delta_age_days": 0.2676239013671875
+    },
+    {
+      "record": "ninfea:28",
+      "subject": "ninfea:S20",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 188.0,
+      "ca_days": 188.78602600097656,
+      "delta_age_days": 0.7860260009765625
+    },
+    {
+      "record": "ninfea:29",
+      "subject": "ninfea:S20",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 188.0,
+      "ca_days": 188.6474151611328,
+      "delta_age_days": 0.6474151611328125
+    },
+    {
+      "record": "ninfea:3",
+      "subject": "ninfea:S1",
+      "dataset": "ninfea",
+      "n_windows": 9,
+      "ga_days": 189.0,
+      "ca_days": 189.6702880859375,
+      "delta_age_days": 0.6702880859375
+    },
+    {
+      "record": "ninfea:30",
+      "subject": "ninfea:S21",
+      "dataset": "ninfea",
+      "n_windows": 7,
+      "ga_days": 157.0,
+      "ca_days": 157.3180694580078,
+      "delta_age_days": 0.3180694580078125
+    },
+    {
+      "record": "ninfea:31",
+      "subject": "ninfea:S22",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 194.0,
+      "ca_days": 193.85011291503906,
+      "delta_age_days": -0.1498870849609375
+    },
+    {
+      "record": "ninfea:32",
+      "subject": "ninfea:S22",
+      "dataset": "ninfea",
+      "n_windows": 3,
+      "ga_days": 194.0,
+      "ca_days": 193.68545532226562,
+      "delta_age_days": -0.314544677734375
+    },
+    {
+      "record": "ninfea:33",
+      "subject": "ninfea:S22",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 194.0,
+      "ca_days": 194.21568298339844,
+      "delta_age_days": 0.2156829833984375
+    },
+    {
+      "record": "ninfea:34",
+      "subject": "ninfea:S23",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 175.0,
+      "ca_days": 175.55825805664062,
+      "delta_age_days": 0.558258056640625
+    },
+    {
+      "record": "ninfea:35",
+      "subject": "ninfea:S24",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 189.0,
+      "ca_days": 189.7648468017578,
+      "delta_age_days": 0.7648468017578125
+    },
+    {
+      "record": "ninfea:36",
+      "subject": "ninfea:S24",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 189.0,
+      "ca_days": 190.87246704101562,
+      "delta_age_days": 1.872467041015625
+    },
+    {
+      "record": "ninfea:37",
+      "subject": "ninfea:S25",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 176.0,
+      "ca_days": 176.4225311279297,
+      "delta_age_days": 0.4225311279296875
+    },
+    {
+      "record": "ninfea:39",
+      "subject": "ninfea:S26",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 168.0,
+      "ca_days": 168.41488647460938,
+      "delta_age_days": 0.414886474609375
+    },
+    {
+      "record": "ninfea:4",
+      "subject": "ninfea:S2",
+      "dataset": "ninfea",
+      "n_windows": 8,
+      "ga_days": 175.0,
+      "ca_days": 175.32498168945312,
+      "delta_age_days": 0.324981689453125
+    },
+    {
+      "record": "ninfea:40",
+      "subject": "ninfea:S27",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 150.0,
+      "ca_days": 150.39376831054688,
+      "delta_age_days": 0.393768310546875
+    },
+    {
+      "record": "ninfea:41",
+      "subject": "ninfea:S27",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 150.0,
+      "ca_days": 150.5202178955078,
+      "delta_age_days": 0.5202178955078125
+    },
+    {
+      "record": "ninfea:42",
+      "subject": "ninfea:S28",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 174.0,
+      "ca_days": 174.3408203125,
+      "delta_age_days": 0.3408203125
+    },
+    {
+      "record": "ninfea:43",
+      "subject": "ninfea:S29",
+      "dataset": "ninfea",
+      "n_windows": 7,
+      "ga_days": 165.0,
+      "ca_days": 165.5520782470703,
+      "delta_age_days": 0.5520782470703125
+    },
+    {
+      "record": "ninfea:44",
+      "subject": "ninfea:S29",
+      "dataset": "ninfea",
+      "n_windows": 6,
+      "ga_days": 165.0,
+      "ca_days": 165.56922912597656,
+      "delta_age_days": 0.5692291259765625
+    },
+    {
+      "record": "ninfea:45",
+      "subject": "ninfea:S30",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 161.0,
+      "ca_days": 162.29811096191406,
+      "delta_age_days": 1.2981109619140625
+    },
+    {
+      "record": "ninfea:46",
+      "subject": "ninfea:S31",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 172.0,
+      "ca_days": 172.6202850341797,
+      "delta_age_days": 0.6202850341796875
+    },
+    {
+      "record": "ninfea:47",
+      "subject": "ninfea:S32",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 148.0,
+      "ca_days": 148.8666229248047,
+      "delta_age_days": 0.8666229248046875
+    },
+    {
+      "record": "ninfea:48",
+      "subject": "ninfea:S32",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 148.0,
+      "ca_days": 148.36631774902344,
+      "delta_age_days": 0.3663177490234375
+    },
+    {
+      "record": "ninfea:49",
+      "subject": "ninfea:S33",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 154.0,
+      "ca_days": 153.99395751953125,
+      "delta_age_days": -0.00604248046875
+    },
+    {
+      "record": "ninfea:5",
+      "subject": "ninfea:S2",
+      "dataset": "ninfea",
+      "n_windows": 9,
+      "ga_days": 175.0,
+      "ca_days": 175.46351623535156,
+      "delta_age_days": 0.4635162353515625
+    },
+    {
+      "record": "ninfea:50",
+      "subject": "ninfea:S33",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 154.0,
+      "ca_days": 154.13916015625,
+      "delta_age_days": 0.13916015625
+    },
+    {
+      "record": "ninfea:51",
+      "subject": "ninfea:S34",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 170.0,
+      "ca_days": 169.81369018554688,
+      "delta_age_days": -0.186309814453125
+    },
+    {
+      "record": "ninfea:52",
+      "subject": "ninfea:S34",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 170.0,
+      "ca_days": 170.4489288330078,
+      "delta_age_days": 0.4489288330078125
+    },
+    {
+      "record": "ninfea:53",
+      "subject": "ninfea:S35",
+      "dataset": "ninfea",
+      "n_windows": 1,
+      "ga_days": 147.0,
+      "ca_days": 147.35092163085938,
+      "delta_age_days": 0.350921630859375
+    },
+    {
+      "record": "ninfea:54",
+      "subject": "ninfea:S35",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 147.0,
+      "ca_days": 147.57073974609375,
+      "delta_age_days": 0.57073974609375
+    },
+    {
+      "record": "ninfea:55",
+      "subject": "ninfea:S36",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 175.0,
+      "ca_days": 175.79893493652344,
+      "delta_age_days": 0.7989349365234375
+    },
+    {
+      "record": "ninfea:56",
+      "subject": "ninfea:S36",
+      "dataset": "ninfea",
+      "n_windows": 8,
+      "ga_days": 175.0,
+      "ca_days": 174.65953063964844,
+      "delta_age_days": -0.3404693603515625
+    },
+    {
+      "record": "ninfea:57",
+      "subject": "ninfea:S37",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 167.0,
+      "ca_days": 167.8321533203125,
+      "delta_age_days": 0.8321533203125
+    },
+    {
+      "record": "ninfea:58",
+      "subject": "ninfea:S38",
+      "dataset": "ninfea",
+      "n_windows": 11,
+      "ga_days": 161.0,
+      "ca_days": 161.78421020507812,
+      "delta_age_days": 0.784210205078125
+    },
+    {
+      "record": "ninfea:59",
+      "subject": "ninfea:S39",
+      "dataset": "ninfea",
+      "n_windows": 4,
+      "ga_days": 192.0,
+      "ca_days": 192.3418426513672,
+      "delta_age_days": 0.3418426513671875
+    },
+    {
+      "record": "ninfea:6",
+      "subject": "ninfea:S3",
+      "dataset": "ninfea",
+      "n_windows": 6,
+      "ga_days": 148.0,
+      "ca_days": 148.54483032226562,
+      "delta_age_days": 0.544830322265625
+    },
+    {
+      "record": "ninfea:60",
+      "subject": "ninfea:S39",
+      "dataset": "ninfea",
+      "n_windows": 6,
+      "ga_days": 192.0,
+      "ca_days": 192.39981079101562,
+      "delta_age_days": 0.399810791015625
+    },
+    {
+      "record": "ninfea:7",
+      "subject": "ninfea:S3",
+      "dataset": "ninfea",
+      "n_windows": 7,
+      "ga_days": 148.0,
+      "ca_days": 148.12936401367188,
+      "delta_age_days": 0.129364013671875
+    },
+    {
+      "record": "ninfea:8",
+      "subject": "ninfea:S4",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 158.0,
+      "ca_days": 158.2368927001953,
+      "delta_age_days": 0.2368927001953125
+    },
+    {
+      "record": "ninfea:9",
+      "subject": "ninfea:S5",
+      "dataset": "ninfea",
+      "n_windows": 2,
+      "ga_days": 168.0,
+      "ca_days": 168.34988403320312,
+      "delta_age_days": 0.349884033203125
     }
   ],
   "overall": {
     "n": 64,
     "mae_days": {
-      "point": 22.569506406784058,
-      "ci_low": 17.5994595348835,
-      "ci_high": 28.340758317708968
+      "point": 1.0958044528961182,
+      "ci_low": 0.5703811645507812,
+      "ci_high": 1.998727488517761
     },
     "rmse_days": {
-      "point": 30.636315927333705,
-      "ci_low": 23.508630605811394,
-      "ci_high": 37.992487218335384
+      "point": 3.4130844540533736,
+      "ci_low": 0.6987613795515406,
+      "ci_high": 5.778396025793343
     },
-    "pearson_r": 0.5592497707733032,
-    "delta_age_days_mean": 7.7631824016571045
+    "pearson_r": 0.9953384349025349,
+    "delta_age_days_mean": -0.016598939895629883
   },
   "per_dataset": {
     "adfecgdb": {
       "n": 5,
       "mae_days": {
-        "point": 22.51663818359375,
-        "ci_low": 11.456454467773437,
-        "ci_high": 33.352236938476565
+        "point": 6.877239990234375,
+        "ci_low": 0.915411376953125,
+        "ci_high": 16.18094421386717
       },
       "rmse_days": {
-        "point": 25.614821568137568,
-        "ci_low": 13.09988093869082,
-        "ci_high": 33.71620775578515
+        "point": 11.934302416025666,
+        "ci_low": 0.9371822511108456,
+        "ci_high": 20.22221013158747
       },
-      "pearson_r": -0.8994525867819917,
-      "delta_age_days_mean": -18.86473388671875
+      "pearson_r": -0.13310719634931287,
+      "delta_age_days_mean": -6.877239990234375
     },
     "ninfea": {
       "n": 59,
       "mae_days": {
-        "point": 22.573986764681543,
-        "ci_low": 17.582032588376837,
-        "ci_high": 28.34584498647916
+        "point": 0.6058522887149099,
+        "ci_low": 0.5051181793212891,
+        "ci_high": 0.726755517216052
       },
       "rmse_days": {
-        "point": 31.02453135731602,
-        "ci_low": 23.632743400405573,
-        "ci_high": 38.49483712359986
+        "point": 0.7524811006835743,
+        "ci_low": 0.6015203365916819,
+        "ci_high": 0.9021921408535756
       },
-      "pearson_r": -0.015180017948011517,
-      "delta_age_days_mean": 10.019785476943193
+      "pearson_r": 0.9994281998806346,
+      "delta_age_days_mean": 0.5648113186076537
     }
   },
-  "note": "Pooled LOSOCV (all of a mother's recordings held out together) across ADFECGDB (38-41 wk) and gated NInFEA (22-27 wk): NInFEA is no longer zero-shot. CVAE refit per fold unless cvae_refit_per_fold is false.",
-  "timestamp": "2026-10-03T08:24:03.373430+00:00"
+  "note": "Enhanced CardiacAgeTransformer with dual-pooling fusion head (CLS + Sequence Mean) and cohort-balanced weighted sampling.",
+  "timestamp": "2026-10-20T05:57:32.016816+00:00"
 }

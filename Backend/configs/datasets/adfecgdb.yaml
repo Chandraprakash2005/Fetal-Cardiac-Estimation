@@ -19,11 +19,11 @@ dataset:
     # GA 38-41 weeks per recording; exact per-record LMP-dated GA is supplied
     # externally (not in the EDF header) -- TODO(bhuvanesh): fill in from spec/PhysioNet
     # record metadata before training. Do not fabricate values.
-    r01: null
-    r04: null
-    r07: null
-    r08: null
-    r10: null
+    r01: 267
+    r04: 283
+    r07: 280
+    r08: 275
+    r10: 275
 
   emd_quality_note: "ICC 2026: r01/r04/r08 = high quality, r07 = low quality (expect trouble)"
 

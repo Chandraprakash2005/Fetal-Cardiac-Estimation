@@ -46,7 +46,15 @@ class CardiacAgeTransformer(nn.Module):
         self.max_seq_len = cfg.transformer.max_seq_len
         self.register_buffer("target_mean", torch.zeros(()))
         self.register_buffer("target_std", torch.ones(()))
-        self.input_proj = nn.Linear(cfg.cvae.latent_dim, d_model)
+
+        # Multi-stage non-linear input projection with LayerNorm and GELU
+        self.input_proj = nn.Sequential(
+            nn.Linear(cfg.cvae.latent_dim, d_model),
+            nn.LayerNorm(d_model),
+            nn.GELU(),
+            nn.Linear(d_model, d_model),
+            nn.LayerNorm(d_model),
+        )
         self.cls_token = nn.Parameter(torch.zeros(1, 1, d_model))
         self.pos_embedding = nn.Parameter(torch.zeros(1, self.max_seq_len + 1, d_model))
         nn.init.trunc_normal_(self.cls_token, std=0.02)
@@ -65,11 +73,16 @@ class CardiacAgeTransformer(nn.Module):
             encoder_layer, num_layers=cfg.transformer.n_layers, enable_nested_tensor=False
         )
         self.norm = nn.LayerNorm(d_model)
+
+        # Dual Pooling Fusion Head (Combines CLS attention token + Masked Mean Sequence Pooling)
         self.head = nn.Sequential(
-            nn.Linear(d_model, cfg.transformer.head_hidden),
+            nn.Linear(d_model * 2, cfg.transformer.head_hidden),
+            nn.LayerNorm(cfg.transformer.head_hidden),
             nn.GELU(),
             nn.Dropout(cfg.transformer.head_dropout),
-            nn.Linear(cfg.transformer.head_hidden, 1),
+            nn.Linear(cfg.transformer.head_hidden, cfg.transformer.head_hidden // 2),
+            nn.GELU(),
+            nn.Linear(cfg.transformer.head_hidden // 2, 1),
         )
 
     def forward(
@@ -81,13 +94,28 @@ class CardiacAgeTransformer(nn.Module):
         if seq_len > self.max_seq_len:
             raise ValueError(f"sequence length {seq_len} exceeds max_seq_len={self.max_seq_len}")
 
-        x = self.input_proj(z_seq)
-        x = torch.cat([self.cls_token.expand(batch_size, -1, -1), x], dim=1)
+        x_tokens = self.input_proj(z_seq)
+        x = torch.cat([self.cls_token.expand(batch_size, -1, -1), x_tokens], dim=1)
         x = x + self.pos_embedding[:, : seq_len + 1]
 
+        full_mask = None
         if pad_mask is not None:
             cls_keep = torch.zeros(batch_size, 1, dtype=torch.bool, device=z_seq.device)
-            pad_mask = torch.cat([cls_keep, pad_mask], dim=1)
+            full_mask = torch.cat([cls_keep, pad_mask], dim=1)
 
-        encoded = self.encoder(x, src_key_padding_mask=pad_mask)
-        return self.head(self.norm(encoded[:, 0])).squeeze(-1)
+        encoded = self.norm(self.encoder(x, src_key_padding_mask=full_mask))
+
+        # 1. Self-Attention CLS token representation
+        cls_feat = encoded[:, 0]
+
+        # 2. Sequence-level token aggregate (excluding CLS token)
+        if pad_mask is not None:
+            valid_mask = (~pad_mask).unsqueeze(-1).float()
+            seq_mean = (encoded[:, 1:] * valid_mask).sum(dim=1) / valid_mask.sum(dim=1).clamp_min(1.0)
+        else:
+            seq_mean = encoded[:, 1:].mean(dim=1)
+
+        # 3. Dual-pooling fusion regression
+        fused = torch.cat([cls_feat, seq_mean], dim=-1)
+        return self.head(fused).squeeze(-1)
+

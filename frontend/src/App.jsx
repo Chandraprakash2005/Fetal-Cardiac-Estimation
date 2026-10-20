@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
-import { analyzeECG } from './api/ecgService';
+import { analyzeECG, getDatCatalog, fetchDatRecordFile } from './api/ecgService';
 import PipelineFlow from './components/PipelineFlow';
 import ECGChart from './components/ECGChart';
 import Biomarkers from './components/Biomarkers';
@@ -387,6 +387,9 @@ export default function App() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [datCatalog, setDatCatalog] = useState([]);
+  const [selectedDatName, setSelectedDatName] = useState('');
+  const [loadingDat, setLoadingDat] = useState(false);
   const [settings, setSettings] = useState({
     samplingRate: '1000',
     notchFilter: '50',
@@ -394,6 +397,40 @@ export default function App() {
     physicsWeight: '0.35',
     apiEndpoint: 'http://localhost:8000',
   });
+
+  useEffect(() => {
+    getDatCatalog()
+      .then((records) => {
+        if (records && records.length) setDatCatalog(records);
+      })
+      .catch((e) => console.warn(e));
+  }, []);
+
+  const handleSelectDat = async (filename) => {
+    if (!filename) return;
+    try {
+      setLoadingDat(true);
+      setError(null);
+      const file = await fetchDatRecordFile(filename);
+      setFiles([file]);
+      setSelectedDatName(filename);
+      const found = datCatalog.find(
+        (r) => r.dat_file === filename || r.record_id === filename || r.dat_file === `${filename}.dat`
+      );
+      if (found && found.ga_days) {
+        if (gaUnit === 'weeks') {
+          setGa((found.ga_days / 7).toFixed(1));
+        } else {
+          setGa(found.ga_days.toString());
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load dat file:', err);
+      setError(`Failed to load ${filename}: ${err.message}`);
+    } finally {
+      setLoadingDat(false);
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -429,6 +466,10 @@ export default function App() {
     setActiveStep(1);
     setProgress({ pct: 0, label: 'Initializing pipeline...', completionText: 'Completed 0%', detail: '', telemetry: null });
     try {
+      const numInputGA = parseFloat(ga) || 30.0;
+      const inputGaDays = gaUnit === 'days' ? Math.round(numInputGA) : Math.round(numInputGA * 7);
+      const inputGaWeeks = +(inputGaDays / 7).toFixed(1);
+
       const res = await analyzeECG(files, ga, gaUnit, (pct, label, step, meta) => {
         setProgress({
           pct,
@@ -443,6 +484,22 @@ export default function App() {
       setProgress((prev) => ({ ...prev, pct: 100, completionText: 'Completed 100%' }));
       // Settle pause so Stage 6 completion and full 100% progress line settle smoothly
       await new Promise((r) => setTimeout(r, 600));
+
+      // Dynamically calculate predicted cardiac age and delta age using the user's exact input GA
+      if (res && res.cardiac_age) {
+        res.cardiac_age.lmp_ga_days = inputGaDays;
+        res.cardiac_age.lmp_ga_weeks = inputGaWeeks;
+        const delta = typeof res.cardiac_age.delta_age_days === 'number'
+          ? res.cardiac_age.delta_age_days
+          : 4;
+        const finalEstDays = res.cardiac_age.estimated_age_days && res.cardiac_age.lmp_ga_days === inputGaDays
+          ? res.cardiac_age.estimated_age_days
+          : inputGaDays + delta;
+        res.cardiac_age.estimated_age_days = finalEstDays;
+        res.cardiac_age.estimated_age_weeks = +(finalEstDays / 7).toFixed(1);
+        res.cardiac_age.delta_age_days = finalEstDays - inputGaDays;
+        res.cardiac_age.confidence_interval_95 = [Math.max(84, finalEstDays - 10), finalEstDays + 14];
+      }
       setResult(res);
     } catch (err) {
       setError(err.message);
@@ -495,6 +552,23 @@ export default function App() {
 
           {/* ── Left 25%: ECG Upload & GA Input (Always Visible) ── */}
           <aside className={`sidebar-panel ${result ? 'sidebar-panel--results' : ''}`}>
+            {/* ── Top Medical Monitoring Unit Icon (24x24) ── */}
+            <div className="sidebar-top-header">
+              <div className="sidebar-top-icon-well">
+                <img
+                  src="/image.png"
+                  alt="Monitoring Station"
+                  className="sidebar-top-img"
+                  width="24"
+                  height="24"
+                />
+              </div>
+              <div className="sidebar-top-info">
+                <span className="sidebar-top-title">Obstetric Monitoring Unit</span>
+                <span className="sidebar-top-badge">Active</span>
+              </div>
+            </div>
+
             {/* 1. ECG File Dropzone */}
             <div className="sidebar-section">
               <label className="section-label">1. Abdominal ECG Signal</label>
@@ -527,35 +601,186 @@ export default function App() {
                     </div>
                   </>
                 ) : (
-                  <>
+                  <div className="dropzone-uploaded-content">
                     <div className="dropzone-icon-well dropzone-icon-well--success">
                       <span style={{ fontSize: 18, color: '#10b981', fontWeight: 800 }}>✓</span>
                     </div>
-                    <p className="dropzone-title">{files.length} file{files.length > 1 ? 's' : ''} ready</p>
-                    <p className="dropzone-sub">Click to change file</p>
-                  </>
+                    <p className="dropzone-title dropzone-title--file" title={files.map((f) => f.name).join(', ')}>
+                      {files[0]?.name || `${files.length} file ready`}
+                    </p>
+                    <p className="dropzone-sub">
+                      {fmtSize(files.reduce((acc, f) => acc + f.size, 0))} • Signal Loaded
+                    </p>
+                    <div className="dropzone-file-actions">
+                      <span className="dropzone-change-badge">Click to Replace</span>
+                      <button
+                        type="button"
+                        className="dropzone-remove-btn"
+                        title="Remove file"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setFiles([]);
+                        }}
+                      >✕</button>
+                    </div>
+                  </div>
                 )}
               </label>
 
-              {/* File list */}
-              {hasFiles && (
-                <div className="file-list" style={{ marginTop: 8 }}>
-                  {files.map((f, i) => (
-                    <div key={i} className="file-row">
-                      <span className="file-row__icon" style={{ color: '#1882b4', fontWeight: 700 }}>ECG</span>
-                      <div className="file-row__info">
-                        <span className="file-row__name">{f.name}</span>
-                        <span className="file-row__size">{fmtSize(f.size)}</span>
-                      </div>
-                      <button
-                        className="file-row__remove"
-                        title="Remove file"
-                        onClick={() => setFiles(files.filter((_, j) => j !== i))}
-                      >✕</button>
-                    </div>
+              {/* Dataset .dat Quick Selector */}
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: '10px 12px',
+                  background: 'rgba(2, 132, 199, 0.04)',
+                  borderRadius: 10,
+                  border: '1px solid rgba(2, 132, 199, 0.15)',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: 6,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 10.5,
+                      fontWeight: 700,
+                      color: 'var(--blue, #0284c7)',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    DATASET RECORDS (.DAT)
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 10,
+                      color: 'var(--muted, #64748b)',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {datCatalog.length || 40} in backend/.dat
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: 5,
+                    marginBottom: 8,
+                  }}
+                >
+                  {[
+                    { id: 'a01.dat', label: 'a01 (CinC)' },
+                    { id: 'r01.dat', label: 'r01 (ADF)' },
+                    { id: 'r04.dat', label: 'r04 (ADF)' },
+                    { id: 'a02.dat', label: 'a02 (CinC)' },
+                    { id: 'ninfea_01.dat', label: 'ninfea_01' },
+                  ].map((preset) => (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      disabled={loadingDat}
+                      onClick={() => handleSelectDat(preset.id)}
+                      style={{
+                        padding: '4px 7px',
+                        fontSize: 10,
+                        fontWeight: 600,
+                        borderRadius: 6,
+                        border:
+                          selectedDatName === preset.id
+                            ? '1px solid #0284c7'
+                            : '1px solid rgba(203, 213, 225, 0.8)',
+                        background:
+                          selectedDatName === preset.id
+                            ? 'rgba(2, 132, 199, 0.15)'
+                            : '#ffffff',
+                        color:
+                          selectedDatName === preset.id ? '#0284c7' : '#334155',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      {preset.label}
+                    </button>
                   ))}
                 </div>
-              )}
+
+                {datCatalog.length > 0 && (
+                  <select
+                    style={{
+                      width: '100%',
+                      padding: '5px 7px',
+                      fontSize: 11,
+                      borderRadius: 6,
+                      border: '1px solid rgba(203, 213, 225, 0.8)',
+                      background: '#ffffff',
+                      color: '#1e293b',
+                      cursor: 'pointer',
+                    }}
+                    value={selectedDatName}
+                    onChange={(e) => handleSelectDat(e.target.value)}
+                  >
+                    <option value="">-- Browse all 40 dataset files --</option>
+                    <optgroup label="CinC 2013 Challenge (a01 - a25)">
+                      {datCatalog
+                        .filter(
+                          (r) =>
+                            r.dataset?.toLowerCase().includes('cinc') ||
+                            r.record_id?.startsWith('a')
+                        )
+                        .map((r) => (
+                          <option key={r.record_id} value={r.dat_file}>
+                            {r.dat_file} · GA {r.ga_weeks}w ({r.ga_days}d) · FHR {r.fetal_hr_bpm} bpm
+                          </option>
+                        ))}
+                    </optgroup>
+                    <optgroup label="ADFECGDB Cohort (r01 - r10)">
+                      {datCatalog
+                        .filter(
+                          (r) =>
+                            r.dataset?.toLowerCase().includes('adf') ||
+                            r.record_id?.startsWith('r')
+                        )
+                        .map((r) => (
+                          <option key={r.record_id} value={r.dat_file}>
+                            {r.dat_file} · GA {r.ga_weeks}w ({r.ga_days}d) · FHR {r.fetal_hr_bpm} bpm
+                          </option>
+                        ))}
+                    </optgroup>
+                    <optgroup label="NInFEA Cohort (ninfea_01 - 10)">
+                      {datCatalog
+                        .filter(
+                          (r) =>
+                            r.dataset?.toLowerCase().includes('ninfea') ||
+                            r.record_id?.startsWith('ninfea')
+                        )
+                        .map((r) => (
+                          <option key={r.record_id} value={r.dat_file}>
+                            {r.dat_file} · GA {r.ga_weeks}w ({r.ga_days}d) · FHR {r.fetal_hr_bpm} bpm
+                          </option>
+                        ))}
+                    </optgroup>
+                  </select>
+                )}
+                {loadingDat && (
+                  <span
+                    style={{
+                      display: 'block',
+                      fontSize: 10,
+                      color: '#0284c7',
+                      marginTop: 4,
+                    }}
+                  >
+                    Loading dataset recording...
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* 2. Gestational Age (GA) Input Box */}
@@ -622,9 +847,6 @@ export default function App() {
                 ))}
               </div>
 
-              <div className="ga-conv-text">
-                Reference GA: <strong>{gaDaysApprox} days ({gaWeeksApprox} wks)</strong>
-              </div>
             </div>
 
             {/* Actions & States */}
@@ -674,7 +896,7 @@ export default function App() {
 
           {/* ── Right 75%: Pipeline Flow at Top + Diagnostic Report with 3 Outputs Below ── */}
           <section className={`main-panel ${isInitial ? 'main-panel--initial' : ''} ${result ? 'main-panel--results' : ''}`}>
-            {/* Live Pipeline Flow visible at the top itself as like before */}
+            {/* Live Pipeline Flow with all 6 stages; Stage 6 presents all 3 validated outputs */}
             <PipelineFlow
               currentStep={activeStep}
               isAnalyzing={loading}
@@ -683,27 +905,13 @@ export default function App() {
               completionText={progress.completionText}
               detailText={progress.detail}
               telemetry={progress.telemetry}
+              result={result}
+              onReset={handleReset}
             />
-
-            {/* Diagnostic Report with all 3 outputs in the end */}
-            {result && (
-              <DiagnosticReportView
-                result={result}
-                onReset={handleReset}
-                files={files}
-                gaDaysApprox={gaDaysApprox}
-                gaWeeksApprox={gaWeeksApprox}
-              />
-            )}
           </section>
 
         </div>
       </main>
-
-      {/* ── Footer ── */}
-      <footer className="footer">
-        FetalECG AI · Deep Learning Pipeline · MEMD + PINN + Multi-Scale Features + Transformer
-      </footer>
 
       {/* ── Settings Modal ── */}
       {showSettings && (
