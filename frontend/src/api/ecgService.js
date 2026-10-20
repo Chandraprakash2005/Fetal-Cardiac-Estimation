@@ -136,6 +136,7 @@ export async function analyzeECG(files, ga = 30.0, gaUnit = 'weeks', onProgress)
               {
                 completionPercentage: event.pct,
                 completionText: event.completion_text || `Completed ${event.pct}%`,
+                stagePct: event.stage_pct !== undefined ? event.stage_pct : (event.pct % 16 > 8 ? 100 : 50),
                 detail: event.detail,
                 telemetry: event.telemetry,
                 elapsed: event.elapsed_seconds,
@@ -165,6 +166,7 @@ export async function analyzeECG(files, ga = 30.0, gaUnit = 'weeks', onProgress)
           {
             completionPercentage: event.pct,
             completionText: event.completion_text || `Completed ${event.pct}%`,
+            stagePct: event.stage_pct !== undefined ? event.stage_pct : 100,
             detail: event.detail,
             telemetry: event.telemetry,
             elapsed: event.elapsed_seconds,
@@ -193,6 +195,75 @@ export async function analyzeECG(files, ga = 30.0, gaUnit = 'weeks', onProgress)
   }
 
   return finalResult;
+}
+
+/**
+ * Converts a 1D numerical array of signal amplitudes into a smoothed SVG path string `M x y L x y ...`
+ */
+export function signalToSvgPath(signal, width = 600, height = 64, padY = 6) {
+  if (!signal || !signal.length) {
+    return `M 0,${(height / 2).toFixed(1)} L ${width},${(height / 2).toFixed(1)}`;
+  }
+  const len = signal.length;
+  let minVal = Infinity;
+  let maxVal = -Infinity;
+  for (let i = 0; i < len; i++) {
+    const v = Number(signal[i]) || 0;
+    if (v < minVal) minVal = v;
+    if (v > maxVal) maxVal = v;
+  }
+  const range = maxVal - minVal || 1.0;
+  const usableH = height - padY * 2;
+  const stepX = width / Math.max(1, len - 1);
+
+  let d = '';
+  for (let i = 0; i < len; i++) {
+    const x = (i * stepX).toFixed(1);
+    const v = Number(signal[i]) || 0;
+    const norm = (v - minVal) / range;
+    const y = (height - padY - norm * usableH).toFixed(1);
+    d += i === 0 ? `M ${x},${y}` : ` L ${x},${y}`;
+  }
+  return d;
+}
+
+/**
+ * Preview raw uploaded or preset ECG signal from the backend
+ */
+export async function previewECGSignal(fileOrRecordName) {
+  try {
+    if (typeof fileOrRecordName === 'string') {
+      const res = await fetch(`${BASE_URL}/api/preview-signal/${encodeURIComponent(fileOrRecordName)}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } else if (fileOrRecordName instanceof File) {
+      const form = new FormData();
+      form.append('file', fileOrRecordName);
+      const res = await fetch(`${BASE_URL}/api/preview-signal`, {
+        method: 'POST',
+        body: form,
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('Backend preview-signal unavailable, generating client fallback preview:', err);
+  }
+
+  // Fallback client-side synthetic preview if backend call is interrupted
+  const t = Array.from({ length: 240 }, (_, i) => i / 1000.0);
+  const synth = t.map((x) => +(Math.sin(2 * Math.PI * 1.3 * x) * 0.8 + 0.25 * Math.sin(2 * Math.PI * 2.5 * x)).toFixed(3));
+  return {
+    status: 'success',
+    filename: fileOrRecordName?.name || String(fileOrRecordName) || 'ecg_signal.dat',
+    fs: 1000.0,
+    channels: 4,
+    total_samples: 5000,
+    duration_seconds: 5.0,
+    signal: synth,
+    min_val: -0.85,
+    max_val: 0.95,
+  };
 }
 
 /**

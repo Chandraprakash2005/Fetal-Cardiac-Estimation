@@ -399,102 +399,123 @@ export default function PipelineFlow({
       {/* ── Continuous Horizontal Flow with Waves Connecting Adjacent Squares ──── */}
       <div className="linear-track-wrapper">
         <div className="linear-nodes-row">
-          {LINEAR_STEPS.map((step, idx) => {
-            // Precise stage completion driven strictly by backend completion percentage thresholds
-            const isCompleted =
-              isFinished ||
-              (step.id === 1 && completionPercentage >= 16) ||
-              (step.id === 2 && completionPercentage >= 33) ||
-              (step.id === 3 && completionPercentage >= 50) ||
-              (step.id === 4 && completionPercentage >= 67) ||
-              (step.id === 5 && completionPercentage >= 84) ||
-              (step.id === 6 && completionPercentage >= 100);
+          {(() => {
+            const STAGE_CONFIG = [
+              { id: 1, start: 0,  mid: 10, end: 16 },
+              { id: 2, start: 16, mid: 25, end: 33 },
+              { id: 3, start: 33, mid: 42, end: 50 },
+              { id: 4, start: 50, mid: 58, end: 67 },
+              { id: 5, start: 67, mid: 78, end: 84 },
+              { id: 6, start: 84, mid: 92, end: 100 },
+            ];
 
-            // Active stage dynamically determined by backend percentage
-            const activeProcessingStage =
-              completionPercentage >= 84 ? 6 :
-              completionPercentage >= 67 ? 5 :
-              completionPercentage >= 50 ? 4 :
-              completionPercentage >= 33 ? 3 :
-              completionPercentage >= 16 ? 2 : 1;
+            // Derive which stage is actively executing
+            let activeProcessingStage = 1;
+            if (isFinished) {
+              activeProcessingStage = 6;
+            } else if (isAnalyzing) {
+              const matched = STAGE_CONFIG.find((cfg) => completionPercentage >= cfg.start && completionPercentage < cfg.end);
+              activeProcessingStage = matched ? matched.id : (currentStep > 0 && currentStep <= 6 ? currentStep : 1);
+            }
 
-            const isProcessing = isAnalyzing && (currentStep === step.id || activeProcessingStage === step.id) && !isCompleted;
-            const isSelected = !isInitial && selectedId === step.id;
-            const isHighlighted = isProcessing || isSelected;
-            const isPending = !isFinished && !isCompleted && !isProcessing;
-            const isLastStep = step.id === 6;
-            const StepIcon = step.Icon;
+            // Active stage progress: 0% at start, 50% (Dead Center) at mid, 100% at end
+            const currentCfg = STAGE_CONFIG[activeProcessingStage - 1] || STAGE_CONFIG[0];
+            let activeStagePct = 50;
+            if (isFinished) {
+              activeStagePct = 100;
+            } else if (isAnalyzing) {
+              if (completionPercentage <= currentCfg.mid) {
+                const ratio = Math.max(0, (completionPercentage - currentCfg.start) / Math.max(1, currentCfg.mid - currentCfg.start));
+                activeStagePct = Math.round(ratio * 50);
+              } else {
+                const ratio = Math.max(0, (completionPercentage - currentCfg.mid) / Math.max(1, currentCfg.end - currentCfg.mid));
+                activeStagePct = Math.round(50 + ratio * 50);
+              }
+              activeStagePct = Math.min(100, Math.max(15, activeStagePct));
+            }
 
-            // Compute exact continuous water stream percentage across all 5 inter-stage conduits
-            // Conduit idx (0 to 4) connects Stage (idx+1) to Stage (idx+2)
-            // Segment ranges: [0, 20], [20, 40], [40, 60], [60, 80], [80, 100]
-            // At 58%: Segment 0=100%, Segment 1=100%, Segment 2=(58-40)/20 = 90%
-            const segStart = idx * 20;
-            const segEnd = (idx + 1) * 20;
+            return LINEAR_STEPS.map((step, idx) => {
+              const cfg = STAGE_CONFIG[idx] || { start: 0, mid: 10, end: 16 };
+              const isCompleted = isFinished || completionPercentage >= cfg.end;
+              const isProcessing = isAnalyzing && (activeProcessingStage === step.id) && !isCompleted;
+              const isSelected = !isInitial && selectedId === step.id;
+              const isHighlighted = isProcessing || isSelected;
+              const isPending = !isFinished && !isCompleted && !isProcessing;
+              const isLastStep = step.id === 6;
+              const StepIcon = step.Icon;
 
-            const connectorCompleted = isFinished || completionPercentage >= segEnd;
-            const connectorProcessing = isAnalyzing && completionPercentage >= segStart && completionPercentage < segEnd;
+              // Connector idx (0 to 4) is located directly in FRONT of Stage (idx + 1).
+              // Conduits behind the active stage are strictly 100% solid completed (no trailing droplet).
+              // Only the conduit NEXT to the running stage flows forward into the next square.
+              const isConnectorBehind = isFinished || completionPercentage >= cfg.end;
+              const isConnectorCurrent = isAnalyzing && (activeProcessingStage === idx + 1);
 
-            const segPct = connectorCompleted
-              ? 100
-              : (completionPercentage > segStart)
-              ? Math.min(100, Math.max(0, Math.round(((completionPercentage - segStart) / 20) * 100)))
-              : 0;
+              const connectorCompleted = isConnectorBehind;
+              const connectorProcessing = !isFinished && isConnectorCurrent;
 
-            return (
-              <React.Fragment key={step.id}>
-                {/* 1. Square Node Process */}
-                <div
-                  className={`linear-node ${isLastStep ? 'linear-node--last' : ''} ${isCompleted ? 'linear-node--completed' : ''} ${isProcessing ? 'linear-node--active linear-node--processing' : ''} ${isSelected ? 'linear-node--selected' : ''} ${isHighlighted ? 'linear-node--highlighted' : ''} ${isPending ? 'linear-node--pending' : ''}`}
-                  onClick={() => {
-                    setSelectedId(step.id);
-                    setHasUserSelected(true);
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  title={`Click to inspect Stage ${step.id}: ${step.title}`}
-                >
-                  {/* Node square circle / icon container (z-index 6, white background so wave is behind it) */}
+              // Forward streaming water percentage: 50% at midpoint, 100% at completion
+              let segPct = 0;
+              if (connectorCompleted) {
+                segPct = 100;
+              } else if (connectorProcessing) {
+                segPct = activeStagePct;
+              }
+
+              return (
+                <React.Fragment key={step.id}>
+                  {/* 1. Square Node Process */}
                   <div
-                    className={`linear-node__circle ${isLastStep ? 'linear-node__circle--last' : ''}`}
-                    style={{ '--node-idx': step.id }}
-                    title={`${step.title} — ${step.sub}`}
+                    className={`linear-node ${isLastStep ? 'linear-node--last' : ''} ${isCompleted ? 'linear-node--completed' : ''} ${isProcessing ? 'linear-node--active linear-node--processing' : ''} ${isSelected ? 'linear-node--selected' : ''} ${isHighlighted ? 'linear-node--highlighted' : ''} ${isPending ? 'linear-node--pending' : ''}`}
+                    onClick={() => {
+                      setSelectedId(step.id);
+                      setHasUserSelected(true);
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    title={`Click to inspect Stage ${step.id}: ${step.title}`}
                   >
-                    <span className="linear-node__icon">
-                      <StepIcon
-                        size={isLastStep ? (isHighlighted ? 32 : 28) : (isHighlighted ? 30 : 26)}
-                        color={isHighlighted ? '#2563eb' : isCompleted ? '#1882b4' : '#1882b4'}
-                      />
-                    </span>
+                    {/* Node square circle / icon container */}
+                    <div
+                      className={`linear-node__circle ${isLastStep ? 'linear-node__circle--last' : ''}`}
+                      style={{ '--node-idx': step.id }}
+                      title={`${step.title} — ${step.sub}`}
+                    >
+                      <span className="linear-node__icon">
+                        <StepIcon
+                          size={isLastStep ? (isHighlighted ? 32 : 28) : (isHighlighted ? 30 : 26)}
+                          color={isHighlighted ? '#2563eb' : isCompleted ? '#1882b4' : '#1882b4'}
+                        />
+                      </span>
 
-                    {/* Creative Precision Tech HUD Reticle with Anime.js smooth fade & scale */}
-                    <CreativeTechFrame isVisible={isHighlighted} />
+                      {/* Creative Precision Tech HUD Reticle with Anime.js smooth fade & scale */}
+                      <CreativeTechFrame isVisible={isHighlighted} />
 
-                    {/* Live real-time completion percentage pill on the active node */}
-                    <NodeLivePct isVisible={isProcessing && displayPct > 0} pct={displayPct} />
+                      {/* Live real-time completion percentage pill on the active node */}
+                      <NodeLivePct isVisible={isProcessing} pct={activeStagePct} />
 
-                    {/* Completed checkmark badge (smoothly springs into view with Anime.js) */}
-                    <NodeCheckmark isVisible={isCompleted && !isHighlighted} />
+                      {/* Completed checkmark badge (smoothly springs into view with Anime.js) */}
+                      <NodeCheckmark isVisible={isCompleted && !isHighlighted} />
+                    </div>
+
+                    {/* Process Name & Subtitle below the square */}
+                    <div className="linear-node__text">
+                      <span className="linear-node__name">{step.title}</span>
+                      <span className="linear-node__sub">{step.sub}</span>
+                    </div>
                   </div>
 
-                  {/* Process Name & Subtitle below the square */}
-                  <div className="linear-node__text">
-                    <span className="linear-node__name">{step.title}</span>
-                    <span className="linear-node__sub">{step.sub}</span>
-                  </div>
-                </div>
-
-                {/* 2. Wave Connecting this Square to the Adjacent Next Square */}
-                {idx < total - 1 && (
-                  <AdjacentWaveConnector
-                    isCompleted={connectorCompleted}
-                    isProcessing={connectorProcessing}
-                    progressPct={segPct}
-                  />
-                )}
-              </React.Fragment>
-            );
-          })}
+                  {/* 2. Wave Connecting this Square to the Adjacent Next Square */}
+                  {idx < total - 1 && (
+                    <AdjacentWaveConnector
+                      isCompleted={connectorCompleted}
+                      isProcessing={connectorProcessing}
+                      progressPct={segPct}
+                    />
+                  )}
+                </React.Fragment>
+              );
+            });
+          })()}
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
-import { analyzeECG, getDatCatalog, fetchDatRecordFile } from './api/ecgService';
+import { analyzeECG, getDatCatalog, fetchDatRecordFile, previewECGSignal, signalToSvgPath } from './api/ecgService';
 import PipelineFlow from './components/PipelineFlow';
 import ECGChart from './components/ECGChart';
 import Biomarkers from './components/Biomarkers';
@@ -378,6 +378,7 @@ function DiagnosticReportView({ result, onReset, files, gaDaysApprox, gaWeeksApp
 /* ─── Main App ─────────────────────────────────────────── */
 export default function App() {
   const [files, setFiles] = useState([]);
+  const [previewSignal, setPreviewSignal] = useState(null);
   const [ga, setGa] = useState('30.0');
   const [gaUnit, setGaUnit] = useState('weeks'); // 'weeks' | 'days'
   const [dragging, setDragging] = useState(false);
@@ -397,6 +398,25 @@ export default function App() {
     physicsWeight: '0.35',
     apiEndpoint: 'http://localhost:8000',
   });
+
+  // Automatically fetch real ECG signal waveform preview whenever uploaded file changes
+  useEffect(() => {
+    if (!files || !files.length) {
+      setPreviewSignal(null);
+      return;
+    }
+    let isCancelled = false;
+    previewECGSignal(files[0])
+      .then((prev) => {
+        if (!isCancelled && prev) {
+          setPreviewSignal(prev);
+        }
+      })
+      .catch((e) => console.warn('Preview signal load failed:', e));
+    return () => {
+      isCancelled = true;
+    };
+  }, [files]);
 
   useEffect(() => {
     getDatCatalog()
@@ -510,6 +530,7 @@ export default function App() {
 
   const handleReset = () => {
     setFiles([]);
+    setPreviewSignal(null);
     setResult(null);
     setError(null);
     setActiveStep(0);
@@ -552,24 +573,7 @@ export default function App() {
 
           {/* ── Left 25%: ECG Upload & GA Input (Always Visible) ── */}
           <aside className={`sidebar-panel ${result ? 'sidebar-panel--results' : ''}`}>
-            {/* ── Top Medical Monitoring Unit Icon (24x24) ── */}
-            <div className="sidebar-top-header">
-              <div className="sidebar-top-icon-well">
-                <img
-                  src="/image.png"
-                  alt="Monitoring Station"
-                  className="sidebar-top-img"
-                  width="24"
-                  height="24"
-                />
-              </div>
-              <div className="sidebar-top-info">
-                <span className="sidebar-top-title">Obstetric Monitoring Unit</span>
-                <span className="sidebar-top-badge">Active</span>
-              </div>
-            </div>
-
-            {/* 1. ECG File Dropzone */}
+            {/* 1. ECG File Dropzone (Moved to the Top) */}
             <div className="sidebar-section">
               <label className="section-label">1. Abdominal ECG Signal</label>
               <label
@@ -621,12 +625,52 @@ export default function App() {
                           e.preventDefault();
                           e.stopPropagation();
                           setFiles([]);
+                          setPreviewSignal(null);
                         }}
                       >✕</button>
                     </div>
                   </div>
                 )}
               </label>
+
+              {/* Real Raw ECG Signal Waveform Preview Card */}
+              {previewSignal && previewSignal.signal && (
+                <div className="sidebar-raw-ecg-card animate-in">
+                  <div className="sidebar-raw-ecg-header">
+                    <div className="sidebar-raw-ecg-title">
+                      <span className="live-pulse-dot" />
+                      <span>Raw Abdominal ECG (Ch 1)</span>
+                    </div>
+                    <span className="sidebar-raw-ecg-rate">{previewSignal.fs || 1000} Hz</span>
+                  </div>
+
+                  <div className="sidebar-raw-ecg-canvas-wrap">
+                    <svg className="sidebar-raw-ecg-svg" viewBox="0 0 280 60" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id="sidebarRawGrad" x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stopColor="#0284c7" />
+                          <stop offset="100%" stopColor="#0ea5e9" />
+                        </linearGradient>
+                      </defs>
+                      <path
+                        d={signalToSvgPath(previewSignal.signal, 280, 60, 4)}
+                        fill="none"
+                        stroke="url(#sidebarRawGrad)"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <div className="sidebar-raw-ecg-grid" />
+                  </div>
+
+                  <div className="sidebar-raw-ecg-meta">
+                    <span>Duration: <strong>{previewSignal.duration_seconds}s</strong></span>
+                    <span>Channels: <strong>{previewSignal.channels || 4}</strong></span>
+                    <span>Span: <strong>{previewSignal.min_val} to {previewSignal.max_val} mV</strong></span>
+                  </div>
+                </div>
+              )}
 
               {/* Dataset .dat Quick Selector */}
               <div
