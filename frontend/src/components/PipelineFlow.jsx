@@ -57,12 +57,28 @@ export const LINEAR_STEPS = [
 
 /* ─── Blue Water Liquid Conduit Connector between Adjacent Squares ─── */
 function AdjacentWaveConnector({ isCompleted = false, isProcessing = false, progressPct = 0 }) {
-  const effectivePct = isCompleted ? 100 : isProcessing ? Math.max(0, Math.min(100, progressPct)) : 0;
+  const targetPct = isCompleted ? 100 : isProcessing ? Math.max(0, Math.min(100, progressPct)) : 0;
+  const [smoothPct, setSmoothPct] = useState(targetPct);
+  const animRef = useRef(null);
+  const pctObj = useRef({ val: targetPct });
+
+  useEffect(() => {
+    animRef.current?.pause?.();
+    animRef.current = animate(pctObj.current, {
+      val: targetPct,
+      duration: isCompleted ? 500 : 700,
+      ease: 'outCubic',
+      onUpdate: () => {
+        setSmoothPct(pctObj.current.val);
+      },
+    });
+    return () => animRef.current?.pause?.();
+  }, [targetPct, isCompleted]);
 
   return (
     <div
       className={`adj-wave-connector ${isProcessing ? 'adj-wave-connector--processing' : ''} ${isCompleted ? 'adj-wave-connector--completed' : ''}`}
-      title={isCompleted ? 'Water flow complete (100%)' : isProcessing ? `Water streaming: ${effectivePct}%` : 'Standby conduit'}
+      title={isCompleted ? 'Water flow complete (100%)' : isProcessing ? `Water streaming: ${Math.round(smoothPct)}%` : 'Standby conduit'}
     >
       {/* 1. Neumorphic Carved Channel Trench Background */}
       <div className="water-channel-trench" />
@@ -70,7 +86,7 @@ function AdjacentWaveConnector({ isCompleted = false, isProcessing = false, prog
       {/* 2. Flowing Blue Water Liquid Stream */}
       <div
         className="water-stream-fill"
-        style={{ width: `${effectivePct}%` }}
+        style={{ width: `${smoothPct.toFixed(1)}%` }}
       >
         {/* Continuous Flowing Water Current Waves & Ripples */}
         <div className="water-current-ripples" />
@@ -79,7 +95,7 @@ function AdjacentWaveConnector({ isCompleted = false, isProcessing = false, prog
         <div className="water-surface-sheen" />
 
         {/* Active Leading Water Surge Droplet */}
-        {isProcessing && effectivePct > 0 && effectivePct < 100 && (
+        {isProcessing && smoothPct > 0 && smoothPct < 99 && (
           <div className="water-leading-drop" />
         )}
       </div>
@@ -209,7 +225,23 @@ function NodeCheckmark({ isVisible }) {
 function NodeLivePct({ isVisible, pct }) {
   const pctRef = useRef(null);
   const animRef = useRef(null);
+  const numAnimRef = useRef(null);
   const isFirstRender = useRef(true);
+  const numObj = useRef({ val: pct });
+  const [displayVal, setDisplayVal] = useState(pct);
+
+  useEffect(() => {
+    numAnimRef.current?.pause?.();
+    numAnimRef.current = animate(numObj.current, {
+      val: pct,
+      duration: 650,
+      ease: 'outCubic',
+      onUpdate: () => {
+        setDisplayVal(Math.round(numObj.current.val));
+      },
+    });
+    return () => numAnimRef.current?.pause?.();
+  }, [pct]);
 
   useEffect(() => {
     if (!pctRef.current) return;
@@ -245,7 +277,7 @@ function NodeLivePct({ isVisible, pct }) {
         pointerEvents: 'none',
       }}
     >
-      {pct}%
+      {displayVal}%
     </div>
   );
 }

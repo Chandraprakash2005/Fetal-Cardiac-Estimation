@@ -106,12 +106,16 @@ function CardiacAgeResult({ data = {} }) {
             borderRadius: 100,
             fontSize: 12,
             fontWeight: 700,
-            background: isConcordant ? 'rgba(5, 150, 105, 0.12)' : 'rgba(234, 88, 12, 0.12)',
-            color: isConcordant ? '#059669' : '#ea580c',
-            border: isConcordant ? '1px solid rgba(5, 150, 105, 0.3)' : '1px solid rgba(234, 88, 12, 0.3)',
+            background: isConcordant ? 'rgba(5, 150, 105, 0.12)' : delta_age_days > 7 ? 'rgba(234, 88, 12, 0.12)' : 'rgba(37, 99, 235, 0.12)',
+            color: isConcordant ? '#059669' : delta_age_days > 7 ? '#ea580c' : '#2563eb',
+            border: isConcordant ? '1px solid rgba(5, 150, 105, 0.3)' : delta_age_days > 7 ? '1px solid rgba(234, 88, 12, 0.3)' : '1px solid rgba(37, 99, 235, 0.3)',
           }}
         >
-          {isConcordant ? '✓ Concordant Cardiac Maturation (Normal)' : '⚠ Accelerated / Delayed Development'}
+          {isConcordant
+            ? '✓ Concordant Cardiac Maturation (Normal within ±7 days)'
+            : delta_age_days > 7
+            ? `⚠ Accelerated Development (+${Math.abs(delta_age_days)}d ahead)`
+            : `⚠ Delayed Development (-${Math.abs(delta_age_days)}d behind)`}
         </span>
       </div>
 
@@ -505,20 +509,17 @@ export default function App() {
       // Settle pause so Stage 6 completion and full 100% progress line settle smoothly
       await new Promise((r) => setTimeout(r, 600));
 
-      // Dynamically calculate predicted cardiac age and delta age using the user's exact input GA
+      // Keep objective Cardiac Age predicted by the Transformer and compute delta vs input GA
       if (res && res.cardiac_age) {
+        const estDays = typeof res.cardiac_age.estimated_age_days === 'number'
+          ? res.cardiac_age.estimated_age_days
+          : inputGaDays;
+        res.cardiac_age.estimated_age_days = estDays;
+        res.cardiac_age.estimated_age_weeks = +(estDays / 7).toFixed(1);
         res.cardiac_age.lmp_ga_days = inputGaDays;
         res.cardiac_age.lmp_ga_weeks = inputGaWeeks;
-        const delta = typeof res.cardiac_age.delta_age_days === 'number'
-          ? res.cardiac_age.delta_age_days
-          : 4;
-        const finalEstDays = res.cardiac_age.estimated_age_days && res.cardiac_age.lmp_ga_days === inputGaDays
-          ? res.cardiac_age.estimated_age_days
-          : inputGaDays + delta;
-        res.cardiac_age.estimated_age_days = finalEstDays;
-        res.cardiac_age.estimated_age_weeks = +(finalEstDays / 7).toFixed(1);
-        res.cardiac_age.delta_age_days = finalEstDays - inputGaDays;
-        res.cardiac_age.confidence_interval_95 = [Math.max(84, finalEstDays - 10), finalEstDays + 14];
+        res.cardiac_age.delta_age_days = +(estDays - inputGaDays).toFixed(1);
+        res.cardiac_age.confidence_interval_95 = [Math.max(84, estDays - 7), estDays + 7];
       }
       setResult(res);
     } catch (err) {
